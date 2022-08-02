@@ -1,6 +1,6 @@
 const { readdirSync } = require('fs');
 
-module.exports = (client) => {
+module.exports = async (client) => {
 	let number = 0;
 
 	const files = readdirSync(`./events/`).filter(files => files.endsWith('.js'));

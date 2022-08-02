@@ -76,7 +76,7 @@ module.exports = {
         balance -= bet;
         balance += (bet * multiplier);
 
-        description += `\n\nĂsta-i factorul de multiplicare: \`${multiplier}\`\n\nAtât ai pariat: \`${bet}\`\nAi făcut (sau pierdut): \`${bet * multiplier}\`\nAsta era balanța ta acum 2 secunde: \`${original_bal}\`\nAsta-i balanța ta acum: \`${balance}\``;
+        description += `\n\nĂsta-i factorul de multiplicare: \`${multiplier}\`\n\nAtât ai pariat: \`${bet}\`\nAsta era balanța ta acum 2 secunde: \`${original_bal}\`\nAsta-i balanța ta acum: \`${balance}\``;
 
         await user.set('balance', balance);
 
