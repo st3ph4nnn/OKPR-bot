@@ -62,7 +62,7 @@ module.exports = {
                return (reaction.emoji.name === '⬅️' || reaction.emoji.name === '➡️');
             }
 
-            const collector = msg.createReactionCollector({ filter, time: 120000 });
+            const collector = msg.createReactionCollector({ filter, time: 300000 });
 
             collector.on('collect', (reaction, user) => {
                 if (message && author_id === user.id) {

@@ -18,7 +18,7 @@ module.exports = {
 		}
 
 		let video = await youtube.search(args.join(' '));
-        
+
         if (!video || !video[0] || !video[0].url) {
             search_embed.description(`Nu am găsit nimic legat de \`${args.join(" ")}\`\nÎn unele cazuri, nu primesc informații de la Larry Page, așa că te incurajez să încerci din nou.`);
             return search_embed.send();         
@@ -47,7 +47,7 @@ module.exports = {
                return (reaction.emoji.name === '⬅️' || reaction.emoji.name === '➡️');
             }
 
-            const collector = msg.createReactionCollector({ filter, time: 120000 });
+            const collector = msg.createReactionCollector({ filter, time: 300000 });
 
             collector.on('collect', (reaction, user) => {
                 if (message && author_id === user.id) {
