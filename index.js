@@ -25,7 +25,7 @@ client.owner_id = owner_id;
 	require(`./handlers/${handler}`)(client);
 })
 
-client.login(token);
+client.login(process.env.TOKEN);
 
 client.distube
     .on('playSong', (queue, song) => {
