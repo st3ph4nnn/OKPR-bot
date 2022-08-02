@@ -29,27 +29,25 @@ module.exports = {
 
 		if (skip < needed && !voted_to_skip.includes(message.member.user.id)) {
 			skip++;
-			voted_to_skip.push(message.member.user.id);
-			return message.reply(`**Skip**: \`${skip}/${needed}\` de voturi pentru a da skip.`);
+			if (skip >= needed) {
+				skip = 0;
+				voted_to_skip = [ ];
+				needed = 0;
+
+				if (!queue.songs[1]) {
+					queue.stop();
+					play_embed.description('Aceasta era ultima piesă din queue.');
+					return play_embed.send();
+				}
+
+				const song = queue.songs[1];
+				queue.skip();
+				play_embed.description(`Am sărit la următoarea piesă.\n\n**Piesă**\n\`${song.name}\`\n\n**Durată**\n\`${song.formattedDuration}\``);
+				return play_embed.send();
+			} else {
+				voted_to_skip.push(message.member.user.id);
+				return message.reply(`**Skip**: \`${skip}/${needed}\` de voturi pentru a da skip.`);
+			}
 		}
-
-		console.log(voted_to_skip);
-
-		if (skip == needed) {
-			skip = 0;
-			voted_to_skip = [ ];
-			needed = 0;
-		}
-
-		if (!queue.songs[1]) {
-			queue.stop();
-			play_embed.description('Aceasta era ultima piesă din queue.');
-			return play_embed.send();
-		}
-
-		const song = queue.songs[1];
-		queue.skip();
-		play_embed.description(`Am sărit la următoarea piesă.\n\n**Piesă**\n\`${song.name}\`\n\n**Durată**\n\`${song.formattedDuration}\``);
-		return play_embed.send();
 	}
 }
