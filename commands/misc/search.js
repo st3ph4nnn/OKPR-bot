@@ -23,7 +23,7 @@ module.exports = {
             return search_embed.send();
         })
         
-        if (!response.results[0]) {
+        if (!response || !response.results || !response.results[0]) {
             search_embed.description(`Nu am găsit nimic legat de \`${args.join(" ")}\`\nÎn unele cazuri, nu primesc informații de la Larry Page, așa că te incurajez să încerci din nou.`);
             return search_embed.send();
         }

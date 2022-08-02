@@ -18,9 +18,7 @@ module.exports = {
 		}
 
 		let video = await youtube.search(args.join(' '));
-
-        console.log(video, video[0], video[0].url);
-
+        
         if (!video || !video[0] || !video[0].url) {
             search_embed.description(`Nu am găsit nimic legat de \`${args.join(" ")}\`\nÎn unele cazuri, nu primesc informații de la Larry Page, așa că te incurajez să încerci din nou.`);
             return search_embed.send();         
