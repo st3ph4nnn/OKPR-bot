@@ -95,7 +95,7 @@ module.exports = {
 					let s = fs.createReadStream('database/strings');
 
 					chain.seed(s, () => {
-        				let res = chain.respond(message.content, random.int(1, 15)).join(' ');
+        				let res = chain.respond(message.content, random.int(1, 10)).join(' ');
         				message.channel.send(res);
 					});
 				}
