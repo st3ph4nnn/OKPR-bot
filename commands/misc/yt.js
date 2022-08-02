@@ -27,6 +27,8 @@ module.exports = {
         if (video[0].snippet.thumbnails.url)
             search_embed.image(video[0].snippet.thumbnails.url);
 
+        console.log(video[0].url);
+
         let max = video.length;
 
         search_embed.description(`**Titlu**\n\`${video[0].title}\`\n\n**Descriere** \n\`${video[0].description == '' ? 'Nu are descriere.' : video[0].description}\`\n\n**Durată** \n\`${video[0].duration_raw}\`\n\nRezultat \`1\`/\`${max}\``);
