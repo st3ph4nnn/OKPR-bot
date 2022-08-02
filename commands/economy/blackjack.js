@@ -172,7 +172,7 @@ module.exports = {
                                 description = update(hands, true);
                                 local_sum = sum(hands[1]);
                                 balance += (bet * 2);
-                                description += `**Bravo boss!!! Ai câștigat.**\n\nSuma ta: \`${local_sum}\`\nSuma inamicului: \`${enemy_sum}\`\n\nAi pariat: \`${bet}\`\nAi câștigat: \`${bet*2}\`\n Atâția bani ai acum: \`${balance}\``;
+                                description += `**Bravo boss!!! Ai câștigat.**\n\nSuma ta: \`${local_sum}\`\nSuma inamicului: \`${enemy_sum}\`\n\nAi pariat: \`${bet}\` <:troll_romania:996060026093441104>\nAi câștigat: \`${bet*2}\`\n Atâția bani ai acum: \`${balance}\` <:troll_romania:996060026093441104>`;
                                 blackjack_embed.description(description);
                                 msg.reactions.removeAll();
                                 db_user.set('balance', balance);
@@ -186,7 +186,7 @@ module.exports = {
                         if (local_sum > enemy_sum && local_sum <= 21) {
                             description = update(hands, true);
                             balance += (bet * 2);
-                            description += `**Bravo boss!!! Ai câștigat.**\n\nSuma ta: \`${local_sum}\`\nSuma inamicului: \`${enemy_sum}\`\n\nAi pariat: \`${bet}\`\nAi câștigat: \`${bet*2}\`\n Atâția bani ai acum: \`${balance}\``;
+                            description += `**Bravo boss!!! Ai câștigat.**\n\nSuma ta: \`${local_sum}\`\nSuma inamicului: \`${enemy_sum}\`\n\nAi pariat: \`${bet}\` <:troll_romania:996060026093441104>\nAi câștigat: \`${bet*2}\` <:troll_romania:996060026093441104>\n Atâția bani ai acum: \`${balance}\` <:troll_romania:996060026093441104>`;
                             blackjack_embed.description(description);
                             msg.reactions.removeAll();
                             db_user.set('balance', balance);
@@ -197,7 +197,7 @@ module.exports = {
                                 description = update(hands, true);
                                 local_sum = sum(hands[1]);
                                 enemy_sum = sum(hands[0]);
-                                description += `**Aia e boss, ai pierdut.**\n\nSuma ta: \`${local_sum}\`\nSuma inamicului: \`${enemy_sum}\`\n\nAi pariat: \`${bet}\`\nAi pierdut: \`${bet}\`\n Atâția bani ai acum: \`${balance}\``;
+                                description += `**Aia e boss, ai pierdut.**\n\nSuma ta: \`${local_sum}\`\nSuma inamicului: \`${enemy_sum}\`\n\nAi pariat: \`${bet}\` <:troll_romania:996060026093441104>\nAi pierdut: \`${bet}\` <:troll_romania:996060026093441104>\n Atâția bani ai acum: \`${balance}\` <:troll_romania:996060026093441104>`;
                                 blackjack_embed.description(description);
                                 msg.reactions.removeAll();
                                 db_user.set('balance', balance);
@@ -212,7 +212,7 @@ module.exports = {
                     description = update(hands, true);
                     local_sum = sum(hands[1]);
                     enemy_sum = sum(hands[0]);
-                    description += `**Aia e boss, ai pierdut.**\n\nSuma ta: \`${local_sum}\`\nSuma inamicului: \`${enemy_sum}\`\n\nAi pariat: \`${bet}\`\nAi pierdut: \`${bet}\`\n Atâția bani ai acum: \`${balance}\``;
+                    description += `**Aia e boss, ai pierdut.**\n\nSuma ta: \`${local_sum}\`\nSuma inamicului: \`${enemy_sum}\`\n\nAi pariat: \`${bet}\` <:troll_romania:996060026093441104>\nAi pierdut: \`${bet}\` <:troll_romania:996060026093441104>\n Atâția bani ai acum: \`${balance}\` <:troll_romania:996060026093441104>`;
                     blackjack_embed.description(description);
                     msg.reactions.removeAll();
                     db_user.set('balance', balance);
@@ -224,7 +224,7 @@ module.exports = {
                         local_sum = sum(hands[1]);
                         enemy_sum = sum(hands[0]);
                         balance += (bet * 2);
-                        description += `**Bravo boss!!! Ai câștigat.**\n\nSuma ta: \`${local_sum}\`\nSuma inamicului: \`${enemy_sum}\`\n\nAi pariat: \`${bet}\`\nAi câștigat: \`${bet*2}\`\n Atâția bani ai acum: \`${balance}\``;
+                        description += `**Bravo boss!!! Ai câștigat.**\n\nSuma ta: \`${local_sum}\`\nSuma inamicului: \`${enemy_sum}\`\n\nAi pariat: \`${bet}\` <:troll_romania:996060026093441104>\nAi câștigat: \`${bet*2}\` <:troll_romania:996060026093441104>\n Atâția bani ai acum: \`${balance}\` <:troll_romania:996060026093441104>`;
                         blackjack_embed.description(description);
                         msg.reactions.removeAll();
                         db_user.set('balance', balance);
@@ -241,7 +241,7 @@ module.exports = {
                             local_sum = sum(hands[1]);
                             enemy_sum = sum(hands[0]);
                             balance += (bet * 2);
-                            description += `**Bravo boss!!! Ai câștigat.**\n\nSuma ta: \`${local_sum}\`\nSuma inamicului: \`${enemy_sum}\`\n\nAi pariat: \`${bet}\`\nAi câștigat: \`${bet*2}\`\n Atâția bani ai acum: \`${balance}\``;
+                            description += `**Bravo boss!!! Ai câștigat.**\n\nSuma ta: \`${local_sum}\`\nSuma inamicului: \`${enemy_sum}\`\n\nAi pariat: \`${bet}\` <:troll_romania:996060026093441104>\nAi câștigat: \`${bet*2}\` <:troll_romania:996060026093441104>\n Atâția bani ai acum: \`${balance}\` <:troll_romania:996060026093441104>`;
                             blackjack_embed.description(description);
                             msg.reactions.removeAll();
                             db_user.set('balance', balance);
