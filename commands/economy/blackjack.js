@@ -89,32 +89,32 @@ module.exports = {
 	category: 'Economy',
 	cooldown: 1000,
 	async execute(message, args, client) {
-		const jaf_embed = new embed(message, 'Negru jack 💶 💶 💶');
+		const blackjack_embed = new embed(message, 'Negru jack 💶 💶 💶');
 
 		let db_user = new DatabaseUser(message.author.username, message.author.id);
 
 		if (!args[0]) {
-            jaf_embed.description(`Cât pariezi boss? \n\nFolosire: \`${client.prefix}blackjack {bani}\``);
-            return jaf_embed.send();
+            blackjack_embed.description(`Cât pariezi boss? \n\nFolosire: \`${client.prefix}blackjack {bani}\``);
+            return blackjack_embed.send();
         }
 
         let bet = args[0];
 
         if (isNaN(bet) || bet % 1 !== 0) {
-            jaf_embed.description(`Ce monedă folosești? N-am înțeles cât vrei să pariezi. \n\nFolosire: \`${client.prefix}septari {bani}\``);
-            return jaf_embed.send();
+            blackjack_embed.description(`Ce monedă folosești? N-am înțeles cât vrei să pariezi. \n\nFolosire: \`${client.prefix}septari {bani}\``);
+            return blackjack_embed.send();
         }
 		
 		if (bet < 50) {
-			jaf_embed.description(`Bă, știu că pula botswană costă mult, dar totuși, măcar 50 tre sa bagi...`);
-            return jaf_embed.send();
+			blackjack_embed.description(`Bă, știu că pula botswană costă mult, dar totuși, măcar 50 tre sa bagi...`);
+            return blackjack_embed.send();
 		}
 
 		let balance = await db_user.get('balance');
 
 		if (bet > balance) {
-			jaf_embed.description(`Ești sărac lipit, n-ai atâta.`);
-            return jaf_embed.send();
+			blackjack_embed.description(`Ești sărac lipit, n-ai atâta.`);
+            return blackjack_embed.send();
 		}
 
         balance -= bet;
@@ -131,8 +131,8 @@ module.exports = {
 
         description += `Suma ta: \`${local_sum}\`\nSuma inamicului: \`${enemy_sum}\`\n\nHIT: 🟩\n\nSTAY: 🟧`;
 
-        jaf_embed.description(description);
-        let msg = await jaf_embed.send();
+        blackjack_embed.description(description);
+        let msg = await blackjack_embed.send();
 
         msg.react('🟩');
         msg.react('🟧');
@@ -141,7 +141,12 @@ module.exports = {
 
         const collector = msg.createReactionCollector({ time: 60000 });
 
+        let game_over = false;
+
         collector.on('collect', (reaction, user) => {
+            if (game_over)
+                return;
+            
             if (author_id === user.id) {
                 switch (reaction.emoji.name) {
                     case '🟩': {
@@ -167,11 +172,12 @@ module.exports = {
                                 description = update(hands, true);
                                 local_sum = sum(hands[1]);
                                 balance += (bet * 2);
-                                description += `**Bravo boss!!! Ai castigat.**\n\nSuma ta: \`${local_sum}\`\nSuma inamicului: \`${enemy_sum}\`\n\nAi pariat: \`${bet}\`\nAi câștigat: \`${bet*2}\`\n Atâția bani ai acum: \`${balance}\``;
-                                jaf_embed.description(description);
+                                description += `**Bravo boss!!! Ai câștigat.**\n\nSuma ta: \`${local_sum}\`\nSuma inamicului: \`${enemy_sum}\`\n\nAi pariat: \`${bet}\`\nAi câștigat: \`${bet*2}\`\n Atâția bani ai acum: \`${balance}\``;
+                                blackjack_embed.description(description);
                                 msg.reactions.removeAll();
                                 db_user.set('balance', balance);
-                                return msg.edit({embeds: [jaf_embed.embed]});
+                                game_over = true;
+                                return msg.edit({embeds: [blackjack_embed.embed]});
                             }
                         }
 
@@ -180,21 +186,23 @@ module.exports = {
                         if (local_sum > enemy_sum && local_sum <= 21) {
                             description = update(hands, true);
                             balance += (bet * 2);
-                            description += `**Bravo boss!!! Ai castigat.**\n\nSuma ta: \`${local_sum}\`\nSuma inamicului: \`${enemy_sum}\`\n\nAi pariat: \`${bet}\`\nAi câștigat: \`${bet*2}\`\n Atâția bani ai acum: \`${balance}\``;
-                            jaf_embed.description(description);
+                            description += `**Bravo boss!!! Ai câștigat.**\n\nSuma ta: \`${local_sum}\`\nSuma inamicului: \`${enemy_sum}\`\n\nAi pariat: \`${bet}\`\nAi câștigat: \`${bet*2}\`\n Atâția bani ai acum: \`${balance}\``;
+                            blackjack_embed.description(description);
                             msg.reactions.removeAll();
                             db_user.set('balance', balance);
-                            return msg.edit({embeds: [jaf_embed.embed]});
+                            game_over = true;   
+                            return msg.edit({embeds: [blackjack_embed.embed]});
                         } else {
                             if (local_sum < enemy_sum && enemy_sum <= 21) {
                                 description = update(hands, true);
                                 local_sum = sum(hands[1]);
                                 enemy_sum = sum(hands[0]);
                                 description += `**Aia e boss, ai pierdut.**\n\nSuma ta: \`${local_sum}\`\nSuma inamicului: \`${enemy_sum}\`\n\nAi pariat: \`${bet}\`\nAi pierdut: \`${bet}\`\n Atâția bani ai acum: \`${balance}\``;
-                                jaf_embed.description(description);
+                                blackjack_embed.description(description);
                                 msg.reactions.removeAll();
                                 db_user.set('balance', balance);
-                                return msg.edit({embeds: [jaf_embed.embed]});
+                                game_over = true;    
+                                return msg.edit({embeds: [blackjack_embed.embed]});
                             }
                         }
                     }
@@ -205,21 +213,23 @@ module.exports = {
                     local_sum = sum(hands[1]);
                     enemy_sum = sum(hands[0]);
                     description += `**Aia e boss, ai pierdut.**\n\nSuma ta: \`${local_sum}\`\nSuma inamicului: \`${enemy_sum}\`\n\nAi pariat: \`${bet}\`\nAi pierdut: \`${bet}\`\n Atâția bani ai acum: \`${balance}\``;
-                    jaf_embed.description(description);
+                    blackjack_embed.description(description);
                     msg.reactions.removeAll();
                     db_user.set('balance', balance);
-                    return msg.edit({embeds: [jaf_embed.embed]});
+                    game_over = true;   
+                    return msg.edit({embeds: [blackjack_embed.embed]});
                 } else {
                     if (enemy_sum > 21 || local_sum == 21) {
                         description = update(hands, true);
                         local_sum = sum(hands[1]);
                         enemy_sum = sum(hands[0]);
                         balance += (bet * 2);
-                        description += `**Bravo boss!!! Ai castigat.**\n\nSuma ta: \`${local_sum}\`\nSuma inamicului: \`${enemy_sum}\`\n\nAi pariat: \`${bet}\`\nAi câștigat: \`${bet*2}\`\n Atâția bani ai acum: \`${balance}\``;
-                        jaf_embed.description(description);
+                        description += `**Bravo boss!!! Ai câștigat.**\n\nSuma ta: \`${local_sum}\`\nSuma inamicului: \`${enemy_sum}\`\n\nAi pariat: \`${bet}\`\nAi câștigat: \`${bet*2}\`\n Atâția bani ai acum: \`${balance}\``;
+                        blackjack_embed.description(description);
                         msg.reactions.removeAll();
                         db_user.set('balance', balance);
-                        return msg.edit({embeds: [jaf_embed.embed]});
+                        game_over = true;   
+                        return msg.edit({embeds: [blackjack_embed.embed]});
                     }
 
                     if (ai(hands[0])) {
@@ -231,11 +241,12 @@ module.exports = {
                             local_sum = sum(hands[1]);
                             enemy_sum = sum(hands[0]);
                             balance += (bet * 2);
-                            description += `**Bravo boss!!! Ai castigat.**\n\nSuma ta: \`${local_sum}\`\nSuma inamicului: \`${enemy_sum}\`\n\nAi pariat: \`${bet}\`\nAi câștigat: \`${bet*2}\`\n Atâția bani ai acum: \`${balance}\``;
-                            jaf_embed.description(description);
+                            description += `**Bravo boss!!! Ai câștigat.**\n\nSuma ta: \`${local_sum}\`\nSuma inamicului: \`${enemy_sum}\`\n\nAi pariat: \`${bet}\`\nAi câștigat: \`${bet*2}\`\n Atâția bani ai acum: \`${balance}\``;
+                            blackjack_embed.description(description);
                             msg.reactions.removeAll();
                             db_user.set('balance', balance);
-                            return msg.edit({embeds: [jaf_embed.embed]});
+                            game_over = true;   
+                            return msg.edit({embeds: [blackjack_embed.embed]});
                         }
                     } else {
                         enemy_stay = true;
@@ -244,9 +255,9 @@ module.exports = {
                     description = update(hands);
                     local_sum = sum(hands[1]);
                     enemy_sum = sum(hands[0], true);
-                    description += `Suma ta: \`${local_sum}\`\nSuma cunoscuta a inamicului: \`${enemy_sum}\`\n\nHIT: 🟩\n\nSTAY: 🟧`;
-                    jaf_embed.description(description);
-                    msg.edit({embeds: [jaf_embed.embed]})
+                    description += `Suma ta: \`${local_sum}\`\nSuma cunoscută a inamicului: \`${enemy_sum}\`\n\nHIT: 🟩\n\nSTAY: 🟧`;
+                    blackjack_embed.description(description);
+                    msg.edit({embeds: [blackjack_embed.embed]})
                 }
             }
 
