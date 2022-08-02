@@ -31,7 +31,11 @@ module.exports = {
 			skip++;
 			voted_to_skip.push(message.member.user.id);
 			return message.reply(`**Skip**: \`${skip}/${needed}\` de voturi pentru a da skip.`);
-		} else {
+		}
+
+		console.log(voted_to_skip);
+
+		if (skip == needed) {
 			skip = 0;
 			voted_to_skip = [ ];
 			needed = 0;
