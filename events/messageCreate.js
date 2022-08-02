@@ -88,7 +88,7 @@ module.exports = {
 					if (quotes.includes(message.content))
 						return;
 
-					return fs.appendFileSync('database/strings', message.content + ' ');
+					return fs.appendFileSync('database/strings', message.content.strip('\n') + ' ');
 				}
 
 				if (val == 1) {
