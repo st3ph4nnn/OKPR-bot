@@ -15,10 +15,8 @@ module.exports = {
 		switch (args[0]) {
 			case 'r':
 			case 'reset': {
-				if (message.author.id != '766292175289843712') {
-					args[0] = 'default';
-					continue;
-				}
+				if (!message.member.permissions.has("ADMINISTRATOR"))
+					return;
 
 
 				await message.guild.members.fetch()
