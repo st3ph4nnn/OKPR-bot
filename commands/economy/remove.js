@@ -22,7 +22,7 @@ module.exports = {
 			try {
 				await Database.delete(args[0]);
 				return message.reply(`Am reusit sa stergem utilizatorul cu id-ul: ${args[0]}`)
-			} else {
+			} catch {
 				return message.reply(`Nu am reusit sa stergem utilizatorul cu id-ul: ${args[0]}`)
 			}
 		}
