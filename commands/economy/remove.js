@@ -20,10 +20,10 @@ module.exports = {
 			}
 
 			try {
-				await Database.delete(args[0]);
-				return message.reply(`Am reusit sa stergem utilizatorul cu id-ul: ${args[0]}`)
+				await Database.delete(args[1]);
+				return message.reply(`Am reusit sa stergem utilizatorul cu id-ul: \`${args[1]}\``)
 			} catch {
-				return message.reply(`Nu am reusit sa stergem utilizatorul cu id-ul: ${args[0]}`)
+				return message.reply(`Nu am reusit sa stergem utilizatorul cu id-ul: \`${args[1]}\``)
 			}
 		}
 
