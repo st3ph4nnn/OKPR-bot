@@ -57,10 +57,6 @@ class DatabaseUser {
 
   async fetch_user() {
     const user = await db.get(`${this.id}`);
-    if (user == undefined) {
-      await this.check_user();
-      return 0;
-    }
     return user;
   }
 

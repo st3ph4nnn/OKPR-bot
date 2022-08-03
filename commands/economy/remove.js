@@ -1,5 +1,5 @@
 const { embed } = require('../../embed.js');
-const { DatabaseUser } = require('../../database/database.js');
+const { Database, DatabaseUser } = require('../../database/database.js');
 
 module.exports = {
 	name: 'remove',
@@ -10,6 +10,20 @@ module.exports = {
 	async execute(message, args, client) {
 		let member = message.mentions.members.first();
 		const remove_embed = new embed(message, 'Remove');
+
+		if (args[0] == 'user') {
+			if (!args[1]) {
+				remove_embed.description(`Te rog specifică membrul pe care vrei sa-l stergi.. \n\nFolosire: \`${client.prefix}remove user {id}\``);
+            	return remove_embed.send();
+			}
+
+			try {
+				await Database.delete(args[0]);
+				return message.reply(`Am reusit sa stergem utilizatorul cu id-ul: ${args[0]}`)
+			} else {
+				return message.reply(`Nu am reusit sa stergem utilizatorul cu id-ul: ${args[0]}`)
+			}
+		}
 
 		if (!member) {
             remove_embed.description(`Te rog specifică membrul caruia vrei să-i scoți bani. \n\nFolosire: \`${client.prefix}remove @membru {bani}\``);
