@@ -1,4 +1,5 @@
 const fs = require('fs');
+const random = require('random');
 
 module.exports = {
 	name: 'generate',
