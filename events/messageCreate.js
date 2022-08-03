@@ -1,6 +1,5 @@
 const { EmbedBuilder, Collection } = require('discord.js');
 const { DatabaseUser } = require('../database/database.js');
-const { owner_id } = require('../config.json');
 const random = require('random');
 
 const fs = require('fs');
@@ -135,10 +134,10 @@ module.exports = {
             	return;
 			}
 
-			if (command.owner && message.author.id != owner_id)
+			if (command.owner && message.author.id != client.owner_id)
 				return;
 
-			if (command.permissions && message.author.id != owner_id) {
+			if (command.permissions && message.author.id != client.owner_id) {
 				for (const perm of command.permissions) {
 					try {
 						message.member.permissions.has(perm)
@@ -201,7 +200,7 @@ module.exports = {
             		.setTimestamp();
 
            		message.reply({embeds: [error_embed]});
-            	message.channel.send(`<@${client.owner_id}>`);
+            	message.channel.send(`<@${client.client.owner_id}>`);
             }
 		} catch(err) {
 			const error_embed = new EmbedBuilder()

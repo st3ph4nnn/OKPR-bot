@@ -1,6 +1,5 @@
 const { readdirSync } = require('fs');
 const { embed } = require('../../embed.js');
-const { prefix } = require('../../config.json');
 
 let commands = [ ];
 let descriptions = [ ];
@@ -48,7 +47,7 @@ module.exports = {
 		if (!args[0]) {
 			let description = `**PREFIX:** \`${client.prefix}\`\n\nAlege o categorie.\n\n`;
 			for (const category of categories)
-				description += `**${category}**: \`${prefix}help ${category}\`\n`;
+				description += `**${category}**: \`${client.prefix}help ${category}\`\n`;
 			help_embed.description(description);
 			return help_embed.send();
 		}
@@ -58,7 +57,7 @@ module.exports = {
 			let description = `**Categoria aleasă (\`${args[0]}\`) nu există.**\nAlege o categorie.\n\n`;
 
 			for (const category of categories)
-				description += `**${category}**: \`${prefix}help ${category}\`\n`;
+				description += `**${category}**: \`${client.prefix}help ${category}\`\n`;
 
 			help_embed.description(description);
 			return help_embed.send();
