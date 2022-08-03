@@ -11,6 +11,8 @@ module.exports = {
 		let member = message.mentions.members.first();
 		const remove_embed = new embed(message, 'Remove');
 
+		console.log(args);
+
 		if (args[0] == 'user') {
 			if (!args[1]) {
 				remove_embed.description(`Te rog specifică membrul pe care vrei sa-l stergi.. \n\nFolosire: \`${client.prefix}remove user {id}\``);
