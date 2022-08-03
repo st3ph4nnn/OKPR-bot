@@ -23,7 +23,7 @@ client.commands = new Collection();
 client.cooldowns = new Collection();
 client.prefix = process.env.PREFIX;
 client.owner_id = process.env.OWNER;
-
+    
 ['commandhandler.js', 'eventhandler.js'].forEach((handler) => {
     console.log(`[event handler] loading ${handler}`);
 	require(`./handlers/${handler}`)(client);
