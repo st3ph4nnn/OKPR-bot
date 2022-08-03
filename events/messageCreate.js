@@ -4,7 +4,7 @@ const random = require('random');
 
 const fs = require('fs');
 let markov = require('markov');
-let chain = markov(1);
+let chain = markov(2);
 
 module.exports = {
 	name: "messageCreate",
