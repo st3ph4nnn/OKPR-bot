@@ -14,6 +14,11 @@ client.distube = new DisTube(client, {
   	plugins: [ new YtDlpPlugin() ]
 })
 
+let markov = require('markov');
+let chain = markov(2);
+
+client.markov = markov;
+client.chain = chain;
 client.commands = new Collection();
 client.cooldowns = new Collection();
 client.prefix = process.env.PREFIX;

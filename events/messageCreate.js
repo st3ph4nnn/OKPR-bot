@@ -1,10 +1,8 @@
 const { EmbedBuilder, Collection } = require('discord.js');
 const { DatabaseUser } = require('../database/database.js');
-const random = require('random');
 
+const random = require('random');
 const fs = require('fs');
-let markov = require('markov');
-let chain = markov(2);
 
 module.exports = {
 	name: "messageCreate",
@@ -96,8 +94,8 @@ module.exports = {
 				if (val == 1) {
 					let s = fs.createReadStream('database/strings');
 
-					chain.seed(s, () => {
-        				let res = chain.respond(message.content, random.int(1, 10)).join(' ');
+					client.chain.seed(s, () => {
+        				let res = client.chain.respond(message.content, random.int(1, 10)).join(' ');
         				message.channel.send(res);
 					});
 				}
