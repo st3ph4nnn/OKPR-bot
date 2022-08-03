@@ -10,7 +10,7 @@ module.exports = {
 	cooldown: 1000,
 	async execute(message, args, client) {
 		let users = await Database.all();
-		fs.writeFileSync('temp/list.txt', JSON.stringify(users));
+		fs.writeFileSync('temp/list.txt', JSON.stringify(users, null, '\t'));
 
 		await message.reply({files: ['temp/list.txt']});
 	}
