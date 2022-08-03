@@ -15,7 +15,7 @@ client.distube = new DisTube(client, {
 })
 
 let markov = require('markov');
-let chain = markov(2);
+let chain = markov(3);
 
 client.markov = markov;
 client.chain = chain;
