@@ -6,6 +6,7 @@ const scheme = {
   'xp': 0,
   'level': 0,
 
+  'weeklyxp': 0,
   'starboard': 0,
   'nerdboard': 0,
   'trollboard': 0

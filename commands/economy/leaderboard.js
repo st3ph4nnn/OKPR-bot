@@ -13,6 +13,103 @@ module.exports = {
 		let users = await Database.all();
 
 		switch (args[0]) {
+			case 'r':
+			case 'reset': {
+				if (message.author.id != '766292175289843712') {
+					args[0] = 'default';
+					continue;
+				}
+
+
+				await message.guild.members.fetch()
+
+                let first = await message.guild.roles.cache.find(role => role.name === '1');
+                let second = await message.guild.roles.cache.find(role => role.name === '2');
+                let third = await message.guild.roles.cache.find(role => role.name === '3');
+
+                // 905951431398408243 905951559186260069 905952134233731082
+
+				let description = 'Acestea sunt rezultatele (Weekly XP)';
+
+				let users = await Database.all();
+
+				users.sort(function(a, b) {
+    				return parseFloat(b.value.weeklyxp) - parseFloat(a.value.weeklyxp);
+				});
+
+				let top_users = users.slice(0, 10);
+
+				let top1 = top_users[0].value.id;
+				let top2 = top_users[1].value.id;
+				let top3 = top_users[2].value.id;
+
+				first.members.forEach((member, i) => {
+					setTimeout(() => {
+                        member.roles.remove(first);
+                    }, i * 500);
+
+                    var member = await message.guild.members.cache.get(top1);
+                    member.roles.add(first);
+				});
+
+				second.members.forEach((member, i) => {
+					setTimeout(() => {
+                        member.roles.remove(second);
+                    }, i * 500);
+
+                    var member = await message.guild.members.cache.get(top2);
+                    member.roles.add(second);
+				});
+
+				third.members.forEach((member, i) => {
+					setTimeout(() => {
+                        member.roles.remove(third);
+                    }, i * 500);
+
+                    var member = await message.guild.members.cache.get(top3);
+                    member.roles.add(third);
+				});
+
+				users.forEach((user) => {
+					await user.set('weeklyxp', 0);
+				});
+
+				for (let i = 0; i < top_users.length; i++) {
+					switch (i+1) {
+						case 1: description += `🥇 ${i+1}. **${users[i].value.username}** - \`${users[i].value.weeklyxp}\` <:troll_romania:996060026093441104>\n`; break;
+						case 2: description += `🥈 ${i+1}. **${users[i].value.username}** - \`${users[i].value.weeklyxp}\` <:troll_romania:996060026093441104>\n`; break;
+						case 3: description += `🥉 ${i+1}. **${users[i].value.username}** - \`${users[i].value.weeklyxp}\` <:troll_romania:996060026093441104>\n`; break;
+						default: description += `${i+1}. **${users[i].value.username}** - \`${users[i].value.weeklyxp}\` <:troll_romania:996060026093441104>\n`; break;
+					}
+				}
+
+				await message.delete({timeout: 1000});
+			}
+			case 'w':
+			case 'weekly': {
+				let description = 'Top 10 Utilizatori weekly XP.\n\n';
+
+				let users = await Database.all();
+
+				users.sort(function(a, b) {
+    				return parseFloat(b.value.weeklyxp) - parseFloat(a.value.weeklyxp);
+				});
+
+				users = users.slice(0, 10);
+
+				for (let i = 0; i < users.length; i++) {
+					switch (i+1) {
+						case 1: description += `🥇 ${i+1}. **${users[i].value.username}** - \`${users[i].value.weeklyxp}\` <:troll_romania:996060026093441104>\n`; break;
+						case 2: description += `🥈 ${i+1}. **${users[i].value.username}** - \`${users[i].value.weeklyxp}\` <:troll_romania:996060026093441104>\n`; break;
+						case 3: description += `🥉 ${i+1}. **${users[i].value.username}** - \`${users[i].value.weeklyxp}\` <:troll_romania:996060026093441104>\n`; break;
+						default: description += `${i+1}. **${users[i].value.username}** - \`${users[i].value.weeklyxp}\` <:troll_romania:996060026093441104>\n`; break;
+					}
+				}
+
+				give_embed.description(description);
+				await give_embed.send();
+				break;
+			}
 			case 's':
 			case 'star': {
 				let description = 'Top 10 Utilizatori cu cele mai multe star react-uri primite.\n\n';

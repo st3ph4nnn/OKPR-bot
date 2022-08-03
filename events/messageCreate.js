@@ -27,6 +27,7 @@ module.exports = {
 				await db_user.check_user();
 				let xp = (await db_user.get('xp')) + 1;
 				await db_user.set('xp', xp);
+				await db_user.add('weeklyxp', 1);
 
 				let db_level = await db_user.get('level');
 

@@ -16,7 +16,7 @@ module.exports = {
 		}
 
 		args[0] = args[0].toLowerCase();
-
+🃏
 		if (!args[1]) {
             coinflip_embed.description(`Câți bani vrei sa arunci bossule? \n\nFolosire: \`${client.prefix}coinflip {bani}\``);
             return coinflip_embed.send();
