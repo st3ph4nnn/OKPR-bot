@@ -68,7 +68,7 @@ module.exports = {
 				});
 
 				users.forEach((user) => {
-					await user.set('weeklyxp', 0);
+					user.set('weeklyxp', 0);
 				});
 
 				for (let i = 0; i < top_users.length; i++) {
