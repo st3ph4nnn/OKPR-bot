@@ -18,7 +18,6 @@ module.exports = {
 				if (!message.member.permissions.has("ADMINISTRATOR"))
 					return;
 
-
 				await message.guild.members.fetch()
 
                 let first = await message.guild.roles.cache.find(role => role.name === '1');
@@ -46,7 +45,7 @@ module.exports = {
                         member.roles.remove(first);
                     }, i * 500);
 
-                    var member = await message.guild.members.cache.get(top1);
+                    var member = message.guild.members.cache.get(top1);
                     member.roles.add(first);
 				});
 
@@ -55,7 +54,7 @@ module.exports = {
                         member.roles.remove(second);
                     }, i * 500);
 
-                    var member = await message.guild.members.cache.get(top2);
+                    var member = message.guild.members.cache.get(top2);
                     member.roles.add(second);
 				});
 
@@ -64,7 +63,7 @@ module.exports = {
                         member.roles.remove(third);
                     }, i * 500);
 
-                    var member = await message.guild.members.cache.get(top3);
+                    var member = message.guild.members.cache.get(top3);
                     member.roles.add(third);
 				});
 
