@@ -5,7 +5,7 @@ const { MessageAttachement } = require('discord.js')
 module.exports = {
 	name: 'list',
 	owner: true,
-	description: 'Evaluează o comandă.',
+	description: 'Arată data de baze.',
 	category: 'Admin',
 	cooldown: 1000,
 	async execute(message, args, client) {
