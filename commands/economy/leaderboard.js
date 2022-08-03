@@ -31,6 +31,9 @@ module.exports = {
 				let users = await Database.all();
 
 				users.sort(function(a, b) {
+					if (b.value.weeklyxp === undefined) b.value.weeklyxp = 0;
+					if (a.value.weeklyxp === undefined) a.value.weeklyxp = 0;
+					
     				return parseFloat(b.value.weeklyxp) - parseFloat(a.value.weeklyxp);
 				});
 
