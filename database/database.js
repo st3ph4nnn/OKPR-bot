@@ -33,8 +33,7 @@ class DatabaseUser {
 
     await db.set(`${this.id}`, {
     	username: this.name,
-      	userId: this.id,
-      	...scheme
+      ...scheme
     });
   }
 

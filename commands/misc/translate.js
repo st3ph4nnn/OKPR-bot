@@ -46,6 +46,7 @@ module.exports = {
                 return tr_embed.send();
             }).catch((err) => {
                 tr_embed.description(`Ups! Nu am reușit să translatam acest mesaj.\n\nEroare: \`${err}\``);
+                console.error(err);
                 return tr_embed.send();
             });
         } catch (err) {
