@@ -8,7 +8,7 @@ module.exports = {
 	category: 'Misc',
 	cooldown: 5000,
 	async execute(message, args, client) {
-		let s = fs.createReadStream('database/strings');
+		let s = fs.createReadStream('database/strings.txt');
 
 		client.chain.seed(s, () => {
         	let res = client.chain.respond(client.chain.pick(), random.int(1, 10)).join(' ');
