@@ -9,6 +9,22 @@ module.exports = {
   			status: 'online'
 		});
 
+		try {
+        	await client.ftp.access({
+           		host: process.env.HOST,
+            	user: process.env.USER,
+            	password: process.env.PASSWORD,
+            	secure: true
+        	})
+	    	await client.ftp.downloadTo('database/userDB.sqlite', 'userDB.sqlite');
+    		setInterval(() => {
+    			client.ftp.uploadFrom('database/userDB.sqlite', 'userDB.sqlite');
+    		}, 60000);
+    	} catch(err) {
+        	console.log(`[ftp] ${err}`);
+    	}
+
+
 		client.distube
     	.on('playSong', (queue, song) => {
     	if (queue.previousSongs)

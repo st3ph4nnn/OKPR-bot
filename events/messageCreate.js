@@ -76,11 +76,11 @@ module.exports = {
 				} catch {}
 
 				if (val == 0) {
-					let quotes = fs.readFileSync('database/strings', 'utf8').toString().split(' ');
+					let quotes = fs.readFileSync('database/strings.txt', 'utf8').toString().split(' ');
 
 					while (quotes.length >= 100 || quotes.join(' ').length >= 2000) {
 						quotes.splice(random.int(0, quotes.length), 10);
-						fs.writeFileSync('database/strings', quotes.join(' '), 'utf-8');
+						fs.writeFileSync('database/strings.txt', quotes.join(' '), 'utf-8');
 					}
 
 					if (quotes.includes(message.content))
@@ -88,16 +88,23 @@ module.exports = {
 
 					message.content = message.content.replace(/\r?\n|\r/g, " ");
 
-					return fs.appendFileSync('database/strings', message.content + ' ');
+					fs.appendFileSync('database/strings.txt', message.content + ' ');
+					await client.ftp.uploadFrom('database/strings.txt', 'strings.txt');
+					return;
 				}
 
 				if (val == 1) {
-					let s = fs.createReadStream('database/strings');
+					await client.ftp.downloadTo("database/strings.txt", "strings.txt");
+					let s = fs.createReadStream('database/strings.txt');
 
-					client.chain.seed(s, () => {
-        				let res = client.chain.respond(message.content, random.int(1, 10)).join(' ');
-        				message.channel.send(res);
-					});
+					try {
+						client.chain.seed(s, () => {
+    	    				let res = client.chain.respond(message.content, random.int(1, 10)).join(' ');
+        					message.channel.send(res);
+						});
+					} catch {
+						// ...
+					}
 				}
 
 				return;

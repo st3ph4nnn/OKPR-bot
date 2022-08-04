@@ -1,7 +1,7 @@
 const { Client, Collection, EmbedBuilder, Partials } = require('discord.js');
 const { DisTube } = require('distube');
 const { YtDlpPlugin } = require('@distube/yt-dlp');
-const random_col = require('random-hex-color');
+const ftp = require("basic-ftp")
 
 const client = new Client({ intents: 3276799, partials: [Partials.Message, Partials.Channel, Partials.Reaction]});
 
@@ -21,8 +21,9 @@ client.markov = markov;
 client.chain = chain;
 client.commands = new Collection();
 client.cooldowns = new Collection();
-client.prefix = process.env.PREFIX;
-client.owner_id = process.env.OWNER;
+client.prefix = '.';
+client.owner_id = '853225138116100106';
+client.ftp = new ftp.Client();
     
 ['commandhandler.js', 'eventhandler.js'].forEach((handler) => {
     console.log(`[event handler] loading ${handler}`);
