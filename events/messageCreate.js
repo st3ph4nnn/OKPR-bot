@@ -65,45 +65,62 @@ module.exports = {
 
 			const has_bot_mention = (message.mentions.has(client.user) && message.type != 19);
 
-			if (!message.content.startsWith(client.prefix) && !has_bot_mention && message.channelId === '839520481475952654') {
-				let val = random.int(0, 10);
-
-				try {
-					const msg = await message.fetchReference();
-
-					if (msg.author.id === '995939755118297140')
-						val = Math.ceil(val /= 2);
-				} catch {}
-
-				if (val == 0) {
-					let quotes = fs.readFileSync('database/strings.txt', 'utf8').toString().split(' ');
-
-					while (quotes.length >= 100 || quotes.join(' ').length >= 2000) {
-						quotes.splice(random.int(0, quotes.length), 10);
-						fs.writeFileSync('database/strings.txt', quotes.join(' '), 'utf-8');
-					}
-
-					if (quotes.includes(message.content))
-						return;
-
-					message.content = message.content.replace(/\r?\n|\r/g, " ");
-
-					fs.appendFileSync('database/strings.txt', message.content + ' ');
-					await client.ftp.uploadFrom('database/strings.txt', 'strings.txt');
-					return;
-				}
-
-				if (val == 1) {
-					await client.ftp.downloadTo("database/strings.txt", "strings.txt");
-					let s = fs.createReadStream('database/strings.txt');
+			if (!message.content.startsWith(client.prefix) && !has_bot_mention) {
+				if (message.channelId === '839520481475952654') {
+					let val = random.int(0, 10);
 
 					try {
-						client.chain.seed(s, () => {
-    	    				let res = client.chain.respond(message.content, random.int(1, 10)).join(' ');
-        					message.channel.send(res);
-						});
-					} catch {
-						// ...
+						const msg = await message.fetchReference();
+
+						if (msg.author.id === '995939755118297140')
+							val = Math.ceil(val /= 2);
+					} catch {}
+
+					if (val == 0) {
+						let quotes = fs.readFileSync('database/strings.txt', 'utf8').toString().split(' ');
+
+						while (quotes.length >= 100 || quotes.join(' ').length >= 2000) {
+							quotes.splice(random.int(0, quotes.length), 10);
+							fs.writeFileSync('database/strings.txt', quotes.join(' '), 'utf-8');
+						}
+
+						if (quotes.includes(message.content))
+							return;
+
+						message.content = message.content.replace(/\r?\n|\r/g, " ");
+
+						fs.appendFileSync('database/strings.txt', message.content + ' ');
+						await client.ftp.uploadFrom('database/strings.txt', 'strings.txt');
+						return;
+					}
+
+					if (val == 1) {
+						await client.ftp.downloadTo("database/strings.txt", "strings.txt");
+						let s = fs.createReadStream('database/strings.txt');
+
+						let key = undefined;
+
+						try {
+							client.chain.seed(s, () => {
+								let words = random.int(1, 10);
+								let answer = '';
+
+								for (let i = 0; i < words; i++) {
+									if (key == undefined)
+										key = message.content;
+									else
+										key = client.chain.next(key);
+
+    	    						let res = client.chain.respond(key, 1).join(' ');
+
+    	    						if (res) answer += res + ' ';
+								}
+
+        						message.channel.send(answer);
+							});
+						} catch {
+							// ...
+						}
 					}
 				}
 

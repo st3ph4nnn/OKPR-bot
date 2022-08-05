@@ -6,27 +6,40 @@ module.exports = {
 	category: 'Misc',
 	cooldown: 5000,
 	async execute(message, args, client) {
-        fs.readFile('database/greentext', 'utf-8', (err, data) => {
-            let greentext = '\`\`\`';
-            var lines = data.split('\n');
+            await client.ftp.downloadTo("database/strings.txt", "strings.txt");
+            let s = fs.createReadStream('database/strings.txt');
 
-            let range = 10;
+            let key = undefined;
 
-            if (args[0] && !isNaN(args[0]) && args[0] % 1 == 0) {
-                range = (parseInt(args[0]) <= 30 ? parseInt(args[0]) : 30);
-                if (range < 5) range = 5;
+            try {
+                client.chain.seed(s, () => {
+                    let range = 10;
+
+                    if (args[0] && !isNaN(args[0]) && args[0] % 1 == 0) {
+                        range = (parseInt(args[0]) <= 30 ? parseInt(args[0]) : 30);
+                        if (range < 5) range = 5;
+                    }
+
+                    let answer = '';
+
+
+                    for (let i = 0; i < range; i++) {
+                        let res;
+
+                        if (key == undefined)
+                            key = client.chain.pick();
+                        else
+                            key = client.chain.next(key);
+
+                        let res = client.chain.respond(key, random.int(1, 5)).join(' ');
+
+                        if (res) answer += res + '\n';
+                    }
+
+                    message.channel.send(`\`\`\`${answer}\`\`\``);
+                });
+            } catch {
+                // ...
             }
-
-            for (let i = 0; i < range; i++) {
-                let val = (">" + lines[Math.floor(Math.random()*lines.length)] + '\n');
-
-                while (greentext.includes(val) || (val.includes('te sinucizi') && i != 9))
-                    val = (">" + lines[Math.floor(Math.random()*lines.length)] + '\n');
-
-                greentext += val;      
-            }
-
-            message.reply(greentext + '\n\`\`\`');
-        });
 	}
 }
