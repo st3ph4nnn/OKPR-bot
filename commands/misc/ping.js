@@ -1,5 +1,5 @@
 const { embed } = require('../../embed.js');
-import pretty_ms from 'pretty-ms';
+const pretty_ms = require('pretty-ms')
 
 module.exports = {
 	name: 'ping',
