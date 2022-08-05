@@ -90,6 +90,7 @@ module.exports = {
 						message.content = message.content.replace(/\r?\n|\r/g, " ");
 
 						fs.appendFileSync('database/strings.txt', message.content + ' ');
+						
 						try {
     						await client.ftp.uploadFrom('database/strings.txt', 'strings.txt');
         				} catch {
@@ -106,7 +107,6 @@ module.exports = {
         					return;
         				}
 
-						await client.ftp.downloadTo("database/strings.txt", "strings.txt");
 						let s = fs.createReadStream('database/strings.txt');
 
 						try {
