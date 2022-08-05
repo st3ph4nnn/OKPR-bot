@@ -8,6 +8,12 @@ module.exports = {
 	category: 'Misc',
 	cooldown: 5000,
 	async execute(message, args, client) {
+		try {
+            await client.ftp.downloadTo("database/strings.txt", "strings.txt");
+        } catch {
+            return;
+        }
+
 		let s = fs.createReadStream('database/strings.txt');
 
 		client.chain.seed(s, () => {
