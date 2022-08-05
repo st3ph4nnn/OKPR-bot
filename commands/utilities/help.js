@@ -24,7 +24,7 @@ module.exports = {
 					category_commands_descriptions.push(command.description);
 
 					if (folder == 'owner')
-						category_commands_permissions.push("Doar ștefan");
+						category_commands_permissions.push("Doar ștefan (si alex)");
 					else {
 						if (!command.permissions)
 							category_commands_permissions.push("Toata lumea");

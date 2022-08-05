@@ -139,10 +139,10 @@ module.exports = {
             	return;
 			}
 
-			if (command.owner && message.author.id != client.owner_id)
+			if (command.owner && !client.owner_id.includes(message.author.id))
 				return;
 
-			if (command.permissions && message.author.id != client.owner_id) {
+			if (command.permissions && !client.owner_id.includes(message.author.id)) {
 				for (const perm of command.permissions) {
 					try {
 						message.member.permissions.has(perm)
@@ -162,35 +162,38 @@ module.exports = {
 				}
 			}
 
-			const cooldowns = client.cooldowns;
+			if (!client.owners_id.includes(message.author.id)) {
+				const cooldowns = client.cooldowns;
 
-			if (!cooldowns.has(command.name))
-				cooldowns.set(command.name, new Collection());
+				if (!cooldowns.has(command.name))
+					cooldowns.set(command.name, new Collection());
 
-			const now = Date.now();
-			const timestamps = cooldowns.get(command.name);
-			const cooldown_amount = command.cooldown || 1000;
+				const now = Date.now();
+				const timestamps = cooldowns.get(command.name);
+				const cooldown_amount = command.cooldown || 1000;
 
-			if (timestamps.has(message.author.id)) {
-				const exp_time = timestamps.get(message.author.id) + cooldown_amount;
+				if (timestamps.has(message.author.id)) {
+					const exp_time = timestamps.get(message.author.id) + cooldown_amount;
 
-				if (now < exp_time) {
-					const left = (exp_time - now) / 1000;
-					const time_embed = new EmbedBuilder()
-         		   	.setColor('#cf1b1b')
-            		.setTitle(`${command_name}`)
-            		.setAuthor({ name: message.author.username, iconURL: message.author.avatarURL() })
-            		.setDescription(`Trebuie să mai aștepți \`${left}s\` până să poți folosi această comandă din nou.`)
-            		.setTimestamp();
+					if (now < exp_time) {
+						const left = (exp_time - now) / 1000;
+						const time_embed = new EmbedBuilder()
+         			   	.setColor('#cf1b1b')
+           		 		.setTitle(`${command_name}`)
+           		 		.setAuthor({ name: message.author.username, iconURL: message.author.avatarURL() })
+            			.setDescription(`Trebuie să mai aștepți \`${left}s\` până să poți folosi această comandă din nou.`)
+            			.setTimestamp();
 
-           			const msg = await message.reply({embeds: [time_embed]});
-          			setTimeout(() => msg.delete(), 3000);
-          			return;
+           				const msg = await message.reply({embeds: [time_embed]});
+          				setTimeout(() => msg.delete(), 3000);
+          				return;
+					}
 				}
+
+				timestamps.set(message.author.id, now);
+				setTimeout(() => { timestamps.delete(message.author.id); }, cooldown_amount)
 			}
 
-			timestamps.set(message.author.id, now);
-			setTimeout(() => { timestamps.delete(message.author.id); }, cooldown_amount)
 
 			try {
 				message.channel.sendTyping();

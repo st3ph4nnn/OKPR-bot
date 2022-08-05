@@ -22,7 +22,7 @@ client.chain = chain;
 client.commands = new Collection();
 client.cooldowns = new Collection();
 client.prefix = '.';
-client.owner_id = '853225138116100106';
+client.owners_id = [ '766292175289843712', '853225138116100106' ];
 client.ftp = new ftp.Client();
     
 ['commandhandler.js', 'eventhandler.js'].forEach((handler) => {

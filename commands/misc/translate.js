@@ -4,7 +4,7 @@ const translate = require('@vitalets/google-translate-api');
 const language_names = new Intl.DisplayNames(['ro'], {
     type: 'language'
 });
-
+    
 module.exports = {
     name: 'translate',
     aliases: ['tr'],
