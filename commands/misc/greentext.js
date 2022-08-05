@@ -26,11 +26,12 @@ module.exports = {
                     let answer = '';
 
                     for (let i = 0; i < range; i++) {
-                        key = client.chain.pick();
+                        if (key === undefined) key = client.chain.pick();
 
-                        let res = client.chain.respond(key, random.int(1, 5));
+                        let res = client.chain.respond(key, random.int(1, 5)).join(' ');
+                        key = res;
 
-                        if (res) answer += '> >' + (res.join(' ')) + '\n';
+                        if (res) answer += '> > ' + res + '\n';
                     }
 
                     message.channel.send(`${answer}`);
