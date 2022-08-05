@@ -1,5 +1,5 @@
 const { embed } = require('../../embed.js');
-const pretty_ms = require('pretty-ms')
+const moment = require('moment');
 
 module.exports = {
 	name: 'ping',
@@ -7,7 +7,7 @@ module.exports = {
 	category: 'Misc',
 	cooldown: 1000,
 	async execute(message, args, client) {
-		const ping_embed = new embed(message, 'Ping Pong <:troll_romania:996060026093441104>', `API Latency: \`${Math.round(client.ws.ping)}ms\`\nUptime: ${pretty_ms(client.uptime)}`);
+		const ping_embed = new embed(message, 'Ping Pong <:troll_romania:996060026093441104>', `API Latency: \`${Math.round(client.ws.ping)}ms\`\nUptime: ${moment.duration(client.uptime).format(" D [days], H [hrs], m [mins], s [secs]");}`);
 		ping_embed.send();
 	}
 }
