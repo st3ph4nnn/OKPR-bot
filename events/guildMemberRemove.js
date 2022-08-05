@@ -7,7 +7,7 @@ module.exports = {
 		if (member.user.bot)
 			return;
 
-		const user = DatabaseUser(member.user.username, member.user.id);
+		const user = new DatabaseUser(member.user.username, member.user.id);
 
 		if ((await user.fetch_user()))
 			await Database.delete(member.user.id);
