@@ -98,25 +98,10 @@ module.exports = {
 						await client.ftp.downloadTo("database/strings.txt", "strings.txt");
 						let s = fs.createReadStream('database/strings.txt');
 
-						let key = undefined;
-
 						try {
 							client.chain.seed(s, () => {
-								let words = random.int(1, 10);
-								let answer = '';
-
-								for (let i = 0; i < words; i++) {
-									if (key == undefined)
-										key = message.content;
-									else
-										key = client.chain.next(key);
-
-    	    						let res = client.chain.respond(key, 1).join(' ');
-
-    	    						if (res) answer += res + ' ';
-								}
-
-        						message.channel.send(answer);
+    	    					let res = client.chain.respond(message.content, random.int(1, 10)).join(' ');
+        						message.channel.send(res);
 							});
 						} catch {
 							// ...

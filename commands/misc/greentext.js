@@ -12,6 +12,8 @@ module.exports = {
 
             let key = undefined;
 
+            let last_answer = undefined;
+
             try {
                 client.chain.seed(s, () => {
                     let range = random.int(5, 10);
@@ -26,14 +28,11 @@ module.exports = {
                     for (let i = 0; i < range; i++) {
                         if (key === undefined)
                             key = client.chain.pick();
-                        else
-                            key = client.chain.next(key);
 
-                        console.log(key);
+                        let res = client.chain.respond(key, random.int(1, 5));
+                        key = res[res.length - 1];
 
-                        let res = client.chain.respond(key, random.int(1, 5)).join(' ');
-
-                        if (res) answer += res + '\n';
+                        if (res) answer += (res.join(' ')) + '\n';
                     }
 
                     message.channel.send(`\`\`\`${answer}\`\`\``);
