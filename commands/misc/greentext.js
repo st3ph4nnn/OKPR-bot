@@ -29,6 +29,8 @@ module.exports = {
                         else
                             key = client.chain.next(key);
 
+                        console.log(key);
+
                         let res = client.chain.respond(key, random.int(1, 5)).join(' ');
 
                         if (res) answer += res + '\n';
