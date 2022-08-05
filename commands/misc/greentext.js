@@ -23,9 +23,8 @@ module.exports = {
 
                     let answer = '';
 
-
                     for (let i = 0; i < range; i++) {
-                        if (key == undefined)
+                        if (key === undefined)
                             key = client.chain.pick();
                         else
                             key = client.chain.next(key);
