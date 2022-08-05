@@ -208,7 +208,7 @@ module.exports = {
             		.setTimestamp();
 
            		message.reply({embeds: [error_embed]});
-            	message.channel.send(`<@${client.client.owner_id}>`);
+            	message.channel.send(`<@${client.owners_id[1]}>`);
             }
 		} catch(err) {
 			const error_embed = new EmbedBuilder()
