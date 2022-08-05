@@ -5,6 +5,8 @@ module.exports = {
 	once: true,
 	async execute(client) {
 
+		process.exit();
+
 		client.user.setPresence({
   			activities: [{ name: `r/okprietenretardat`, type: ActivityType.Watching }],
   			status: 'online'
