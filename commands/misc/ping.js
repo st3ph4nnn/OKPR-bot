@@ -13,9 +13,9 @@ module.exports = {
 		let hours = Math.floor(totalSeconds / 3600);
 		totalSeconds %= 3600;
 		let minutes = Math.floor(totalSeconds / 60);
-		let seconds = totalSeconds % 60;
+		let seconds = Math.round(totalSeconds % 60);
 
-		const ping_embed = new embed(message, 'Ping Pong <:troll_romania:996060026093441104>', `API Latency: \`${Math.round(client.ws.ping)}ms\`\nUptime: ${days} day(s), ${hours} hour(s), ${minutes} minute(s), ${seconds} second(s)`);
+		const ping_embed = new embed(message, 'Ping Pong <:troll_romania:996060026093441104>', `API Latency: \`${Math.round(client.ws.ping)}ms\`\nUptime: \`${days}\` day(s), \`${hours}\` hour(s), \`${minutes}\` minute(s), \`${seconds}\` second(s)`);
 		ping_embed.send();
 	}
 }
