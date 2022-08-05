@@ -1,4 +1,5 @@
 const fs = require("fs");
+const random = require('random');
 
 module.exports = {
 	name: 'greentext',
@@ -13,7 +14,7 @@ module.exports = {
 
             try {
                 client.chain.seed(s, () => {
-                    let range = 10;
+                    let range = random.int(5, 10);
 
                     if (args[0] && !isNaN(args[0]) && args[0] % 1 == 0) {
                         range = (parseInt(args[0]) <= 30 ? parseInt(args[0]) : 30);
@@ -24,8 +25,6 @@ module.exports = {
 
 
                     for (let i = 0; i < range; i++) {
-                        let res;
-
                         if (key == undefined)
                             key = client.chain.pick();
                         else
