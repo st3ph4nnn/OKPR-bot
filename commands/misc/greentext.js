@@ -5,7 +5,7 @@ module.exports = {
 	name: 'greentext',
 	description: 'Chadează pe cineva anume.',
 	category: 'Misc',
-	cooldown: 5000,
+	cooldown: 15000,
 	async execute(message, args, client) {
         try {
             await client.ftp.downloadTo("database/strings.txt", "strings.txt");

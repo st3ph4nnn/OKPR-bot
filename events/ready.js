@@ -6,7 +6,7 @@ module.exports = {
 	async execute(client) {
 
 		process.exit();
-		
+
 		client.user.setPresence({
   			activities: [{ name: `r/okprietenretardat`, type: ActivityType.Watching }],
   			status: 'online'
@@ -20,7 +20,11 @@ module.exports = {
             	secure: true
         	});
 
-	    	await client.ftp.downloadTo('database/userDB.sqlite', 'userDB.sqlite');
+        	try {
+	    		await client.ftp.downloadTo('database/userDB.sqlite', 'userDB.sqlite');
+        	} catch {
+        		// ...
+        	}
     		setInterval(() => {
     			client.ftp.uploadFrom('database/userDB.sqlite', 'userDB.sqlite');
     		}, 60000);
