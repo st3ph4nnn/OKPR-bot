@@ -13,8 +13,7 @@ module.exports = {
         let image = await google.image(args.join(' '), {
             safe: true,
         }).catch((err) => {
-            image_embed.description(`Nu am găsit nimic legat de \`${args.join(" ")}\`\nÎn unele cazuri, nu primesc informații de la Larry Page, așa că te incurajez să încerci din nou.`);
-            return image_embed.send();
+            // ...
         });
 
         if (!image || !image.length || !image[0].url || !image[0].origin.title) {
