@@ -8,7 +8,7 @@ module.exports = {
 	cooldown: 1000,
 	async execute(message, args, client) {
 
-		let totalSeconds = (bot.uptime / 1000);
+		let totalSeconds = (client.uptime / 1000);
 		let days = Math.floor(totalSeconds / 86400);
 		let hours = Math.floor(totalSeconds / 3600);
 		totalSeconds %= 3600;
