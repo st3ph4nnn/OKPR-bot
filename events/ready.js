@@ -1,4 +1,5 @@
 const { ActivityType, EmbedBuilder } = require('discord.js');
+const random_col = require('random-hex-color');
 
 module.exports = {
 	name: "ready",
