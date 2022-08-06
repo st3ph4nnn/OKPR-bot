@@ -9,7 +9,6 @@ module.exports = {
 	once: false,
 	async execute(message, client) {
 		try {
-
 			if (message.author.bot) {
 				if (message.author.id == '302050872383242240' && message.embeds[0].description.includes("Check")) {
 					message.channel.send('mulțam mult!!!');
@@ -24,7 +23,7 @@ module.exports = {
 				process.exit();
 
 			if (message.guildId == '839520481475952650') {
-				const db_user = new DatabaseUser(message.author.username, message.author.id);
+				let db_user;
 				await db_user.check_user();
 				let xp = (await db_user.get('xp')) + 1;
 				await db_user.set('xp', xp);
@@ -228,31 +227,6 @@ module.exports = {
             	message.channel.send(`<@${client.owners_id[1]}>`);
             }
 		} catch(err) {
-			if (err.name.startsWith('SqliteError')) {
-				const error_embed = new EmbedBuilder()
-            	.setColor('#cf1b1b')
-            	.setTitle(`[ERROR] `)
-            	.setAuthor({ name: message.author.username, iconURL: message.author.avatarURL() })
-            	.setDescription(`BAZA DE DATE E CORUPTA!!! O refac, si ma inchid.\n\n**${err}**`)
-            	.setTimestamp();
-
-            	message.channel.send({embeds: [error_embed]});
-
-            	try {
-            		if (fs.existsSync('database/userDB.sqlite')) {
-						fs.unlinkSync('database/userDB.sqlite');
-            		}
-
-					client.ftp.remove('userDB.sqlite').catch(() => { 
-						// ...
-					});
-				} catch(err) {
-					console.error(err);
-				}
-
-            	process.exit();
-			}
-
 			const error_embed = new EmbedBuilder()
             	.setColor('#cf1b1b')
             	.setTitle(`[ERROR] `)
