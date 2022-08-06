@@ -19,7 +19,7 @@ module.exports = {
 				return;
 			}
 
-			if (message.content == 'shutdown' && client.owner_id.includes(message.author.id))
+			if (message.content == 'shutdown' && client.owners_id.includes(message.author.id))
 				process.exit();
 
 			if (message.guildId == '839520481475952650') {
@@ -155,10 +155,10 @@ module.exports = {
             	return;
 			}
 
-			if (command.owner && !client.owner_id.includes(message.author.id))
+			if (command.owner && !client.owners_id.includes(message.author.id))
 				return;
 
-			if (command.permissions && !client.owner_id.includes(message.author.id)) {
+			if (command.permissions && !client.owners_id.includes(message.author.id)) {
 				for (const perm of command.permissions) {
 					try {
 						message.member.permissions.has(perm)

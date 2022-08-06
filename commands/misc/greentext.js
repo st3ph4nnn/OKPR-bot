@@ -5,11 +5,16 @@ module.exports = {
 	name: 'greentext',
 	description: 'Chadează pe cineva anume.',
 	category: 'Misc',
-	cooldown: 15000,
+	cooldown: 20000,
 	async execute(message, args, client) {
         try {
             await client.ftp.downloadTo("database/strings.txt", "strings.txt");
             let s = fs.createReadStream('database/strings.txt');
+
+            const content = readFileSync('database/strings.txt', 'utf-8').split(/\r?\n/);
+
+            if (content.length <= 5)
+                return;
 
             let key = undefined;
 
