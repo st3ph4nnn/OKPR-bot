@@ -112,6 +112,11 @@ module.exports = {
 
 						let s = fs.createReadStream('database/strings.txt');
 
+						const content = readFileSync('database/strings.txt', 'utf-8').split(/\r?\n/);
+
+						if (content.length <= 5)
+							return;
+
 						try {
 							client.chain.seed(s, () => {
     	    					let res = client.chain.respond(message.content, random.int(1, 10)).join(' ');
