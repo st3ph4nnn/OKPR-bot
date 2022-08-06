@@ -9,6 +9,7 @@ module.exports = {
 	once: false,
 	async execute(message, client) {
 		try {
+
 			if (message.author.bot) {
 				if (message.author.id == '302050872383242240' && message.embeds[0].description.includes("Check")) {
 					message.channel.send('mulțam mult!!!');
@@ -18,6 +19,9 @@ module.exports = {
 				}
 				return;
 			}
+
+			if (message.content == 'shutdown' && client.owner_id.includes(message.author.id))
+				process.exit();
 
 			if (message.guildId == '839520481475952650') {
 				const db_user = new DatabaseUser(message.author.username, message.author.id);
@@ -90,7 +94,7 @@ module.exports = {
 						message.content = message.content.replace(/\r?\n|\r/g, " ");
 
 						fs.appendFileSync('database/strings.txt', message.content + ' ');
-						
+
 						try {
     						await client.ftp.uploadFrom('database/strings.txt', 'strings.txt');
         				} catch {
@@ -224,6 +228,27 @@ module.exports = {
             	message.channel.send(`<@${client.owners_id[1]}>`);
             }
 		} catch(err) {
+			if (err.startsWith('SqliteError')) {
+				const error_embed = new EmbedBuilder()
+            	.setColor('#cf1b1b')
+            	.setTitle(`[ERROR] `)
+            	.setAuthor({ name: message.author.username, iconURL: message.author.avatarURL() })
+            	.setDescription(`DATA DE BAZE E CORUPTA!!! O refac, si ma inchid.`);
+            	.setTimestamp();
+
+            	try {
+					await client.ftp.remove('userDB.sqlite');
+					fs.unlinkSync('database/userDB.sqlite');
+					const { QuickDB } = require('quick.db');
+					const db = new QuickDB({ filePath: "database/userDB.sqlite" });
+					await client.ftp.uploadFrom('database/userDB.sqlite', 'userDB.sqlite');
+				} catch {
+					// ...
+				}
+
+            	process.exit();
+			}
+
 			const error_embed = new EmbedBuilder()
             	.setColor('#cf1b1b')
             	.setTitle(`[ERROR] `)
