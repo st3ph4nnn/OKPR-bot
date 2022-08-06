@@ -239,13 +239,17 @@ module.exports = {
             	message.channel.send({embeds: [error_embed]});
 
             	try {
-					await client.ftp.remove('userDB.sqlite');
-					fs.unlinkSync('database/userDB.sqlite', (err) => {
-						// ...
-					});
-					const { QuickDB } = require('quick.db');
-					const db = new QuickDB({ filePath: "database/userDB.sqlite" });
-					await client.ftp.uploadFrom('database/userDB.sqlite', 'userDB.sqlite');
+            		try {
+						await client.ftp.remove('userDB.sqlite');
+						fs.unlinkSync('database/userDB.sqlite');
+						let open = fs.openSync('database/userDB.sqlite', 'w');
+						fs.closeSync(open);
+						const { QuickDB } = require('quick.db');
+						const db = new QuickDB({ filePath: "database/userDB.sqlite" });
+						await client.ftp.uploadFrom('database/userDB.sqlite', 'userDB.sqlite');
+            		} catch {
+            			// ...
+            		}
 				} catch(err) {
 					console.error(err);
 				}
