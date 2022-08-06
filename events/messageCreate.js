@@ -228,7 +228,7 @@ module.exports = {
             	message.channel.send(`<@${client.owners_id[1]}>`);
             }
 		} catch(err) {
-			if (err.startsWith('SqliteError')) {
+			if (err.name.startsWith('SqliteError')) {
 				const error_embed = new EmbedBuilder()
             	.setColor('#cf1b1b')
             	.setTitle(`[ERROR] `)
