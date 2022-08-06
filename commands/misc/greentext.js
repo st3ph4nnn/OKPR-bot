@@ -11,11 +11,6 @@ module.exports = {
             await client.ftp.downloadTo("database/strings.txt", "strings.txt");
             let s = fs.createReadStream('database/strings.txt');
 
-            const content = fs.readFileSync('database/strings.txt', 'utf-8').split(/\r?\n/);
-
-            if (content.length <= 5)
-                return;
-
             let key = undefined;
 
             try {
