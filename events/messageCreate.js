@@ -91,8 +91,11 @@ module.exports = {
 							fs.writeFileSync('database/strings.txt', quotes.join(' '), 'utf-8');
 						}
 
-						if (quotes.includes(message.content))
-							return;
+						let words = message.content.join(' ');
+
+						for (let i = 0; i < words.length; i++)
+							if (quotes.includes(words[i]))
+								return;
 
 						message.content = message.content.replace(/\r?\n|\r/g, " ");
 
