@@ -11,9 +11,9 @@ module.exports = {
 
 		try {
         	await client.ftp.access({
-           		host: process.env.HOST,
-            	user: process.env.USER,
-            	password: process.env.PASSWORD,
+           		host: 'ftp-st3ph4nnn.alwaysdata.net',
+            	user: 'st3ph4nnn',
+            	password: 'nCkBrqMURWV8TyH7dz38K2RR',
             	secure: true
         	});
 
@@ -22,7 +22,7 @@ module.exports = {
         	} catch {
         		// ...
         	}
-        	
+
     		setInterval(() => {
     			client.ftp.uploadFrom('database/userDB.sqlite', 'userDB.sqlite');
     		}, 60000);

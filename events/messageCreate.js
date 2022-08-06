@@ -239,8 +239,12 @@ module.exports = {
             	message.channel.send({embeds: [error_embed]});
 
             	try {
-					fs.unlinkSync('database/userDB.sqlite', (err) => {
-						await client.ftp.remove('userDB.sqlite');
+            		if (fs.existsSync('database/userDB.sqlite')) {
+						fs.unlinkSync('database/userDB.sqlite');
+            		}
+
+					client.ftp.remove('userDB.sqlite').catch(() => { 
+						// ...
 					});
 				} catch(err) {
 					console.error(err);
