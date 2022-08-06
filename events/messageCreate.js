@@ -236,6 +236,8 @@ module.exports = {
             	.setDescription(`DATA DE BAZE E CORUPTA!!! O refac, si ma inchid.`)
             	.setTimestamp();
 
+            	message.channel.send({embeds: [error_embed]});
+
             	try {
 					await client.ftp.remove('userDB.sqlite');
 					fs.unlinkSync('database/userDB.sqlite');
