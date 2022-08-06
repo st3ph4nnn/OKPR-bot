@@ -12,6 +12,11 @@ module.exports = {
             await client.ftp.downloadTo("database/strings.txt", "strings.txt");
 			let s = fs.createReadStream('database/strings.txt');
 
+            const content = fs.readFileSync('database/strings.txt', 'utf-8').split(/\r?\n/);
+
+            if (content.length <= 5)
+                return;
+
 			client.chain.seed(s, () => {
         		let res = client.chain.respond(client.chain.pick(), random.int(1, 10)).join(' ');
         		if (res) message.channel.send(res);
