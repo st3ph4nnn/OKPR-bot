@@ -244,8 +244,8 @@ module.exports = {
 					const { QuickDB } = require('quick.db');
 					const db = new QuickDB({ filePath: "database/userDB.sqlite" });
 					await client.ftp.uploadFrom('database/userDB.sqlite', 'userDB.sqlite');
-				} catch {
-					// ...
+				} catch(err) {
+					console.error(err);
 				}
 
             	process.exit();
