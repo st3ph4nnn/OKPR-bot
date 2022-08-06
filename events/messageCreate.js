@@ -23,7 +23,7 @@ module.exports = {
 				process.exit();
 
 			if (message.guildId == '839520481475952650') {
-				let db_user;
+				let db_user = new DatabaseUser(message.author.username, message.author.id);
 				await db_user.check_user();
 				let xp = (await db_user.get('xp')) + 1;
 				await db_user.set('xp', xp);
@@ -209,7 +209,6 @@ module.exports = {
 				timestamps.set(message.author.id, now);
 				setTimeout(() => { timestamps.delete(message.author.id); }, cooldown_amount)
 			}
-
 
 			try {
 				message.channel.sendTyping();

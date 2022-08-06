@@ -11,9 +11,9 @@ module.exports = {
 
 		try {
         	await client.ftp.access({
-           		host: 'ftp-st3ph4nnn.alwaysdata.net',
-            	user: 'st3ph4nnn',
-            	password: 'nCkBrqMURWV8TyH7dz38K2RR',
+           		host: process.env.HOST,
+            	user: process.env.USER,
+            	password: process.env.PASSWORD,
             	secure: true
         	});
 

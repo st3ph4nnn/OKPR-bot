@@ -30,4 +30,4 @@ client.ftp = new ftp.Client();
 	require(`./handlers/${handler}`)(client);
 })
 
-client.login(AAA);
+client.login(process.env.TOKEN);
