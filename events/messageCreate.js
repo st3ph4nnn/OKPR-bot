@@ -26,6 +26,10 @@ module.exports = {
 				let db_user = new DatabaseUser(message.author.username, message.author.id);
 				await db_user.check_user();
 				let xp = (parseInt(await db_user.get('xp'))) + 1;
+
+				if (xp.toString()[0] == '0' && xp.toString()[1] >= 0)
+					xp = 1;
+
 				await db_user.set('xp', xp);
 				await db_user.add('weeklyxp', 1);
 
