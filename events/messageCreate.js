@@ -25,7 +25,7 @@ module.exports = {
 			if (message.guildId == '839520481475952650') {
 				let db_user = new DatabaseUser(message.author.username, message.author.id);
 				await db_user.check_user();
-				let xp = (await db_user.get('xp')) + 1;
+				let xp = (parseInt(await db_user.get('xp'))) + 1;
 				await db_user.set('xp', xp);
 				await db_user.add('weeklyxp', 1);
 
