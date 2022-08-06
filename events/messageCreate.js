@@ -91,7 +91,7 @@ module.exports = {
 							fs.writeFileSync('database/strings.txt', quotes.join(' '), 'utf-8');
 						}
 
-						let words = message.content.join(' ');
+						let words = message.content.split(' ');
 
 						for (let i = 0; i < words.length; i++)
 							if (quotes.includes(words[i]))
