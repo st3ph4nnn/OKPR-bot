@@ -12,7 +12,7 @@ module.exports = {
 		const set_embed = new embed(message, 'Set');
 
 		if (!member) {
-            set_embed.description(`Te rog specifică membrul caruia vrei să-i dai bani. \n\nFolosire: \`${client.prefix}give @membru {bani}\``);
+            set_embed.description(`Te rog specifică membrul caruia vrei să-i setezi ceva. \n\nFolosire: \`${client.prefix}set @membru {balance/xp} {valoare}\``);
             return set_embed.send();
 		}
 
@@ -22,7 +22,7 @@ module.exports = {
         }
 
         if (isNaN(args[2]) || args[2] % 1 !== 0) {
-            set_embed.description(`Valoarea de bani specificată nu este validă. \n\nFolosire: \`${client.prefix}give @membru {bani}\``);
+            set_embed.description(`Valoarea specificată nu este validă. \n\nFolosire: \`${client.prefix}give @membru {bani}\``);
             return set_embed.send();
         }
 
