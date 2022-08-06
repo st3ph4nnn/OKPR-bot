@@ -240,7 +240,9 @@ module.exports = {
 
             	try {
 					await client.ftp.remove('userDB.sqlite');
-					fs.unlinkSync('database/userDB.sqlite');
+					fs.unlinkSync('database/userDB.sqlite', (err) => {
+						// ...
+					});
 					const { QuickDB } = require('quick.db');
 					const db = new QuickDB({ filePath: "database/userDB.sqlite" });
 					await client.ftp.uploadFrom('database/userDB.sqlite', 'userDB.sqlite');
