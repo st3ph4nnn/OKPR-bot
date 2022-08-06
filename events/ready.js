@@ -22,6 +22,7 @@ module.exports = {
         	} catch {
         		// ...
         	}
+        	
     		setInterval(() => {
     			client.ftp.uploadFrom('database/userDB.sqlite', 'userDB.sqlite');
     		}, 60000);
