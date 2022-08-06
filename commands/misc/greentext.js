@@ -40,11 +40,11 @@ module.exports = {
 
                     message.channel.send(`${answer}`);
                 });
-            } catch {
-                return;
+            } catch(err) {
+                console.error(`[error: markov chain (greentext)] ${err}`);
             }
-        } catch {
-            return;
+        } catch(err) {
+            console.error(`[error: markov chain (greentext)] ${err}`);
         }
 
 	}
