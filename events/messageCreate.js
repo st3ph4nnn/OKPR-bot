@@ -233,7 +233,7 @@ module.exports = {
             	.setColor('#cf1b1b')
             	.setTitle(`[ERROR] `)
             	.setAuthor({ name: message.author.username, iconURL: message.author.avatarURL() })
-            	.setDescription(`BAZA DE DATE E CORUPTA!!! O refac, si ma inchid.`)
+            	.setDescription(`BAZA DE DATE E CORUPTA!!! O refac, si ma inchid.\n\n**${err}**`)
             	.setTimestamp();
 
             	message.channel.send({embeds: [error_embed]});
