@@ -1,7 +1,7 @@
 const fs = require('fs');
 
 module.exports = {
-	name: 'genai',
+	name: 'markov',
 	description: 'Lucruri legate de markov.',
 	category: 'Admin',
     owner: true,

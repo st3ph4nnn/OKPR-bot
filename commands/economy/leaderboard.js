@@ -74,9 +74,9 @@ module.exports = {
 
 				for (let i = 0; i < top_users.length; i++) {
 					switch (i+1) {
-						case 1: description += `🥇 ${i+1}. **${users[i].value.username}** - \`${users[i].value.weeklyxp}\` <:troll_romania:996060026093441104>\n`; break;
-						case 2: description += `🥈 ${i+1}. **${users[i].value.username}** - \`${users[i].value.weeklyxp}\` <:troll_romania:996060026093441104>\n`; break;
-						case 3: description += `🥉 ${i+1}. **${users[i].value.username}** - \`${users[i].value.weeklyxp}\` <:troll_romania:996060026093441104>\n`; break;
+						case 1: description += `🥇 **${users[i].value.username}** - \`${users[i].value.weeklyxp}\` <:troll_romania:996060026093441104>\n`; break;
+						case 2: description += `🥈 **${users[i].value.username}** - \`${users[i].value.weeklyxp}\` <:troll_romania:996060026093441104>\n`; break;
+						case 3: description += `🥉 **${users[i].value.username}** - \`${users[i].value.weeklyxp}\` <:troll_romania:996060026093441104>\n`; break;
 						default: description += `${i+1}. **${users[i].value.username}** - \`${users[i].value.weeklyxp}\` <:troll_romania:996060026093441104>\n`; break;
 					}
 				}

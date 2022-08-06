@@ -3,7 +3,7 @@ const fs = require('fs');
 const { MessageAttachement } = require('discord.js')
 
 module.exports = {
-	name: 'list',
+	name: 'database',
 	owner: true,
 	description: 'Arată data de baze.',
 	category: 'Admin',
