@@ -73,7 +73,7 @@ module.exports = {
 			const has_bot_mention = (message.mentions.has(client.user) && message.type != 19);
 
 			if (!message.content.startsWith(client.prefix) && !has_bot_mention) {
-				if (message.channelId === '839520481475952654') {
+				if (message.channelId === '839520481475952654' && !client.markov_stop) {
 					let val = random.int(0, 10);
 
 					try {

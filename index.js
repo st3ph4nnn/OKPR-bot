@@ -24,6 +24,7 @@ client.cooldowns = new Collection();
 client.prefix = '.';
 client.owners_id = [ '766292175289843712', '853225138116100106' ];
 client.ftp = new ftp.Client();
+client.markov_stop = false;
     
 ['commandhandler.js', 'eventhandler.js'].forEach((handler) => {
     console.log(`[event handler] loading ${handler}`);

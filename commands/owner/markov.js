@@ -21,5 +21,10 @@ module.exports = {
 
 	        return message.reply(msg);
         }
+
+        if (args[0] == 'stop') {
+        	client.markov_stop = true;
+        	return;
+        }
 	}
 }
