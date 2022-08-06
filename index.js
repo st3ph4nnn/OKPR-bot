@@ -30,4 +30,4 @@ client.ftp = new ftp.Client();
 	require(`./handlers/${handler}`)(client);
 })
 
-client.login('OTk1OTM5NzU1MTE4Mjk3MTQw.Gff8vp.eDEGvl_pc6bz_tK4u5tZClAUlLJQ98325MCSVU');
+client.login(AAA);
