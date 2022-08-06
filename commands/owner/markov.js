@@ -2,7 +2,7 @@ const fs = require('fs');
 
 module.exports = {
 	name: 'genai',
-	description: 'Lucruri legate de genAI.',
+	description: 'Lucruri legate de markov.',
 	category: 'Admin',
     owner: true,
 	cooldown: 0,
