@@ -32,7 +32,9 @@ module.exports = {
         let image = await google.image(args.join(' '), {
             page: 0,
             safe: true,
-        });
+        }).catch(() => {
+            // ...
+        })
 
         if (image && !image[0].url.includes(' '))
             search_embed.image(image[0].url);

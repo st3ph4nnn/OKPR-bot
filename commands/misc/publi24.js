@@ -31,7 +31,9 @@ module.exports = {
         let image = await google.image(args.join(' ') + " site:https://www.publi24.ro/", {
             page: 0,
             safe: true,
-        });
+        }).catch(() => {
+            // ...
+        })
 
         if (image)
             search_embed.image(image[0].url);
