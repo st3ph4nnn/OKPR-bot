@@ -1,5 +1,4 @@
 const { embed } = require('../../embed.js');
-const moment = require('moment');
 
 module.exports = {
 	name: 'ping',
@@ -7,7 +6,6 @@ module.exports = {
 	category: 'Misc',
 	cooldown: 1000,
 	async execute(message, args, client) {
-
 		let totalSeconds = (client.uptime / 1000);
 		let days = Math.floor(totalSeconds / 86400);
 		let hours = Math.floor(totalSeconds / 3600);
