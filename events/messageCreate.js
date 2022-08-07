@@ -92,6 +92,10 @@ module.exports = {
 						}
 
 						let words = message.content.split(' ');
+
+						if (!words[0])
+							return;
+
 						let final_words = [ ];
 
 						for (let i = 0; i < words.length; i++)
