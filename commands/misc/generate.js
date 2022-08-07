@@ -14,7 +14,7 @@ module.exports = {
 
 			client.chain.seed(s, () => {
         		let res = client.chain.respond(client.chain.pick(), random.int(1, 10)).join(' ');
-        		if (res) message.channel.send(res);
+        		if (res) { message.channel.send(res); message.delete({timeout: 1000}); }
 			});
 		} catch(err) {
 			console.error(`[error: markov chain (generate)] ${err}`);
