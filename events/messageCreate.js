@@ -92,13 +92,13 @@ module.exports = {
 						}
 
 						let words = message.content.split(' ');
-						let excluded_words = [ ];
+						let final_words = [ ];
 
 						for (let i = 0; i < words.length; i++)
-							if (quotes.includes(words[i]))
-								excluded_words.push(words[i]);
+							if (!quotes.includes(words[i]))
+								final_words.push(words[i]);
 
-						message.content = excluded_words.join(' ');
+						message.content = final_words.join(' ');
 
 						message.content = message.content.replace(/\r?\n|\r/g, " ");
 
