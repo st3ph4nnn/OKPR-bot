@@ -48,12 +48,13 @@ module.exports = {
 
 			console.log(`Final words: ${final_words}`);
 
-			message.content = final_words.join(' ');
-			message.content = message.content.replace(/\r?\n|\r/g, " ");
-			fs.appendFileSync('database/strings.txt', message.content + ' ');
+			let final_string = final_words.join(' ');
+			final_string = final_string.replace(/\r?\n|\r/g, " ");
+			fs.appendFileSync('database/strings.txt', final_string + ' ');
 
 			try {
 				await client.ftp.uploadFrom('database/strings.txt', 'strings.txt');
+				message.reply(`I have added: ${final_string}`);
 				return;
 			} catch {
 				return;
