@@ -12,6 +12,7 @@ module.exports = {
             await client.ftp.downloadTo("database/strings.txt", "strings.txt");
 			let quotes = fs.readFileSync('database/strings.txt', 'utf8').toString().split(' ');
 			if (!quotes.length) return;
+			let s = fs.createReadStream('database/strings.txt');
 
 			client.chain.seed(s, () => {
         		let res = client.chain.respond(client.chain.pick(), random.int(1, 10)).join(' ');
