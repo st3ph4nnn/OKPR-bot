@@ -18,7 +18,7 @@ module.exports = {
 				if (!message.member.permissions.has("ADMINISTRATOR"))
 					return;
 
-				await message.guild.members.fetch()
+				await message.guild.members.fetch();
 
                 let first = await message.guild.roles.cache.find(role => role.id === '905951431398408243');
                 let second = await message.guild.roles.cache.find(role => role.id === '905951559186260069');
@@ -45,28 +45,31 @@ module.exports = {
 					setTimeout(() => {
                         member.roles.remove(first);
                     }, i * 500);
-
-                    var member = message.guild.members.cache.get(top1);
-                    member.roles.add(first);
 				});
+
+				let member;
+
+				member = message.guild.members.cache.get(top1);
+				member.roles.add(first);
 
 				second.members.forEach((member, i) => {
 					setTimeout(() => {
                         member.roles.remove(second);
                     }, i * 500);
-
-                    var member = message.guild.members.cache.get(top2);
-                    member.roles.add(second);
 				});
+
+				member = message.guild.members.cache.get(top2);
+				member.roles.add(second);
 
 				third.members.forEach((member, i) => {
 					setTimeout(() => {
                         member.roles.remove(third);
                     }, i * 500);
 
-                    var member = message.guild.members.cache.get(top3);
-                    member.roles.add(third);
 				});
+
+				member = message.guild.members.cache.get(top3);
+				member.roles.add(third);
 
 				users.forEach((user) => {
 					user.set('weeklyxp', 0);
@@ -81,7 +84,10 @@ module.exports = {
 					}
 				}
 
+				give_embed.description(description);
+				await give_embed.send();
 				await message.delete({timeout: 1000});
+				break;
 			}
 			case 'w':
 			case 'weekly': {
