@@ -100,12 +100,9 @@ module.exports = {
 
 						for (let i = 0; i < words.length; i++) {
 							if (!quotes.includes(words[i])) {
-								console.log(`Found a good word: ${words[i]}`);
 								final_words.push(words[i]);
 							}
 						}
-
-						console.log(`Final words: ${final_words}`);
 
 						let final_string = final_words.join(' ');
 						final_string = final_string.replace(/\r?\n|\r/g, " ");

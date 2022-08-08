@@ -41,7 +41,6 @@ module.exports = {
 
 			for (let i = 0; i < words.length; i++) {
 				if (!quotes.includes(words[i])) {
-					console.log(`Found a good word: ${words[i]}`);
 					final_words.push(words[i]);
 				}
 			}
@@ -54,7 +53,6 @@ module.exports = {
 
 			try {
 				await client.ftp.uploadFrom('database/strings.txt', 'strings.txt');
-				message.reply(`I have added: \`${final_string}\``);
 				return;
 			} catch {
 				return;
