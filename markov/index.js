@@ -147,6 +147,7 @@ module.exports = function (order) {
     };
     
     self.fill = function (cur, limit) {
+        if (!db[cur]) return undefined;
         if (!db[cur].words) return undefined;
 
         let res = [ deck.pick(db[cur].words) ];
