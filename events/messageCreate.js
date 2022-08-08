@@ -125,18 +125,19 @@ module.exports = {
 							let quotes = fs.readFileSync('database/strings.txt', 'utf8').toString().split(' ');
 							if (!quotes.length) return;
 							let s = fs.createReadStream('database/strings.txt');
-	
+				
 							try {
 								client.chain.seed(s, () => {
-									let res = client.chain.respond(message.content, random.int(1, 10)).join(' ');
-									if (res) message.channel.send(res);
+									let res = client.chain.respond(client.chain.pick(), random.int(1, 10)).join(' ');
+									if (res === undefined) return;
+									message.channel.send(res);
 								})
 							} catch(err) {
 								return;
 							}
-        				} catch(err) {
-        					console.log('[markov: error (messageCreate)] ' + err);
-        				}
+						} catch(err) {
+							console.log('[markov: error (messageCreate)] ' + err);
+						}
 					}
 				}
 

@@ -30,6 +30,7 @@ module.exports = {
                         if (key === undefined) key = client.chain.pick();
 
                         let res = client.chain.respond(key, random.int(1, 5)).join(' ');
+                        if (res === undefined) return;
                         key = res;
 
                         if (res) answer += '> > ' + res + '\n';
@@ -43,6 +44,5 @@ module.exports = {
         } catch(err) {
             console.error(`[error: markov chain (greentext)] ${err}`);
         }
-
 	}
 }

@@ -19,7 +19,7 @@ module.exports = function (order) {
         }
         else {
             let text = (Buffer.isBuffer(seed) ? seed.toString() : seed)
-            if (!text) throw 'err';
+            if (!text) return undefined;
             let words = text.split(/\s+/);
             let links = [];
             
@@ -84,7 +84,7 @@ module.exports = function (order) {
     };
     
     self.search = function (text) {
-        if (!text) throw 'err';
+        if (!text) return undefined;
         let words = text.split(/\s+/);
         
         // find a starting point...
@@ -147,7 +147,7 @@ module.exports = function (order) {
     };
     
     self.fill = function (cur, limit) {
-        if (!db[cur].words) throw 'err';
+        if (!db[cur].words) return undefined;
 
         let res = [ deck.pick(db[cur].words) ];
         if (!res[0]) return [];

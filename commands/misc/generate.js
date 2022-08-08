@@ -17,7 +17,8 @@ module.exports = {
 			try {
 				client.chain.seed(s, () => {
 					let res = client.chain.respond(client.chain.pick(), random.int(1, 10)).join(' ');
-					if (res) message.channel.send(res);
+					if (res === undefined) return;
+					message.channel.send(res);
 				})
 			} catch(err) {
 				return;
