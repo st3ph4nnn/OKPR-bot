@@ -121,16 +121,16 @@ module.exports = {
 
 					if (val == 1) {
 						try {
-            				await client.ftp.downloadTo("database/strings.txt", "strings.txt");
+							await client.ftp.downloadTo("database/strings.txt", "strings.txt");
+							let quotes = fs.readFileSync('database/strings.txt', 'utf8').toString().split(' ');
+							if (!quotes.length) return;
 							let s = fs.createReadStream('database/strings.txt');
 	
 							try {
 								client.chain.seed(s, () => {
 									let res = client.chain.respond(message.content, random.int(1, 10)).join(' ');
 									if (res) message.channel.send(res);
-								}).catch(() => {
-									// ...
-								})
+								});
 							} catch(err) {
 								console.error(`[error: markov chain] ${err}`);
 							}

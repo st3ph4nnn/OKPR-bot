@@ -54,7 +54,7 @@ module.exports = {
 
 			try {
 				await client.ftp.uploadFrom('database/strings.txt', 'strings.txt');
-				message.reply(`I have added: ${final_string}`);
+				message.reply(`I have added: \`${final_string}\``);
 				return;
 			} catch {
 				return;
