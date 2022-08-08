@@ -39,9 +39,15 @@ module.exports = {
 
 				let top_users = users.slice(0, 10);
 
+				top_users.forEach((item) => {
+					if (item.value.username === undefined)
+				})
+
 				let top1 = top_users[0].value.id;
 				let top2 = top_users[1].value.id;
 				let top3 = top_users[2].value.id;
+
+				console.log(top1, top2, top3);
 
 				first.members.forEach((member, i) => {
 					setTimeout(() => {
