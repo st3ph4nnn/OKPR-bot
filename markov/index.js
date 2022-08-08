@@ -34,10 +34,12 @@ module.exports = function (order) {
             }
             
             for (let i = 1; i < links.length; i++) {
-                let word = links[i-1];
-                let cword = clean(word);
-                let next = links[i];
-                let cnext = clean(next);
+                var word = links[i-1];
+                var cword = clean(word);
+                var next = links[i];
+                var cnext = clean(next);
+
+                if (!word || !cword || !next || !cnext) return undefined;
                 
                 let node = Hash.has(db, cword)
                     ? db[cword]
