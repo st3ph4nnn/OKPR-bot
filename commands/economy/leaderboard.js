@@ -52,7 +52,7 @@ module.exports = {
 				let member;
 
 				member = message.guild.members.cache.get(top1);
-				member.roles.add(first);
+				if (member !== undefined) member.roles.add(first);
 
 				second.members.forEach((member, i) => {
 					setTimeout(() => {
@@ -61,7 +61,7 @@ module.exports = {
 				});
 
 				member = message.guild.members.cache.get(top2);
-				member.roles.add(second);
+				if (member !== undefined) member.roles.add(second);
 
 				third.members.forEach((member, i) => {
 					setTimeout(() => {
@@ -70,7 +70,7 @@ module.exports = {
 				});
 
 				member = message.guild.members.cache.get(top3);
-				member.roles.add(third);
+				if (member !== undefined) member.roles.add(third);
 
 				users.forEach((user) => {
 					user.set('weeklyxp', 0);
