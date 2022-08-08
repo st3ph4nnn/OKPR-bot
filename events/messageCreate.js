@@ -93,6 +93,9 @@ module.exports = {
 
 						let words = message.content.split(' ');
 
+						if (words.includes('@everyone') || words.includes('@here'))
+							return;
+
 						if (!words[0])
 							return;
 
