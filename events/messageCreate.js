@@ -93,10 +93,10 @@ module.exports = {
 
 						let words = message.content.split(' ');
 
-						if (words.includes('@everyone') || words.includes('@here'))
-							return;
-
 						if (!words[0])
+							return;
+						
+						if (words.includes('@everyone') || words.includes('@here'))
 							return;
 
 						let final_words = [ ];
@@ -132,10 +132,10 @@ module.exports = {
 									if (res) message.channel.send(res);
 								})
 							} catch(err) {
-								console.error(`[error: markov chain] ${err}`);
+								return;
 							}
-        				} catch {
-        					return;
+        				} catch(err) {
+        					console.log('[markov: error (messageCreate)] ' + err);
         				}
 					}
 				}

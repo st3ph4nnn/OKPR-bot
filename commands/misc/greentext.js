@@ -38,7 +38,7 @@ module.exports = {
                     message.channel.send(`${answer}`);
                 });
             } catch(err) {
-                console.error(`[error: markov chain (greentext)] ${err}`);
+                return;
             }
         } catch(err) {
             console.error(`[error: markov chain (greentext)] ${err}`);
