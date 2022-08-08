@@ -43,7 +43,7 @@ module.exports = {
 				let top2 = top_users[1].value.id;
 				let top3 = top_users[2].value.id;
 
-				console.log(top1, top2, top3);
+				console.log(top_users[0], top_users[1], top_users[2]);
 
 				first.members.forEach((member, i) => {
 					setTimeout(() => {
