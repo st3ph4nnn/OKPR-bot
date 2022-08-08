@@ -39,11 +39,9 @@ module.exports = {
 
 				let top_users = users.slice(0, 10);
 
-				let top1 = top_users[0].value.id;
-				let top2 = top_users[1].value.id;
-				let top3 = top_users[2].value.id;
-
-				console.log(top_users[0], top_users[1], top_users[2]);
+				let top1 = top_users[0].id;
+				let top2 = top_users[1].id;
+				let top3 = top_users[2].id;
 
 				first.members.forEach((member, i) => {
 					setTimeout(() => {
@@ -54,7 +52,6 @@ module.exports = {
 				let member;
 
 				member = message.guild.members.cache.get(top1);
-				console.log(member);
 				member.roles.add(first);
 
 				second.members.forEach((member, i) => {
@@ -64,18 +61,15 @@ module.exports = {
 				});
 
 				member = message.guild.members.cache.get(top2);
-				console.log(member);
 				member.roles.add(second);
 
 				third.members.forEach((member, i) => {
 					setTimeout(() => {
                         member.roles.remove(third);
                     }, i * 500);
-
 				});
 
 				member = message.guild.members.cache.get(top3);
-				console.log(member);
 				member.roles.add(third);
 
 				users.forEach((user) => {
@@ -83,6 +77,12 @@ module.exports = {
 				});
 
 				for (let i = 0; i < top_users.length; i++) {
+					if (users[i].value.username === undefined) {
+						let member = message.guild.members.cache.get(users[i].id);
+						users[i].value.username = member.user.username;
+						user.set('username', member.user.username);
+					}
+
 					switch (i+1) {
 						case 1: description += `🥇 **${users[i].value.username}** - \`${users[i].value.weeklyxp}\` <:troll_romania:996060026093441104>\n`; break;
 						case 2: description += `🥈 **${users[i].value.username}** - \`${users[i].value.weeklyxp}\` <:troll_romania:996060026093441104>\n`; break;
