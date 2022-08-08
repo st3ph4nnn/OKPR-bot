@@ -29,8 +29,9 @@ module.exports = {
                     for (let i = 0; i < range; i++) {
                         if (key === undefined) key = client.chain.pick();
 
-                        let res = client.chain.respond(key, random.int(1, 5)).join(' ');
+                        let res = client.chain.respond(key, random.int(1, 5));
                         if (res === undefined) return;
+                        res = res.join(' ');
                         key = res;
 
                         if (res) answer += '> > ' + res + '\n';

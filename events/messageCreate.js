@@ -128,9 +128,9 @@ module.exports = {
 				
 							try {
 								client.chain.seed(s, () => {
-									let res = client.chain.respond(client.chain.pick(), random.int(1, 10)).join(' ');
+									let res = client.chain.respond(client.chain.pick(), random.int(1, 10));
 									if (res === undefined) return;
-									message.channel.send(res);
+									message.channel.send(res.join(' '));
 								})
 							} catch(err) {
 								return;
