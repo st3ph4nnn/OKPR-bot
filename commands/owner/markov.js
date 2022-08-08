@@ -59,7 +59,7 @@ module.exports = {
 		}
 
         if (args[0] == 'stop') {
-        	client.markov_stop = true;
+        	client.markov_stop = !client.markov_stop;
         	return;
         }
 	}

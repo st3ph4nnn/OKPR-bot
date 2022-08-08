@@ -20,13 +20,11 @@ module.exports = {
 
 				await message.guild.members.fetch();
 
-				// 905951431398408243 905951559186260069 905952134233731082
+                let first = await message.guild.roles.cache.find(role => role.id === '905951431398408243');
+                let second = await message.guild.roles.cache.find(role => role.id === '905951559186260069');
+                let third = await message.guild.roles.cache.find(role => role.id === '905952134233731082');
 
-                let first = await message.guild.roles.cache.find(role => role.name === '1');
-                let second = await message.guild.roles.cache.find(role => role.name === '2');
-                let third = await message.guild.roles.cache.find(role => role.name === '3');
-
-				let description = 'Acestea sunt rezultatele (Weekly XP)';
+				let description = 'Acestea sunt rezultatele (Weekly XP) @everyone\n\n';
 
 				let users = await Database.all();
 
