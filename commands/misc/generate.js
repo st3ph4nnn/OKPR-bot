@@ -11,7 +11,7 @@ module.exports = {
 		try {
             await client.ftp.downloadTo("database/strings.txt", "strings.txt");
 			let quotes = fs.readFileSync('database/strings.txt', 'utf8').toString().split(' ');
-			if (!quotes.length) return;
+			if (!quotes[0] || !quotes.length) return;
 			let s = fs.createReadStream('database/strings.txt');
 
 			client.chain.seed(s, () => {
