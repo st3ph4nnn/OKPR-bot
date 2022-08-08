@@ -19,7 +19,7 @@ module.exports = {
         
         	let msg = `\`\`\`\n${quotes}\`\`\``;
 
-	        return message.reply(msg);
+	        return message.reply(msg + `\n size: ${qutoes.length}`);
         }
 
         if (args[0] == 'stop') {
