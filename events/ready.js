@@ -1,5 +1,6 @@
 const { ActivityType, EmbedBuilder } = require('discord.js');
 const random_col = require('random-hex-color');
+const fs = require('fs');
 
 module.exports = {
 	name: "ready",
@@ -24,13 +25,16 @@ module.exports = {
         		// ...
         	}
 
+			fs.unlink('database/strings.txt', function(err) {
+				client.ftp.downloadTo('database/strings.txt', 'strings.txt');
+			});
+
     		setInterval(() => {
     			client.ftp.uploadFrom('database/userDB.sqlite', 'userDB.sqlite');
     		}, 60000);
     	} catch(err) {
         	console.log(`[ftp] ${err}`);
     	}
-
 
 		client.distube
     	.on('playSong', (queue, song) => {
