@@ -32,12 +32,14 @@ module.exports = function (order) {
                 if (cb) cb(null);
                 return;
             }
+
+            let word, cword, next, cnext;
             
             for (let i = 1; i < links.length; i++) {
-                var word = links[i-1];
-                var cword = clean(word);
-                var next = links[i];
-                var cnext = clean(next);
+                word = links[i-1];
+                cword = clean(word);
+                next = links[i];
+                cnext = clean(next);
 
                 if (!word || !cword || !next || !cnext) return undefined;
                 
