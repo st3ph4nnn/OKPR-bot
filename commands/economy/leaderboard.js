@@ -73,6 +73,10 @@ module.exports = {
 				if (member !== undefined) member.roles.add(third);
 
 				users.forEach((user) => {
+					if (user.value.username === undefined) {
+						member = message.guild.members.cache.get(user.id);
+						if (member !== undefined) user.set(member.user.username);
+					}
 					user.set('weeklyxp', 0);
 				});
 
