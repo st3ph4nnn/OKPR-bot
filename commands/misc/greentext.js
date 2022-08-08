@@ -30,7 +30,9 @@ module.exports = {
                         if (key === undefined) key = client.chain.pick();
 
                         let res = client.chain.respond(key, random.int(1, 5));
-                        if (res === undefined) return;
+                        if (res === undefined)
+                            return message.reply('Nu stiu nimic deocamdata.. n-am ce iti spune boss');
+
                         res = res.join(' ');
                         key = res;
 
