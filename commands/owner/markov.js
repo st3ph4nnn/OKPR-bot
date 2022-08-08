@@ -30,9 +30,9 @@ module.exports = {
 				fs.writeFileSync('database/strings.txt', quotes.join(' '), 'utf-8');
 			}
 
-			message.content = message.content.slice(1);
-
 			let words = message.content.split(' ');
+
+			words.shift(); words.shift();
 
 			if (!words[0])
 				return;
