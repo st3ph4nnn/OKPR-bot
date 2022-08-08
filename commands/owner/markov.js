@@ -19,8 +19,46 @@ module.exports = {
         
         	let msg = `\`\`\`\n${quotes}\`\`\``;
 
-	        return message.reply(msg + `\n size: ${quotes.length}`);
+	        return message.reply(msg + `\n size: \`${quotes.length}\``);
         }
+
+		if (args[0] == 'set') {
+			let quotes = fs.readFileSync('database/strings.txt', 'utf8').toString().split(' ');
+
+			while (quotes.length >= 100 || quotes.join(' ').length >= 2000) {
+				quotes.splice(random.int(0, quotes.length), 10);
+				fs.writeFileSync('database/strings.txt', quotes.join(' '), 'utf-8');
+			}
+
+			message.content = message.content.slice(1);
+
+			let words = message.content.split(' ');
+
+			if (!words[0])
+				return;
+
+			let final_words = [ ];
+
+			for (let i = 0; i < words.length; i++) {
+				if (!quotes.includes(words[i])) {
+					console.log(`Found a good word: ${words[i]}`);
+					final_words.push(words[i]);
+				}
+			}
+
+			console.log(`Final words: ${final_words}`);
+
+			message.content = final_words.join(' ');
+			message.content = message.content.replace(/\r?\n|\r/g, " ");
+			fs.appendFileSync('database/strings.txt', message.content + ' ');
+
+			try {
+				await client.ftp.uploadFrom('database/strings.txt', 'strings.txt');
+				return;
+			} catch {
+				return;
+			}
+		}
 
         if (args[0] == 'stop') {
         	client.markov_stop = true;
