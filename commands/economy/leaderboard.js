@@ -50,6 +50,7 @@ module.exports = {
 				let member;
 
 				member = message.guild.members.cache.get(top1);
+				console.log(member);
 				member.roles.add(first);
 
 				second.members.forEach((member, i) => {
@@ -59,6 +60,7 @@ module.exports = {
 				});
 
 				member = message.guild.members.cache.get(top2);
+				console.log(member);
 				member.roles.add(second);
 
 				third.members.forEach((member, i) => {
@@ -69,6 +71,7 @@ module.exports = {
 				});
 
 				member = message.guild.members.cache.get(top3);
+				console.log(member);
 				member.roles.add(third);
 
 				users.forEach((user) => {
