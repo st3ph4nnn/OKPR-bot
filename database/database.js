@@ -12,6 +12,10 @@ const scheme = {
   'trollboard': 0
 };
 
+async function set_from_id(id, key, value) {
+  await db.set(`${id}.${key}`, value);
+}
+
 class DatabaseUser {
   constructor(name, id) {
     this.name = name;
@@ -28,6 +32,15 @@ class DatabaseUser {
         if (!has)
          	await db.push(`${this.id}.${key}`, val);
       }
+
+      const get = await db.get(`${this.id}.value.username`);
+      if (get === undefined)
+        await db.push(`${this.id}.value.username`, this.name);
+      else {
+        if (get !== this.name)
+          await db.set(`${this.id}.value.username`, this.name);
+      }
+
       return;
     }
 
@@ -90,4 +103,4 @@ class DatabaseUser {
   }
 }
 
-module.exports = { Database: db, DatabaseUser: DatabaseUser }
+module.exports = { Database: db, DatabaseUser: DatabaseUser, set_from_id: set_from_id }

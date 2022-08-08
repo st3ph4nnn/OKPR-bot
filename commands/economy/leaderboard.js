@@ -1,5 +1,5 @@
 const { embed } = require('../../embed.js');
-const { Database, DatabaseUser } = require('../../database/database.js');
+const { Database, set_from_id } = require('../../database/database.js');
 
 module.exports = {
 	name: 'leaderboard',
@@ -72,14 +72,6 @@ module.exports = {
 				member = message.guild.members.cache.get(top3);
 				if (member !== undefined) member.roles.add(third);
 
-				users.forEach((user) => {
-					if (user.value.username === undefined) {
-						member = message.guild.members.cache.get(user.id);
-						if (member !== undefined) user.set(member.user.username);
-					}
-					user.set('weeklyxp', 0);
-				});
-
 				for (let i = 0; i < top_users.length; i++) {
 					switch (i+1) {
 						case 1: description += `🥇 **${users[i].value.username}** - \`${users[i].value.weeklyxp}\` <:troll_romania:996060026093441104>\n`; break;
@@ -89,9 +81,14 @@ module.exports = {
 					}
 				}
 
+				users = await Database.all();
+				users.forEach((user) => {
+					set_from_id(user.id, 'weeklyxp', 0);
+				});
+
 				give_embed.description(description);
 				await give_embed.send();
-				await message.delete({timeout: 1000});
+				
 				break;
 			}
 			case 'w':
