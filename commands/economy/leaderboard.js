@@ -81,12 +81,6 @@ module.exports = {
 				});
 
 				for (let i = 0; i < top_users.length; i++) {
-					if (users[i].value.username === undefined) {
-						let member = message.guild.members.cache.get(users[i].id);
-						users[i].value.username = member.user.username;
-						user.set('username', member.user.username);
-					}
-
 					switch (i+1) {
 						case 1: description += `🥇 **${users[i].value.username}** - \`${users[i].value.weeklyxp}\` <:troll_romania:996060026093441104>\n`; break;
 						case 2: description += `🥈 **${users[i].value.username}** - \`${users[i].value.weeklyxp}\` <:troll_romania:996060026093441104>\n`; break;
