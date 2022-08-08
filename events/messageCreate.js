@@ -130,7 +130,7 @@ module.exports = {
 								client.chain.seed(s, () => {
 									let res = client.chain.respond(message.content, random.int(1, 10)).join(' ');
 									if (res) message.channel.send(res);
-								});
+								})
 							} catch(err) {
 								console.error(`[error: markov chain] ${err}`);
 							}

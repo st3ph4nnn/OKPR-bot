@@ -2,6 +2,7 @@ const { Client, Collection, EmbedBuilder, Partials } = require('discord.js');
 const { DisTube } = require('distube');
 const { YtDlpPlugin } = require('@distube/yt-dlp');
 const ftp = require("basic-ftp")
+let markov = require('markov');
 
 const client = new Client({ intents: 3276799, partials: [Partials.Message, Partials.Channel, Partials.Reaction]});
 
@@ -14,8 +15,7 @@ client.distube = new DisTube(client, {
   	plugins: [ new YtDlpPlugin() ]
 })
 
-let markov = require('markov');
-let chain = markov(10);
+let chain = markov(4);
 
 client.markov = markov;
 client.chain = chain;
