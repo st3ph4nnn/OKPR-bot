@@ -23,12 +23,9 @@ module.exports = {
 				fs.unlink('database/userDB.sqlite', function(err) {
 					client.ftp.downloadTo('database/userDB.sqlite', 'userDB.sqlite');
 				});
-	    		await client.ftp.downloadTo('database/userDB.sqlite', 'userDB.sqlite');
         	} catch {
         		// ...
         	}
-
-			
 
 			fs.unlink('database/strings.txt', function(err) {
 				client.ftp.downloadTo('database/strings.txt', 'strings.txt');
@@ -38,7 +35,7 @@ module.exports = {
 				client.timer += 1;
 
 				if (client.timer == 60) {
-					client.ftp.uploadFrom('database/userDB.sqlite', 'userDB.sqlite');
+					client.ftp.uploadFrom('database/userDB.sqlite', 'userDB.sqlite').catch((err) => { let i; });
 					client.timer = 0;
 				}
 			}, 1000);
