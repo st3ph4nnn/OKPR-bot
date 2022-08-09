@@ -9,9 +9,17 @@ module.exports = {
 	category: 'Admin',
 	cooldown: 1000,
 	async execute(message, args, client) {
-		let users = await Database.all();
-		fs.writeFileSync('database/list.txt', JSON.stringify(users, null, '\t'));
+		if (args[0] == 'list') {
+			let users = await Database.all();
+			fs.writeFileSync('database/list.txt', JSON.stringify(users, null, '\t'));
+	
+			await message.reply({files: ['database/list.txt']});
+			return;
+		}
 
-		await message.reply({files: ['database/list.txt']});
+		if (args[0] == 'upload') {
+			await client.ftp.uploadFrom('database/userDB.sqlite', 'userDB.sqlite').catch((err) => {});
+			await message.reply('gata boss!!');
+		}
 	}
 }

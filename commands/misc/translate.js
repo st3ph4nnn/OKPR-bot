@@ -15,12 +15,19 @@ module.exports = {
         const tr_embed = new embed(message, 'Translate');
 
         let translation = 'ro';
-        let to_translate = args.join(' ');
+        let to_translate = '';
 
-        if (args[0] == 'en') {
-            to_translate = to_translate.slice(3);
-            translation = 'en';
+        for (let i = 0; i < args.length; i++) {
+            if (args[i].startsWith('-to')) {
+                translation = args[i+1];
+                i++;
+                continue;
+            }
+
+            to_translate += args[i] + ' ';
         }
+
+        to_translate = to_translate.slice(0, -1);
 
         try {
             const msg = await message.fetchReference();
@@ -51,7 +58,7 @@ module.exports = {
             });
         } catch (err) {
             if (!args[0]) {
-                tr_embed.description(`Te rog spune-mi ce vrei să translatezi. \n\nFolosire: \`${client.prefix}translate [OPTIONAL: 'en' pentru a traduce in engleza] {mesaj}\``);
+                tr_embed.description(`Te rog spune-mi ce vrei să translatezi. \n\nFolosire: \`${client.prefix}translate [OPTIONAL: '-to {en/ro...}' pentru a traduce in en/ro...] {mesaj}\``);
                 return tr_embed.send();
             }
 
@@ -59,7 +66,7 @@ module.exports = {
                 to: translation
             }).then(res => {
             		if (!res)
-            				return;
+            			return;
 
                 let from = language_names.of(res.from.language.iso);
                 from = from.charAt(0).toUpperCase() + from.slice(1);

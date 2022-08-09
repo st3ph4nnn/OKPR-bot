@@ -9,6 +9,7 @@ module.exports = {
 	once: false,
 	async execute(message, client) {
 		try {
+				
 			if (message.author.bot) {
 				if (message.author.id == '302050872383242240' && message.embeds[0].description.includes("Check")) {
 					message.channel.send('mulțam mult!!!');
@@ -19,10 +20,13 @@ module.exports = {
 				return;
 			}
 
-			if (message.content == 'shutdown' && client.owners_id.includes(message.author.id))
+			if (message.content == 'shutdown' && client.owners_id.includes(message.author.id)) {
+				await message.reply('gata boss!!!');
 				process.exit();
+			}
 
 			if (message.guildId == '839520481475952650') {
+				client.timer = 0;
 				let db_user = new DatabaseUser(client, message.author.username, message.author.id);
 				await db_user.check_user();
 				let xp = (parseInt(await db_user.get('xp'))) + 1;
@@ -84,6 +88,11 @@ module.exports = {
 					} catch {}
 
 					if (val == 0) {
+						if (!fs.existsSync('database/strings.txt')) {
+							await client.ftp.downloadTo("database/strings.txt", "strings.txt");
+							return;
+						}
+
 						let quotes = fs.readFileSync('database/strings.txt', 'utf8').toString().split(' ');
 
 						while (quotes.length >= 100 || quotes.join(' ').length >= 2000) {
@@ -136,6 +145,16 @@ module.exports = {
 								return;
 							}
 						} catch(err) {
+							if (err.name === 'Error: Client is closed because Server sent FIN packet unexpectedly, closing connection.') {
+								await client.ftp.access({
+									host: process.env.HOST,
+									user: process.env.USER,
+								 	password: procces.env.PASSWORD,
+								 	secure: true
+							 	});
+								
+								return;
+							}
 							console.log('[markov: error (messageCreate)] ' + err);
 						}
 					}

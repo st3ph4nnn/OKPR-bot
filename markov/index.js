@@ -110,6 +110,8 @@ module.exports = function (order) {
         if (!cur || !db[cur]) return undefined;
         
         let next = deck.pick(db[cur].next);
+
+        if (!db[next]) return undefined;
         return next && {
             key : next,
             word : deck.pick(db[next].words),

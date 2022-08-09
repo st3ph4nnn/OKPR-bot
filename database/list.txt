@@ -1,0 +1,24 @@
+[
+	{
+		"id": "853225138116100106",
+		"value": {
+			"username": "stephan",
+			"balance": 0,
+			"xp": 3,
+			"level": 0,
+			"weeklyxp": 3,
+			"starboard": 0,
+			"nerdboard": 0,
+			"trollboard": 0,
+			"value": {
+				"username": "stephan"
+			}
+		}
+	},
+	{
+		"id": "515546892231376937",
+		"value": {
+			"nerdboard": 1
+		}
+	}
+]

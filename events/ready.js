@@ -1,6 +1,7 @@
 const { ActivityType, EmbedBuilder } = require('discord.js');
 const random_col = require('random-hex-color');
 const fs = require('fs');
+const { exec } = require('child_process');
 
 module.exports = {
 	name: "ready",
@@ -15,26 +16,12 @@ module.exports = {
         	await client.ftp.access({
            		host: process.env.HOST,
             	user: process.env.USER,
-            	password: process.env.PASSWORD,
+            	password: procces.env.PASSWORD,
             	secure: true
         	});
 
-			fs.unlinkSync('database/userDB.sqlite', function(err) {
-				client.ftp.downloadTo('database/userDB.sqlite', 'userDB.sqlite');
-			});
-
-			fs.unlinkSync('database/strings.txt', function(err) {
-				client.ftp.downloadTo('database/strings.txt', 'strings.txt');
-			});
-			
-			setInterval(() => {
-				client.timer += 1;
-
-				if (client.timer == 60) {
-					client.ftp.uploadFrom('database/userDB.sqlite', 'userDB.sqlite').catch((err) => { let i; });
-					client.timer = 0;
-				}
-			}, 1000);
+			await client.ftp.downloadTo('database/strings.txt', 'strings.txt').catch((err) => {});
+			await client.ftp.downloadTo('database/userDB.sqlite', 'userDB.sqlite').catch((err) => {});
     	} catch(err) {
         	console.log(`[ftp] ${err}`);
     	}

@@ -15,17 +15,18 @@ client.distube = new DisTube(client, {
   	plugins: [ new YtDlpPlugin() ]
 })
 
-let chain = markov(4);
+let chain = markov(5);
 
 client.markov = markov;
 client.chain = chain;
 client.commands = new Collection();
 client.cooldowns = new Collection();
 client.prefix = '.';
-client.owners_id = [ '766292175289843712', '853225138116100106' ];
+client.owners_id = [ '766292175289843712', '853225138116100106', '486536274937905152' ];
 client.ftp = new ftp.Client();
 client.timer = 0;
 client.markov_stop = false;
+client.last_deleted_message = '';
     
 ['commandhandler.js', 'eventhandler.js'].forEach((handler) => {
     console.log(`[event handler] loading ${handler}`);
