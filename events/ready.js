@@ -16,7 +16,7 @@ module.exports = {
         	await client.ftp.access({
            		host: process.env.HOST,
             	user: process.env.USER,
-            	password: procces.env.PASSWORD,
+            	password: process.env.PASSWORD,
             	secure: true
         	});
 
