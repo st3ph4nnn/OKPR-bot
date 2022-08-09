@@ -5,7 +5,7 @@ const random_col = require('random-hex-color');
 module.exports = {
 	name: "messageReactionAdd",
 	once: false,
-	async execute(reaction, user) {
+	async execute(reaction, user, client) {
 		if (reaction.partial) {
 			try {
 				await reaction.fetch();
@@ -17,7 +17,7 @@ module.exports = {
 
 		if (user.bot || reaction.message.author.id == user.id) return;
 
-		const db_user = new DatabaseUser(reaction.message.author.username, reaction.message.author.id);
+		const db_user = new DatabaseUser(client, reaction.message.author.username, reaction.message.author.id);
 
 		switch (reaction.emoji.name) {
 			case '🤓': {

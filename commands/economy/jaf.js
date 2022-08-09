@@ -17,7 +17,7 @@ module.exports = {
             return jaf_embed.send();
 		}
 
-		let user = new DatabaseUser(member.user.username, member.user.id);
+		let user = new DatabaseUser(client, member.user.username, member.user.id);
 
 		let member_balance = await user.get('balance');
 		
@@ -30,7 +30,7 @@ module.exports = {
 		while (value < member_balance) value--;
 
 		if (Math.floor(Math.random() * 3 + 1) == 1) {
-			user = new DatabaseUser(message.author.username, message.author.id);
+			user = new DatabaseUser(client, message.author.username, message.author.id);
 			if ((await user.get('balance')) >= value) {
 				await user.sub('balance', value);
 				jaf_embed.description(`Ai încercat și tu să furi \`${value}\` de <:troll_romania:996060026093441104> da n-ai reușit <:epicfail:839766619206057994>\nAcum ai: \`${await user.get('balance')}\` de <:troll_romania:996060026093441104>`);
@@ -38,7 +38,7 @@ module.exports = {
 			}
 		}
 
-		user = new DatabaseUser(message.author.username, message.author.id);
+		user = new DatabaseUser(client, message.author.username, message.author.id);
 
 		await user.add('balance', value);
 

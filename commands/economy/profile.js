@@ -10,7 +10,7 @@ module.exports = {
 		let member = message.mentions.members.first() || message.member;
 		const profile_embed = new embed(message, 'Profile');
 
-		let db_user = new DatabaseUser(member.user.username, member.user.id);
+		let db_user = new DatabaseUser(client, member.user.username, member.user.id);
 		let balance = await db_user.get('balance');
 		let xp = await db_user.get('xp');
 		let level = await db_user.get('level');

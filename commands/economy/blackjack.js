@@ -91,7 +91,7 @@ module.exports = {
 	async execute(message, args, client) {
 		const blackjack_embed = new embed(message, 'Negru jack 💶 💶 💶');
 
-		let db_user = new DatabaseUser(message.author.username, message.author.id);
+		let db_user = new DatabaseUser(client, message.author.username, message.author.id);
 
 		if (!args[0]) {
             blackjack_embed.description(`Cât pariezi boss? \n\nFolosire: \`${client.prefix}blackjack {bani}\``);

@@ -18,7 +18,7 @@ module.exports = {
 	async execute(message, args, client) {
 		const septari_embed = new embed(message, '🍉 Șeptari 🎰 🍒');
 
-		let user = new DatabaseUser(message.author.username, message.author.id);
+		let user = new DatabaseUser(client, client, message.author.username, message.author.id);
 
 		if (!args[0]) {
             septari_embed.description(`Cât pariezi boss? \n\nFolosire: \`${client.prefix}septari {bani}\``);

@@ -42,7 +42,7 @@ module.exports = {
             return remove_embed.send();
         }
 
-        let db_user = new DatabaseUser(member.user.username, member.user.id);
+        let db_user = new DatabaseUser(client, member.user.username, member.user.id);
 
 		let value = await database.get('balance');
 
