@@ -19,12 +19,12 @@ module.exports = {
             	secure: true
         	});
 
-			fs.unlink('database/userDB.sqlite', function(err) {
-				client.ftp.downloadTo('database/userDB.sqlite', 'userDB.sqlite').then(() => {
-					fs.unlink('database/strings.txt', function(err) {
-						client.ftp.downloadTo('database/strings.txt', 'strings.txt');
-					});
-				})
+			fs.unlinkSync('database/userDB.sqlite', function(err) {
+				client.ftp.downloadTo('database/userDB.sqlite', 'userDB.sqlite');
+			});
+
+			fs.unlinkSync('database/strings.txt', function(err) {
+				client.ftp.downloadTo('database/strings.txt', 'strings.txt');
 			});
 			
 			setInterval(() => {
