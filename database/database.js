@@ -1,6 +1,6 @@
 const { QuickDB } = require('quick.db');
 const db = new QuickDB({ filePath: "database/userDB.sqlite" });
-const { client } = require('./index.js')
+const { client } = require('../index.js')
 
 const scheme = {
   'balance': 0,
