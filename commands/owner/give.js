@@ -26,7 +26,7 @@ module.exports = {
             return give_embed.send();
         }
 
-		let db_user = new DatabaseUser(member.user.username, member.user.id);
+		let db_user = new DatabaseUser(client, member.user.username, member.user.id);
 		await db_user.add('balance', parseInt(args[1]));
 
         give_embed.description(`Tocmai i-am dat \`${args[1]}\` de <:troll_romania:996060026093441104> lui \`${member.user.username}\`.`);

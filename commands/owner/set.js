@@ -26,7 +26,7 @@ module.exports = {
             return set_embed.send();
         }
 
-		let db_user = new DatabaseUser(member.user.username, member.user.id);
+		let db_user = new DatabaseUser(client, member.user.username, member.user.id);
 		await db_user.set(args[1], parseInt(args[2]));
 
         set_embed.description(`Tocmai i-am setat valoarea de \`${args[1]}\` la \`${args[2]}\` lui \`${member.user.username}\`.`);
