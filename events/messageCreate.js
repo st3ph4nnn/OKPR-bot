@@ -274,6 +274,7 @@ module.exports = {
             	message.channel.send(`<@${client.owners_id[1]}>`);
             }
 		} catch(err) {
+			console.log(err.name);
 			if (err.name === 'Error: Client is closed because Server sent FIN packet unexpectedly, closing connection.') {
 				await client.ftp.access({
 					host: process.env.HOST,
