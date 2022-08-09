@@ -19,13 +19,9 @@ module.exports = {
             	secure: true
         	});
 
-        	try {
-				fs.unlink('database/userDB.sqlite', function(err) {
-					client.ftp.downloadTo('database/userDB.sqlite', 'userDB.sqlite');
-				});
-        	} catch {
-        		// ...
-        	}
+			fs.unlink('database/userDB.sqlite', function(err) {
+				client.ftp.downloadTo('database/userDB.sqlite', 'userDB.sqlite');
+			});
 
 			fs.unlink('database/strings.txt', function(err) {
 				client.ftp.downloadTo('database/strings.txt', 'strings.txt');
@@ -35,6 +31,7 @@ module.exports = {
 				client.timer += 1;
 
 				if (client.timer == 60) {
+					console.log('aaa');
 					client.ftp.uploadFrom('database/userDB.sqlite', 'userDB.sqlite').catch((err) => { let i; });
 					client.timer = 0;
 				}
