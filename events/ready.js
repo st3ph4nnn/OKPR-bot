@@ -31,7 +31,6 @@ module.exports = {
 				client.timer += 1;
 
 				if (client.timer == 60) {
-					console.log('aaa');
 					client.ftp.uploadFrom('database/userDB.sqlite', 'userDB.sqlite').catch((err) => { let i; });
 					client.timer = 0;
 				}
