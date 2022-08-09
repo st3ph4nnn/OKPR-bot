@@ -20,18 +20,28 @@ module.exports = {
         	});
 
         	try {
+				fs.unlink('database/userDB.sqlite', function(err) {
+					client.ftp.downloadTo('database/userDB.sqlite', 'userDB.sqlite');
+				});
 	    		await client.ftp.downloadTo('database/userDB.sqlite', 'userDB.sqlite');
         	} catch {
         		// ...
         	}
 
+			
+
 			fs.unlink('database/strings.txt', function(err) {
 				client.ftp.downloadTo('database/strings.txt', 'strings.txt');
 			});
+			
+			setInterval(() => {
+				client.timer += 1;
 
-    		setInterval(() => {
-    			client.ftp.uploadFrom('database/userDB.sqlite', 'userDB.sqlite');
-    		}, 60000);
+				if (client.timer == 60) {
+					client.ftp.uploadFrom('database/userDB.sqlite', 'userDB.sqlite');
+					client.timer = 0;
+				}
+			}, 1000);
     	} catch(err) {
         	console.log(`[ftp] ${err}`);
     	}

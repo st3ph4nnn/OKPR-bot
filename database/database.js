@@ -1,5 +1,6 @@
 const { QuickDB } = require('quick.db');
 const db = new QuickDB({ filePath: "database/userDB.sqlite" });
+const { client } = require('./index.js')
 
 const scheme = {
   'balance': 0,
@@ -13,6 +14,7 @@ const scheme = {
 };
 
 async function set_from_id(id, key, value) {
+  client.timer = 0;
   await db.set(`${id}.${key}`, value);
 }
 
@@ -23,6 +25,7 @@ class DatabaseUser {
   }
 
   async check_user() {
+    client.timer = 0;
     const exists = await db.has(`${this.id}`);
 
     if (exists) {
@@ -51,6 +54,7 @@ class DatabaseUser {
   }
 
   async set(key, val) {
+    client.timer = 0;
     try {
       await db.set(`${this.id}.${key}`, val);
     } catch(err) {
@@ -59,6 +63,7 @@ class DatabaseUser {
   }
 
   async get(key) {
+    client.timer = 0;
   	const value = await db.get(`${this.id}.${key}`);
     if (value == undefined) {
       await this.check_user();
@@ -68,11 +73,13 @@ class DatabaseUser {
   }
 
   async fetch_user() {
+    client.timer = 0;
     const user = await db.get(`${this.id}`);
     return user;
   }
 
   async add(key, val) {
+    client.timer = 0;
     try {
       await db.add(`${this.id}.${key}`, val);
     } catch(err) {
@@ -81,6 +88,7 @@ class DatabaseUser {
   }
 
   async sub(key, val) {
+    client.timer = 0;
     try {
       await db.sub(`${this.id}.${key}`, val);
     } catch(err) {
@@ -89,6 +97,7 @@ class DatabaseUser {
   }
 
   async mul(key, val) {
+    client.timer = 0;
     db.get(`${this.id}.${key}`).then((value) => {
       value *= val;
       db.set(`${this.id}.${key}`, value);
@@ -96,6 +105,7 @@ class DatabaseUser {
   }
 
   async div(key, val) {
+    client.timer = 0;
     db.get(`${this.id}.${key}`).then((value) => {
       value /= val;
       db.set(`${this.id}.${key}`, value);

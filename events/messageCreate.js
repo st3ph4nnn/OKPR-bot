@@ -23,6 +23,7 @@ module.exports = {
 				process.exit();
 
 			if (message.guildId == '839520481475952650') {
+				client.timer = 0;
 				let db_user = new DatabaseUser(message.author.username, message.author.id);
 				await db_user.check_user();
 				let xp = (parseInt(await db_user.get('xp'))) + 1;
