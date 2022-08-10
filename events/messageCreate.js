@@ -145,7 +145,7 @@ module.exports = {
 								return;
 							}
 						} catch(err) {
-							if (err.name === 'Error: Client is closed because Server sent FIN packet unexpectedly, closing connection.') {
+							if (err.name === 'Error') {
 								await client.ftp.access({
 									host: process.env.HOST,
 									user: process.env.USER,
@@ -251,7 +251,7 @@ module.exports = {
 				message.channel.sendTyping();
 				await command.execute(message, args, client);
 			} catch (err) {
-				if (err.name === 'Error: Client is closed because Server sent FIN packet unexpectedly, closing connection.') {
+				if (err.name === 'Error') {
 					await client.ftp.access({
 						host: process.env.HOST,
 						user: process.env.USER,
@@ -275,7 +275,7 @@ module.exports = {
             }
 		} catch(err) {
 			console.log(err.name);
-			if (err.name === 'Error: Client is closed because Server sent FIN packet unexpectedly, closing connection.') {
+			if (err.name === 'Error') {
 				await client.ftp.access({
 					host: process.env.HOST,
 					user: process.env.USER,
