@@ -145,9 +145,17 @@ module.exports = {
 								return;
 							}
 						} catch(err) {
-							if (err.name === 'Error')
+							if (err.name === 'Error') {
+								await client.ftp.access({
+									host: process.env.HOST,
+								 	user: process.env.USER,
+								 	password: process.env.PASSWORD,
+								 	secure: true
+							 	});
+
 								return;
-								
+							}
+							
 							console.log('[markov: error (messageCreate)] ' + err);
 						}
 					}
@@ -244,8 +252,16 @@ module.exports = {
 				message.channel.sendTyping();
 				await command.execute(message, args, client);
 			} catch (err) {
-				if (err.name === 'Error')
+				if (err.name === 'Error') {
+					await client.ftp.access({
+						host: process.env.HOST,				 	
+						user: process.env.USER,
+						password: process.env.PASSWORD,
+						secure: true
+					});
+									
 					return;
+				}
 				
 				console.error(`[ERROR] ${err}`);
 				const error_embed = new EmbedBuilder()
@@ -259,9 +275,16 @@ module.exports = {
             	message.channel.send(`<@${client.owners_id[1]}>`);
             }
 		} catch(err) {
-			console.log(err.name);
-			if (err.name === 'Error')
+			if (err.name === 'Error') {
+				await client.ftp.access({
+					host: process.env.HOST,				 	
+					user: process.env.USER,
+					password: process.env.PASSWORD,
+					secure: true
+				});
+								
 				return;
+			}
 
 			const error_embed = new EmbedBuilder()
             	.setColor('#cf1b1b')
