@@ -97,7 +97,7 @@ module.exports = {
             });
 
             collector.on('end', () => {
-                msg.delete({timeout: 1000});
+                msg.reactions.removeAll();
             });
         }
 	}

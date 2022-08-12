@@ -91,9 +91,9 @@ module.exports = {
 
                 if (!user.bot) reaction.users.remove(user.id);
             });
-
+            
             collector.on('end', () => {
-                msg.delete({timeout: 1000});
+                msg.reactions.removeAll();
             });
         }
     }

@@ -22,9 +22,17 @@ module.exports = {
 
 			await client.ftp.downloadTo('database/strings.txt', 'strings.txt').catch((err) => {});
 			await client.ftp.downloadTo('database/userDB.sqlite', 'userDB.sqlite').catch((err) => {});
+
+			const d = new Date();
+			d.setHours(3, 0, 0);
+			
+			setInterval(() => {
+				client.ftp.uploadFrom('database/userDB.sqlite', 'userDB.sqlite').catch((err) => {});
+			}, Date.now() - d)
     	} catch(err) {
         	console.log(`[ftp] ${err}`);
     	}
+
 
 		client.distube
     	.on('playSong', (queue, song) => {
