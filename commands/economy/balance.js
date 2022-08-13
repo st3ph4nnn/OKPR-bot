@@ -11,7 +11,7 @@ module.exports = {
 		let member = message.mentions.members.first() || message.member;
 		const balance_embed = new embed(message, 'Balance');
 
-		let db_user = new DatabaseUser(client, member.user.username, member.user.id);
+		let db_user = new DatabaseUser(member.user.username, member.user.id);
 		let balance = await db_user.get('balance');
 
         balance_embed.description(`Membru: \`${member.user.username}\`\nBalanță: \`${balance}\` <:troll_romania:996060026093441104>`);

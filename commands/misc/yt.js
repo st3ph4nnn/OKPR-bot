@@ -30,7 +30,7 @@ module.exports = {
 
         let max = video.length;
 
-        search_embed.description(`**Titlu**\n\`${video[0].title}\`\n\n**Descriere** \n\`${video[0].description == '' ? 'Nu are descriere.' : video[0].description}\`\n\n**Durată** \n\`${video[0].duration_raw}\`\n\nRezultat \`1\`/\`${max}\``);
+        search_embed.description(`**Titlu**\n\`${video[0].title}\`\n\n**Durată** \n\`${video[0].duration_raw}\`\n\nRezultat \`1\`/\`${max}\``);
         search_embed.url(video[0].url);
 
         const msg = await search_embed.send();
@@ -66,7 +66,7 @@ module.exports = {
 
                     try {
         				if (video[index-1].snippet.thumbnails.url) search_embed.image(video[index-1].snippet.thumbnails.url);
-						search_embed.description(`**Titlu**\n\`${video[index-1].title}\`\n\n**Descriere** \n\`${video[index-1].description == '' ? 'Nu are descriere.' : video[index-1].description}\`\n\n**Durată** \n\`${video[index-1].duration_raw}\`\n\nRezultat \`${index}\`/\`${max}\``);
+						search_embed.description(`**Titlu**\n\`${video[index-1].title}\`\n\n**Durată** \n\`${video[index-1].duration_raw}\`\n\nRezultat \`${index}\`/\`${max}\``);
                         search_embed.url(video[index-1].url);
                         msg.edit({embeds: [search_embed.embed]});
                     } catch {

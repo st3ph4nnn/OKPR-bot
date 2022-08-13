@@ -24,7 +24,6 @@ client.cooldowns = new Collection();
 client.prefix = '.';
 client.owners_id = [ '766292175289843712', '853225138116100106', '486536274937905152' ];
 client.ftp = new ftp.Client();
-client.timer = 0;
 client.markov_stop = false;
 client.last_deleted_message = '';
     

@@ -29,7 +29,7 @@ module.exports = {
 
         let bet = parseInt(args[1]);
 
-		let db_user = new DatabaseUser(client, message.author.username, message.author.id);
+		let db_user = new DatabaseUser(message.author.username, message.author.id);
 		let balance = await db_user.get('balance');
 		
 		if (bet < 50) {

@@ -12,20 +12,17 @@ const scheme = {
   'trollboard': 0
 };
 
-async function set_from_id(client, id, key, value) {
-  this.client.timer = 0;
+async function set_from_id(id, key, value) {
   await db.set(`${id}.${key}`, value);
 }
 
 class DatabaseUser {
-  constructor(client, name, id) {
+  constructor(name, id) {
     this.name = name;
     this.id = id;
-    this.client = client;
   }
 
   async check_user() {
-    this.client.timer = 0;
     const exists = await db.has(`${this.id}`);
 
     if (exists) {
@@ -54,7 +51,6 @@ class DatabaseUser {
   }
 
   async set(key, val) {
-    this.client.timer = 0;
     try {
       await db.set(`${this.id}.${key}`, val);
     } catch(err) {
@@ -63,7 +59,6 @@ class DatabaseUser {
   }
 
   async get(key) {
-    this.client.timer = 0;
   	const value = await db.get(`${this.id}.${key}`);
     if (value == undefined) {
       await this.check_user();
@@ -73,13 +68,11 @@ class DatabaseUser {
   }
 
   async fetch_user() {
-    this.client.timer = 0;
     const user = await db.get(`${this.id}`);
     return user;
   }
 
   async add(key, val) {
-    this.client.timer = 0;
     try {
       await db.add(`${this.id}.${key}`, val);
     } catch(err) {
@@ -88,7 +81,6 @@ class DatabaseUser {
   }
 
   async sub(key, val) {
-    this.client.timer = 0;
     try {
       await db.sub(`${this.id}.${key}`, val);
     } catch(err) {
@@ -97,7 +89,6 @@ class DatabaseUser {
   }
 
   async mul(key, val) {
-    this.client.timer = 0;
     db.get(`${this.id}.${key}`).then((value) => {
       value *= val;
       db.set(`${this.id}.${key}`, value);
@@ -105,7 +96,6 @@ class DatabaseUser {
   }
 
   async div(key, val) {
-    this.client.timer = 0;
     db.get(`${this.id}.${key}`).then((value) => {
       value /= val;
       db.set(`${this.id}.${key}`, value);

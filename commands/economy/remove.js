@@ -11,8 +11,6 @@ module.exports = {
 		let member = message.mentions.members.first();
 		const remove_embed = new embed(message, 'Remove');
 
-		console.log(args);
-
 		if (args[0] == 'user') {
 			if (!args[1]) {
 				remove_embed.description(`Te rog specifică membrul pe care vrei sa-l stergi.. \n\nFolosire: \`${client.prefix}remove user {id}\``);
@@ -42,7 +40,7 @@ module.exports = {
             return remove_embed.send();
         }
 
-        let db_user = new DatabaseUser(client, member.user.username, member.user.id);
+        let db_user = new DatabaseUser(member.user.username, member.user.id);
 
 		let value = await database.get('balance');
 

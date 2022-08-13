@@ -9,7 +9,6 @@ module.exports = {
 	once: false,
 	async execute(message, client) {
 		try {
-				
 			if (message.author.bot) {
 				if (message.author.id == '302050872383242240' && message.embeds[0].description.includes("Check")) {
 					message.channel.send('mulțam mult!!!');
@@ -26,8 +25,7 @@ module.exports = {
 			}
 
 			if (message.guildId == '839520481475952650') {
-				client.timer = 0;
-				let db_user = new DatabaseUser(client, message.author.username, message.author.id);
+				let db_user = new DatabaseUser(message.author.username, message.author.id);
 				await db_user.check_user();
 				let xp = (parseInt(await db_user.get('xp'))) + 1;
 
@@ -38,8 +36,6 @@ module.exports = {
 				await db_user.add('weeklyxp', 1);
 
 				let db_level = await db_user.get('level');
-
-    			let level = 0;
 
     			const requirments = [0, 600, 1200, 2000, 3000, 5000, 8000, 10000, 15000, 20000, 25000];
     			const levels = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
@@ -71,7 +67,7 @@ module.exports = {
 				return;
 			}
 
-			if (!message.content || message.content.startsWith('http'))
+			if (!message.content || message.content.includes('http'))
 				return;
 
 			const has_bot_mention = (message.mentions.has(client.user) && message.type != 19);
@@ -100,12 +96,12 @@ module.exports = {
 							fs.writeFileSync('database/strings.txt', quotes.join(' '), 'utf-8');
 						}
 
+						if (message.mentions.everyone === true || message.mentions.members.first())
+							return;
+
 						let words = message.content.split(' ');
 
-						if (!words[0])
-							return;
-						
-						if (words.includes('@everyone') || words.includes('@here'))
+						if (!words.length)
 							return;
 
 						let final_words = [ ];

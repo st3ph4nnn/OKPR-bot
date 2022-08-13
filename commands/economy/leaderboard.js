@@ -35,11 +35,54 @@ module.exports = {
     				return parseFloat(b.value.weeklyxp) - parseFloat(a.value.weeklyxp);
 				});
 
-				let top_users = users.slice(0, 10);
+				let top10_users = users.slice(0, 10);
 
-				let top1 = top_users[0].id;
-				let top2 = top_users[1].id;
-				let top3 = top_users[2].id;
+				let staff = (member) => {
+					return (member.roles.cache.some(role => role.id === '843950648437112843') || member.roles.cache.some(role => role.id === '840233313582186496') || member.roles.cache.some(role => role.id === '839521297867603988'));
+				}
+
+				let top = (users) => {
+					let i = 0;
+					let top_user = [ ];
+
+					for (; i < users.length; i++) {
+						member = message.guild.members.cache.get(users[i].id);
+						if (member !== undefined) {
+							if (staff(member)) continue;
+							else {
+								top_user.push(member);
+								i++;
+								break;
+							}
+						}
+					}
+
+					for (; i < users.length; i++) {
+						member = message.guild.members.cache.get(users[i].id);
+						if (member !== undefined) {
+							if (staff(member)) continue;
+							else {
+								top_user.push(member);
+								i++;
+								break;
+							}
+						}
+					}
+
+					for (; i < users.length; i++) {
+						member = message.guild.members.cache.get(users[i].id);
+						if (member !== undefined) {
+							if (staff(member)) continue;
+							else {
+								top_user.push(member);
+								i++;
+								break;
+							}
+						}
+					}
+				}
+
+				let top3_users = top(users);
 
 				first.members.forEach((member, i) => {
 					setTimeout(() => {
@@ -47,10 +90,7 @@ module.exports = {
                     }, i * 500);
 				});
 
-				let member;
-
-				member = message.guild.members.cache.get(top1);
-				if (member !== undefined) member.roles.add(first);
+				top3_users[0].roles.add(first);
 
 				second.members.forEach((member, i) => {
 					setTimeout(() => {
@@ -58,8 +98,7 @@ module.exports = {
                     }, i * 500);
 				});
 
-				member = message.guild.members.cache.get(top2);
-				if (member !== undefined) member.roles.add(second);
+				top3_users[1].roles.add(second);
 
 				third.members.forEach((member, i) => {
 					setTimeout(() => {
@@ -67,10 +106,9 @@ module.exports = {
                     }, i * 500);
 				});
 
-				member = message.guild.members.cache.get(top3);
-				if (member !== undefined) member.roles.add(third);
+				top3_users[2].roles.add(third);
 
-				for (let i = 0; i < top_users.length; i++) {
+				for (let i = 0; i < top10_users.length; i++) {
 					switch (i+1) {
 						case 1: description += `🥇 **${users[i].value.username}** - \`${users[i].value.weeklyxp}\` <:troll_romania:996060026093441104>\n`; break;
 						case 2: description += `🥈 **${users[i].value.username}** - \`${users[i].value.weeklyxp}\` <:troll_romania:996060026093441104>\n`; break;
@@ -79,14 +117,14 @@ module.exports = {
 					}
 				}
 
-				users = await Database.all();
 				users.forEach((user) => {
 					set_from_id(user.id, 'weeklyxp', 0);
 				});
 
+				description += `\n\nTop 1 weekly: **${top3_users[0]}**\nTop 2 weekly: **${top3_users[1]}**\nTop 3 weekly: **${top3_users[2]}**`;
+
 				give_embed.description(description);
 				await give_embed.send();
-				
 				break;
 			}
 			case 'w':

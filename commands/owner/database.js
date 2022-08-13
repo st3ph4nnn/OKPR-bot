@@ -1,6 +1,5 @@
-const { Database } = require('../../database/database.js');
+const { Database, DatabaseUser } = require('../../database/database.js');
 const fs = require('fs');
-const { MessageAttachement } = require('discord.js')
 
 module.exports = {
 	name: 'database',
@@ -20,6 +19,50 @@ module.exports = {
 		if (args[0] == 'upload') {
 			await client.ftp.uploadFrom('database/userDB.sqlite', 'userDB.sqlite').catch((err) => {});
 			await message.reply('gata boss!!');
+		}
+		
+		if (args[0] == 'set') {
+			let member = message.mentions.members.first();
+			const set_embed = new embed(message, 'Set');
+	
+			if (!member) {
+				set_embed.description(`Te rog specifică membrul caruia vrei să-i setezi ceva. \n\nFolosire: \`${client.prefix}set @membru {balance/xp} {valoare}\``);
+				return set_embed.send();
+			}
+	
+			if (!args[2]) {
+				set_embed.description(`Te rog specifică ce vrei să setezi. \n\nFolosire: \`${client.prefix}set @membru {balance/xp} {valoare}\``);
+				return set_embed.send();
+			}
+	
+			if (isNaN(args[3]) || args[3] % 1 !== 0) {
+				set_embed.description(`Valoarea specificată nu este validă. \n\nFolosire: \`${client.prefix}give @membru {bani}\``);
+				return set_embed.send();
+			}
+	
+			let db_user = new DatabaseUser(member.user.username, member.user.id);
+			await db_user.set(args[2], parseInt(args[3]));
+	
+			set_embed.description(`Tocmai i-am setat valoarea de \`${args[1]}\` la \`${args[2]}\` lui \`${member.user.username}\`.`);
+			return set_embed.send();
+		}
+
+		if (args[0] == 'remove') {
+			let member = message.mentions.members.first();
+			const remove_embed = new embed(message, 'Remove');
+
+			if (!member) {
+				remove_embed.description(`Te rog specifică membrul pe care vrei sa-l stergi. \n\nFolosire: \`${client.prefix}remove @membru\``);
+				return remove_embed.send();
+			}
+
+
+			let user = new DatabaseUser(member.user.username, member.user.id);
+			let username = user.get('username');
+			await Database.delete(member.user.id)
+
+			remove_embed.description(`Membrul \`${username}\` tocmai a fost șters.`);
+			await remove_embed.send();
 		}
 	}
 }
