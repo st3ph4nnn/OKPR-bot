@@ -109,7 +109,7 @@ module.exports = {
 
 						let final_words = [ ];
 
-						for (let i = 0; i < words.length; i++) {c
+						for (let i = 0; i < words.length; i++) {
 							if (!quotes.includes(words[i])) {
 								final_words.push(words[i]);
 							}
