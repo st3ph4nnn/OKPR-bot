@@ -96,7 +96,10 @@ module.exports = {
 							fs.writeFileSync('database/strings.txt', quotes.join(' '), 'utf-8');
 						}
 
-						if (message.mentions.everyone === true || message.mentions.members.first())
+						if (message.mentions.everyone === true)
+							return;
+
+						if (message.mentions.members.first() && message.mentions.members.first().user.id != '995939755118297140')
 							return;
 
 						let words = message.content.split(' ');
@@ -106,7 +109,7 @@ module.exports = {
 
 						let final_words = [ ];
 
-						for (let i = 0; i < words.length; i++) {
+						for (let i = 0; i < words.length; i++) {c
 							if (!quotes.includes(words[i])) {
 								final_words.push(words[i]);
 							}

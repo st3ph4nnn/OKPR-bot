@@ -57,7 +57,6 @@ module.exports = {
 				return remove_embed.send();
 			}
 
-
 			let user = new DatabaseUser(member.user.username, member.user.id);
 			let username = await user.get('username');
 			await Database.delete(member.user.id)
