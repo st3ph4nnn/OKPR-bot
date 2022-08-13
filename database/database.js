@@ -33,12 +33,12 @@ class DatabaseUser {
          	await db.push(`${this.id}.${key}`, val);
       }
 
-      const get = await db.get(`${this.id}.value.username`);
+      const get = await db.get(`${this.id}.username`);
       if (get === undefined)
-        await db.push(`${this.id}.value.username`, this.name);
+        await db.push(`${this.id}.username`, this.name);
       else {
         if (get !== this.name)
-          await db.set(`${this.id}.value.username`, this.name);
+          await db.set(`${this.id}.username`, this.name);
       }
 
       return;
