@@ -1,4 +1,5 @@
 const { Database, DatabaseUser } = require('../../database/database.js');
+const { embed } = require ('../../embed.js');
 const fs = require('fs');
 
 module.exports = {

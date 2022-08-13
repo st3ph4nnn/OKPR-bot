@@ -7,6 +7,8 @@ module.exports = {
 	async execute(message, args, client) {
 		if (!args[0]) return message.reply('Ce vrei să spun?');
 
+		await message.delete({timeout: 1000});
+
 		return message.channel.send(args.join(' '));
 	}
 }
