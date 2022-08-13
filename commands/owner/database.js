@@ -32,12 +32,12 @@ module.exports = {
 			}
 	
 			if (!args[2]) {
-				set_embed.description(`Te rog specifică ce vrei să setezi. \n\nFolosire: \`${client.prefix}set @membru {balance/xp} {valoare}\``);
+				set_embed.description(`Te rog specifică ce vrei să setezi. \n\nFolosire: \`${client.prefix}database set @membru {balance/xp} {valoare}\``);
 				return set_embed.send();
 			}
 	
 			if (isNaN(args[3]) || args[3] % 1 !== 0) {
-				set_embed.description(`Valoarea specificată nu este validă. \n\nFolosire: \`${client.prefix}give @membru {bani}\``);
+				set_embed.description(`Valoarea specificată nu este validă. \n\nFolosire: \`${client.prefix}database set @membru {balance/xp} {valoare}\``);
 				return set_embed.send();
 			}
 	
@@ -53,13 +53,13 @@ module.exports = {
 			const remove_embed = new embed(message, 'Remove');
 
 			if (!member) {
-				remove_embed.description(`Te rog specifică membrul pe care vrei sa-l stergi. \n\nFolosire: \`${client.prefix}remove @membru\``);
+				remove_embed.description(`Te rog specifică membrul pe care vrei sa-l stergi. \n\nFolosire: \`${client.prefix}database remove @membru\``);
 				return remove_embed.send();
 			}
 
 
 			let user = new DatabaseUser(member.user.username, member.user.id);
-			let username = user.get('username');
+			let username = await user.get('username');
 			await Database.delete(member.user.id)
 
 			remove_embed.description(`Membrul \`${username}\` tocmai a fost șters.`);
