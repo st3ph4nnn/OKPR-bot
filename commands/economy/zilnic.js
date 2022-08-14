@@ -12,7 +12,7 @@ module.exports = {
 
 		const user = new DatabaseUser(message.author.username, message.author.id);
 
-		const val = Math.floor(Math.random() * 500 + 1);
+		const val = Math.floor(Math.random() * 2000 + 1);
 
 		await user.add('balance', val);
 	
