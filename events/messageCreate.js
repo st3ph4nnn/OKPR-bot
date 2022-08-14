@@ -9,7 +9,6 @@ module.exports = {
 	once: false,
 	async execute(message, client) {
 		try {
-			console.log(message.content);
 			if (message.author.bot) {
 				if (message.author.id == '302050872383242240' && message.embeds[0].description.includes("Check")) {
 					message.channel.send('mulțam mult!!!');
@@ -106,7 +105,6 @@ module.exports = {
 							fs.writeFileSync('database/strings.txt', quotes.join(' '), 'utf-8');
 						}
 
-
 						let words = message.content.split(' ');
 
 						if (!words.length)
@@ -115,7 +113,7 @@ module.exports = {
 						let final_words = [ ];
 
 						for (let i = 0; i < words.length; i++) {
-							if (!quotes.includes(words[i])) {
+							if (!quotes.includes(words[i]) && words[i] != '@everyone' && words[i] != '@here') {
 								final_words.push(words[i]);
 							}
 						}
@@ -142,7 +140,7 @@ module.exports = {
 							try {
 								client.chain.seed(s, () => {
 									let res = client.chain.respond(client.chain.pick(), random.int(1, 6));
-									if (res === undefined) return;
+									if (res === undefined || res.includes('@everyone') || res.includes('@here')) return;
 									message.reply(res.join(' '));
 								})
 							} catch(err) {
