@@ -9,6 +9,7 @@ module.exports = {
 	once: false,
 	async execute(message, client) {
 		try {
+			console.log(message.content);
 			if (message.author.bot) {
 				if (message.author.id == '302050872383242240' && message.embeds[0].description.includes("Check")) {
 					message.channel.send('mulțam mult!!!');
@@ -84,6 +85,15 @@ module.exports = {
 					} catch {}
 
 					if (val == 0) {
+						if (message.mentions) 
+							return;
+
+						if (message.mentions.everyone)
+							return;
+
+						if (message.mentions.members.first() !== undefined && message.mentions.members.first().user.id !== '995939755118297140')
+							return;
+
 						if (!fs.existsSync('database/strings.txt')) {
 							await client.ftp.downloadTo("database/strings.txt", "strings.txt");
 							return;
@@ -96,14 +106,6 @@ module.exports = {
 							fs.writeFileSync('database/strings.txt', quotes.join(' '), 'utf-8');
 						}
 
-						if (message.mentions) 
-							return;
-
-						if (message.mentions.everyone === true)
-							return;
-
-						if (message.mentions.members.first() !== undefined && message.mentions.members.first().user.id !== '995939755118297140')
-							return;
 
 						let words = message.content.split(' ');
 
@@ -141,6 +143,7 @@ module.exports = {
 								client.chain.seed(s, () => {
 									let res = client.chain.respond(client.chain.pick(), random.int(1, 6));
 									if (res === undefined) return;
+									if (res.join(' ').)
 									message.reply(res.join(' '));
 								})
 							} catch(err) {
