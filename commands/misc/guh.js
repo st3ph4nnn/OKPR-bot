@@ -17,7 +17,7 @@ module.exports = {
                 return message.reply(`Imaginează-ți să incerci să imi dai huh :nerd:`);
 
             msg.react('🤔').catch((err) => {
-                return message.reply(`Acest utilizator (\`${msg.author.username}\`) (:face_vomiting:) este gay și mi-a dat block lol :nerd:`);
+                msg.reply(`Acest utilizator (\`${msg.author.username}\`) (:face_vomiting:) este gay și mi-a dat block lol :nerd:`);
             });
 
             let val = Math.floor(Math.random() * 2);
@@ -43,7 +43,7 @@ module.exports = {
                 return message.reply(`Imaginează-ți să incerci să imi dai huh :nerd:`);
 
             msg.last().react('🤔').catch((err) => {
-                return message.reply(`Acest utilizator (\`${msg.last().author.username}\`) (:face_vomiting:) este gay și mi-a dat block lol :nerd:`);
+                msg.last().reply(`Acest utilizator (\`${msg.last().author.username}\`) (:face_vomiting:) este gay și mi-a dat block lol :nerd:`);
             });
 
             let val = Math.floor(Math.random() * 2);

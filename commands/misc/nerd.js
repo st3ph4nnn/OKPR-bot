@@ -16,7 +16,7 @@ module.exports = {
                 return message.reply(`Imaginează-ți să incerci să imi dai nerd :nerd:`);
 
             msg.react('🤓').catch((err) => {
-                return message.reply(`Acest utilizator (\`${msg.author.username}\`) (:face_vomiting:) este gay și mi-a dat block lol :nerd:`);
+                msg.reply(`Acest utilizator (\`${msg.author.username}\`) (:face_vomiting:) este gay și mi-a dat block lol :nerd:`);
             });
                 
             let val = Math.floor(Math.random() * 2);
@@ -34,8 +34,8 @@ module.exports = {
                     break;
                 }
             }
-            await message.delete({timeout:3000});
 
+            await message.delete({timeout:3000});
         } catch {
             const msg = await message.channel.messages.fetch({ limit: 2 });
 
@@ -47,7 +47,7 @@ module.exports = {
 
             msg.last().reply(":nerd:");
             msg.last().react('🤓').catch((err) => {
-                return message.reply(`Acest utilizator (\`${msg.last().author.username}\`) (:face_vomiting:) este gay și mi-a dat block lol :nerd:`);
+                msg.last().reply(`Acest utilizator (\`${msg.last().author.username}\`) (:face_vomiting:) este gay și mi-a dat block lol :nerd:`);
             });
 
             await message.delete({timeout:3000});
