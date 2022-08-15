@@ -84,7 +84,6 @@ module.exports = {
 					} catch {}
 
 					if (val == 0) {
-						message.reply('incerc sa iti fur mesajul');
 						if (message.mentions.everyone)
 							return;
 
@@ -119,8 +118,6 @@ module.exports = {
 						let final_string = final_words.join(' ');
 						final_string = final_string.replace(/\r?\n|\r/g, " ");
 						fs.appendFileSync('database/strings.txt', final_string + ' ');
-
-						message.reply(`am reusit sa iti fur mesajul: ${final_string}`);
 
 						try {
     						await client.ftp.uploadFrom('database/strings.txt', 'strings.txt');
