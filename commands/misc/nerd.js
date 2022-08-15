@@ -18,7 +18,7 @@ module.exports = {
             await message.delete({timeout:3000});
 
             msg.react('🤓').catch((err) => {
-                return message.reply(`Acest utilizator (\`${msg.user.username}\`) (:face_vomiting:) este gay și mi-a dat block lol :nerd:`);
+                return message.reply(`Acest utilizator (\`${msg.author.username}\`) (:face_vomiting:) este gay și mi-a dat block lol :nerd:`);
             });
 
             let val = Math.floor(Math.random() * 2);
@@ -49,7 +49,7 @@ module.exports = {
 
             msg.last().reply(":nerd:");
             msg.last().react('🤓').catch((err) => {
-                return message.reply(`Acest utilizator (\`${msg.last().user.username}\`) (:face_vomiting:) este gay și mi-a dat block lol :nerd:`);
+                return message.reply(`Acest utilizator (\`${msg.last().author.username}\`) (:face_vomiting:) este gay și mi-a dat block lol :nerd:`);
             });
         }
 	}
