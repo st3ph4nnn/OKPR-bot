@@ -19,10 +19,9 @@ module.exports = {
                 return message.reply(`Acest utilizator (\`${msg.author.username}\`) (:face_vomiting:) este gay și mi-a dat block lol :nerd:`);
             });
                 
-            await message.delete({timeout:3000});
             let val = Math.floor(Math.random() * 2);
             switch (val) {
-            	case 0: {
+                case 0: {
             		msg.reply('https://cdn.discordapp.com/attachments/839520481475952654/1000370917899259914/Screenshot_20220723-031505_Discord.jpg');
             		break;
             	}
@@ -35,6 +34,8 @@ module.exports = {
                     break;
                 }
             }
+            await message.delete({timeout:3000});
+
         } catch {
             const msg = await message.channel.messages.fetch({ limit: 2 });
 
@@ -48,7 +49,8 @@ module.exports = {
             msg.last().react('🤓').catch((err) => {
                 return message.reply(`Acest utilizator (\`${msg.last().author.username}\`) (:face_vomiting:) este gay și mi-a dat block lol :nerd:`);
             });
-            await message.delete({timeout:2000});
+
+            await message.delete({timeout:3000});
         }
 	}
 }
