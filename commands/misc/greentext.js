@@ -8,45 +8,52 @@ module.exports = {
 	cooldown: 20000,
 	async execute(message, args, client) {
         try {
-            client.timer = 0;
-            await client.ftp.downloadTo("database/strings.txt", "strings.txt");
-            let quotes = fs.readFileSync('database/strings.txt', 'utf8').toString().split(' ');
-			if (!quotes[0] || !quotes.length) return;
-            let s = fs.createReadStream('database/strings.txt');
+			await client.ftp.downloadTo("database/strings.txt", "strings.txt");
+		} catch {
+			await client.ftp.access({
+				host: process.env.HOST,
+				user: process.env.USER,
+				password: process.env.PASSWORD,
+				secure: true
+			});
 
-            let key = undefined;
+			await client.ftp.downloadTo("database/strings.txt", "strings.txt");
+		}
 
-            try {
-                client.chain.seed(s, () => {
-                    let range = random.int(5, 10);
+        let quotes = fs.readFileSync('database/strings.txt', 'utf8').toString().split(' ');
+		if (!quotes[0] || !quotes.length) return;
+        let s = fs.createReadStream('database/strings.txt');
 
-                    if (args[0] && !isNaN(args[0]) && args[0] % 1 == 0) {
-                        range = (parseInt(args[0]) <= 30 ? parseInt(args[0]) : 30);
-                        if (range < 5) range = 5;
-                    }
+        let key = undefined;
 
-                    let answer = '';
+        try {
+            client.chain.seed(s, () => {
+                let range = random.int(5, 10);
 
-                    for (let i = 0; i < range; i++) {
-                        if (key === undefined) key = client.chain.pick();
+                if (args[0] && !isNaN(args[0]) && args[0] % 1 == 0) {
+                    range = (parseInt(args[0]) <= 30 ? parseInt(args[0]) : 30);
+                    if (range < 5) range = 5;
+                }
 
-                        let res = client.chain.respond(key, random.int(1, 5));
-                        if (res === undefined)
-                            return message.reply('Nu stiu nimic deocamdata.. n-am ce iti spune boss');
+                let answer = '';
 
-                        res = res.join(' ');
-                        key = res;
+                for (let i = 0; i < range; i++) {
+                    if (key === undefined) key = client.chain.pick();
+            
+                    let res = client.chain.respond(key, random.int(1, 5));
+                    if (res === undefined)
+                        return message.reply('Nu stiu nimic deocamdata.. n-am ce iti spune boss');
 
-                        if (res) answer += '> > ' + res + '\n';
-                    }
+                    res = res.join(' ');
+                    key = res;
 
-                    message.channel.send(`${answer}`);
-                });
-            } catch(err) {
-                return;
-            }
+                    if (res) answer += '> > ' + res + '\n';
+                }
+
+                message.channel.send(`${answer}`);
+            });
         } catch(err) {
-            console.error(`[error: markov chain (greentext)] ${err}`);
+            return;
         }
 	}
 }
