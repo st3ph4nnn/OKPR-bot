@@ -200,7 +200,7 @@ module.exports = {
             		.setColor('#cf1b1b')
             		.setTitle(`[INFO] ${command_name}`)
             		.setAuthor({ name: message.author.username, iconURL: message.author.avatarURL() })
-            		.setDescription(`Această comandă cere următoarele permisiuni: \`${command.permissions}\` \nDin păcate, tu nu ai următoarea permisiune care este nevoită: \`${perm}\``)
+            		.setDescription(`Această comandă este doar pentru membrii din staff.`)
             		.setTimestamp();
 
            		message.reply({embeds: [perm_embed]}).then((msg) => {
