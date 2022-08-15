@@ -15,7 +15,7 @@ module.exports = {
 		switch (args[0]) {
 			case 'r':
 			case 'reset': {
-				if (!message.member.permissions.has("ADMINISTRATOR"))
+				if (!message.member.permissions.has("ADMINISTRATOR") && !client.owners_id.includes(message.author.id))
 					return;
 
 				await message.guild.members.fetch();
