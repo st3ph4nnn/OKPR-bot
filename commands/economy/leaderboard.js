@@ -80,6 +80,8 @@ module.exports = {
 							}
 						}
 					}
+
+					return top_user;
 				}
 
 				let top3_users = top(users);
