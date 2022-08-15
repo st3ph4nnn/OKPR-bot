@@ -15,12 +15,11 @@ module.exports = {
             if (msg.author.id == '995939755118297140')
                 return message.reply(`Imaginează-ți să incerci să imi dai nerd :nerd:`);
 
-            await message.delete({timeout:3000});
-
             msg.react('🤓').catch((err) => {
                 return message.reply(`Acest utilizator (\`${msg.author.username}\`) (:face_vomiting:) este gay și mi-a dat block lol :nerd:`);
             });
-
+                
+            await message.delete({timeout:3000});
             let val = Math.floor(Math.random() * 2);
             switch (val) {
             	case 0: {
@@ -45,12 +44,11 @@ module.exports = {
             if (msg.last().author.id == '995939755118297140')
                 return message.reply(`Imaginează-ți să încerci să imi dai nerd :nerd:`);
 
-            await message.delete({timeout:2000});
-
             msg.last().reply(":nerd:");
             msg.last().react('🤓').catch((err) => {
                 return message.reply(`Acest utilizator (\`${msg.last().author.username}\`) (:face_vomiting:) este gay și mi-a dat block lol :nerd:`);
             });
+            await message.delete({timeout:2000});
         }
 	}
 }
