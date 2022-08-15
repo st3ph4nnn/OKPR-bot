@@ -17,7 +17,7 @@ module.exports = {
                 return message.reply(`Imaginează-ți să incerci să imi dai huh :nerd:`);
 
             msg.react('🤔').catch((err) => {
-                return message.reply(`Acest utilizator (\`${msg.last().user.username}\`) (:face_vomiting:) este gay și mi-a dat block lol :nerd:`);
+                return message.reply(`Acest utilizator (\`${msg.user.username}\`) (:face_vomiting:) este gay și mi-a dat block lol :nerd:`);
             });
 
             let val = Math.floor(Math.random() * 2);

@@ -10,9 +10,9 @@ module.exports = {
             const msg = await message.fetchReference();
 
             msg.react("<:gigachad:839780450322481162>").catch((err) => {
-                return message.reply(`Acest utilizator (\`${msg.last().user.username}\`) (:face_vomiting:) este gay și mi-a dat block lol :nerd:`);
+                return message.reply(`Acest utilizator (\`${msg.user.username}\`) (:face_vomiting:) este gay și mi-a dat block lol :nerd:`);
             });
-            
+
             msg.reply('https://c.tenor.com/epNMHGvRyHcAAAAd/gigachad-chad.gif');
 
             await message.delete({timeout:1000});
