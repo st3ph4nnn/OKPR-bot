@@ -75,6 +75,7 @@ module.exports = {
 
 			try {
 				await client.ftp.uploadFrom("database/strings.txt", "strings.txt");
+				message.reply(`Am adaugat \`${final_string}\``);
 			} catch {
 				await client.ftp.access({
 					host: process.env.HOST,
@@ -84,9 +85,8 @@ module.exports = {
 				});
 	
 				await client.ftp.uploadFrom("database/strings.txt", "strings.txt");
+				message.reply(`Am adaugat \`${final_string}\``);
 			}
-
-			message.reply(`Am adaugat \`${final_string}\``);
 		}
 
         if (args[0] == 'toggle') {
