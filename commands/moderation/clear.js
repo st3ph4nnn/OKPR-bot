@@ -5,7 +5,7 @@ module.exports = {
     aliases: [ 'purge' ],
     category: "Moderation",
     cooldown: 1,
-    permissions: [ "DELETE_MESSAGES" ],
+    staff: true,
     role: [ '843950648437112843' ],
     description: "Șterge ultimele X mesaje din canal.",
     async execute(message, args, client) {

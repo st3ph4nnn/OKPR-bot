@@ -4,8 +4,7 @@ module.exports = {
     name: "mute",
     category: "Moderation",
     cooldown: 1,
-    permissions: [ "MUTE_MEMBERS" ],
-    role: [ '843950648437112843' ],
+    staff: true,
     description: "Dă timeout/mute unui membru specificat.",
     async execute(message, args, client) {
         const mute_embed = new embed(message, 'Mute / Timeout');

@@ -4,7 +4,7 @@ module.exports = {
     name: "off",
     category: "Moderation",
     cooldown: 1,
-    permissions: [ "MUTE_MEMBERS" ],
+    staff: true,
     description: "Dă \"off\" unui membru specificat.",
     async execute(message, args, client) {
         const off_embed = new embed(message, 'Off');

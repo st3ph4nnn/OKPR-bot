@@ -195,24 +195,18 @@ module.exports = {
 			if (command.owner && !client.owners_id.includes(message.author.id))
 				return;
 
-			if (command.permissions && !client.owners_id.includes(message.author.id)) {
-				for (const perm of command.permissions) {
-					try {
-						message.member.permissions.has(perm)
-					} catch {
-						const perm_embed = new EmbedBuilder()
-            				.setColor('#cf1b1b')
-            				.setTitle(`[INFO] ${command_name}`)
-            				.setAuthor({ name: message.author.username, iconURL: message.author.avatarURL() })
-            				.setDescription(`Această comandă cere următoarele permisiuni: \`${command.permissions}\` \nDin păcate, tu nu ai următoarea permisiune care este nevoită: \`${perm}\``)
-            				.setTimestamp();
+			if (command.staff && !client.owners_id.includes(message.author.id) && (!message.member.roles.cache.some(role => role.id === '843950648437112843') && !message.member.roles.cache.some(role => role.id === '839521297867603988'))) {
+				const perm_embed = new EmbedBuilder()
+            		.setColor('#cf1b1b')
+            		.setTitle(`[INFO] ${command_name}`)
+            		.setAuthor({ name: message.author.username, iconURL: message.author.avatarURL() })
+            		.setDescription(`Această comandă cere următoarele permisiuni: \`${command.permissions}\` \nDin păcate, tu nu ai următoarea permisiune care este nevoită: \`${perm}\``)
+            		.setTimestamp();
 
-           				message.reply({embeds: [perm_embed]}).then((msg) => {
-          					setTimeout(() => msg.delete(), 5000);
-           				});
-            			return;
-					}
-				}
+           		message.reply({embeds: [perm_embed]}).then((msg) => {
+          			setTimeout(() => msg.delete(), 5000);
+           		});
+            	return;
 			}
 
 			if (!client.owners_id.includes(message.author.id)) {

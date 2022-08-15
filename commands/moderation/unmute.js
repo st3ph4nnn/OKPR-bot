@@ -4,7 +4,7 @@ module.exports = {
     name: "unmute",
     category: "Moderation",
     cooldown: 1,
-    permissions: [ "MUTE_MEMBERS" ],
+    staff: true,
     description: "Scoate timeout-ul unui membru specificat.",
     async execute(message, args, client) {
         const unmute_embed = new embed(message, 'Unmute / Untimeout');

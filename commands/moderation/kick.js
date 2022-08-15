@@ -4,7 +4,7 @@ module.exports = {
     name: "kick",
     category: "Moderation",
     cooldown: 1,
-    permissions: [ "KICK_MEMBERS" ],
+    staff: true,
     description: "Dă afara un membru specificat.",
     async execute(message, args, client) {
         const kick_embed = new embed(message, 'Kick');

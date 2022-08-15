@@ -4,7 +4,7 @@ module.exports = {
     name: "ban",
     category: "Moderation",
     cooldown: 1,
-    permissions: [ "BAN_MEMBERS" ],
+    staff: true,
     role: [ '839521297867603988' ],
     description: "Banează un membru specificat.",
     async execute(message, args, client) {

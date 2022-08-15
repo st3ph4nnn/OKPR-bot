@@ -4,7 +4,7 @@ module.exports = {
     name: "unban",
     category: "Moderation",
     cooldown: 1,
-    permissions: [ "BAN_MEMBERS" ],
+    staff: true,
     description: "Scoate ban-ul unui membru specificat.",
     async execute(message, args, client) {
         const unban_embed = new embed(message, 'Unban');

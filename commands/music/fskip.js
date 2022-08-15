@@ -4,7 +4,7 @@ module.exports = {
 	name: 'fskip',
 	description: 'Forțează trecerea peste piesa curentă.',
 	category: 'Music',
-	permissions: [ 'ADMINISTRATOR' ],
+	staff: true,
 	cooldown: 5000,
 	async execute(message, args, client) {
 		const play_embed = new embed(message, 'Skip');
