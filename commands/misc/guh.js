@@ -16,7 +16,9 @@ module.exports = {
             if (msg.author.id == '995939755118297140')
                 return message.reply(`Imaginează-ți să incerci să imi dai huh :nerd:`);
 
-            msg.react('🤔');
+            msg.react('🤔').catch((err) => {
+                return message.reply(`Acest utilizator (\`${msg.last().user.username}\`) (:face_vomiting:) este gay și mi-a dat block lol :nerd:`);
+            });
 
             let val = Math.floor(Math.random() * 2);
             switch (val) {
@@ -40,7 +42,9 @@ module.exports = {
             if (msg.last().author.id == '995939755118297140')
                 return message.reply(`Imaginează-ți să incerci să imi dai huh :nerd:`);
 
-            msg.last().react('🤔');
+            msg.last().react('🤔').catch((err) => {
+                return message.reply(`Acest utilizator (\`${msg.last().user.username}\`) (:face_vomiting:) este gay și mi-a dat block lol :nerd:`);
+            });
 
             let val = Math.floor(Math.random() * 2);
             switch (val) {

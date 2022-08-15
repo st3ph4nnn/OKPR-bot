@@ -17,7 +17,9 @@ module.exports = {
 
             await message.delete({timeout:3000});
 
-            msg.react('🤓');
+            msg.react('🤓').catch((err) => {
+                return message.reply(`Acest utilizator (\`${msg.last().user.username}\`) (:face_vomiting:) este gay și mi-a dat block lol :nerd:`);
+            });
 
             let val = Math.floor(Math.random() * 2);
             switch (val) {
@@ -29,6 +31,10 @@ module.exports = {
             		msg.reply(':nerd:');
             		break;
             	}
+                case 2: {
+                    msg.reply('https://c.tenor.com/xCc58fEqFREAAAAd/nerd-nerdy.gif');
+                    break;
+                }
             }
         } catch {
             const msg = await message.channel.messages.fetch({ limit: 2 });
@@ -42,8 +48,9 @@ module.exports = {
             await message.delete({timeout:2000});
 
             msg.last().reply(":nerd:");
-            msg.last().react('🤓');
-
+            msg.last().react('🤓').catch((err) => {
+                return message.reply(`Acest utilizator (\`${msg.last().user.username}\`) (:face_vomiting:) este gay și mi-a dat block lol :nerd:`);
+            });
         }
 	}
 }
