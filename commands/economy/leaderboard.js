@@ -84,6 +84,8 @@ module.exports = {
 
 				let top3_users = top(users);
 
+				console.log(top3_users);
+
 				first.members.forEach((member, i) => {
 					setTimeout(() => {
                         member.roles.remove(first);
