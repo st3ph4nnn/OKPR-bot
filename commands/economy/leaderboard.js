@@ -1,5 +1,5 @@
 const { embed } = require('../../embed.js');
-const { Database, set_from_id } = require('../../database/database.js');
+const { Database, set_from_id, DatabaseUser } = require('../../database/database.js');
 
 module.exports = {
 	name: 'leaderboard',
@@ -24,9 +24,7 @@ module.exports = {
                 let second = await message.guild.roles.cache.find(role => role.id === '905951559186260069');
                 let third = await message.guild.roles.cache.find(role => role.id === '905952134233731082');
 
-				let description = 'Acestea sunt rezultatele (Weekly XP) @everyone\n\n';
-
-				let users = await Database.all();
+				let description = 'Acestea sunt rezultatele (Weekly XP)\n\n';
 
 				users.sort(function(a, b) {
 					if (b.value.weeklyxp === undefined) b.value.weeklyxp = 0;
@@ -86,8 +84,6 @@ module.exports = {
 
 				let top3_users = top(users);
 
-				console.log(top3_users);
-
 				first.members.forEach((member, i) => {
 					setTimeout(() => {
                         member.roles.remove(first);
@@ -121,9 +117,10 @@ module.exports = {
 					}
 				}
 
-				users.forEach((user) => {
-					set_from_id(user.id, 'weeklyxp', 0);
-				});
+				for (const user of users) {
+					let db_user = new DatabaseUser(user.value.username, user.id);
+					await db_user.set('weeklyxp', 0);
+				}
 
 				description += `\n\nTop 1 weekly: **${top3_users[0]}**\nTop 2 weekly: **${top3_users[1]}**\nTop 3 weekly: **${top3_users[2]}**`;
 
@@ -134,8 +131,6 @@ module.exports = {
 			case 'w':
 			case 'weekly': {
 				let description = 'Top 10 Utilizatori weekly XP.\n\n';
-
-				let users = await Database.all();
 
 				users.sort(function(a, b) {
     				return parseFloat(b.value.weeklyxp) - parseFloat(a.value.weeklyxp);
@@ -259,8 +254,6 @@ module.exports = {
 			}
 			default: {
 				let description = 'Top 10 Utilizatori cu cei mai mulți bani (a nu se confunda cu troll board).\n\n';
-
-				let users = await Database.all();
 
 				users.sort(function(a, b) {
     				return parseFloat(b.value.balance) - parseFloat(a.value.balance);
