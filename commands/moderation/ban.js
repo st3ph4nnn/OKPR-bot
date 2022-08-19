@@ -5,7 +5,6 @@ module.exports = {
     category: "Moderation",
     cooldown: 1,
     staff: true,
-    role: [ '839521297867603988' ],
     description: "Banează un membru specificat.",
     async execute(message, args, client) {
         const ban_embed = new embed(message, 'Ban');

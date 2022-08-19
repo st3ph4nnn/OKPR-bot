@@ -1,4 +1,4 @@
-const { Client, Collection, EmbedBuilder, Partials } = require('discord.js');
+const { Client, Collection, Partials } = require('discord.js');
 const { DisTube } = require('distube');
 const { YtDlpPlugin } = require('@distube/yt-dlp');
 const ftp = require("basic-ftp")

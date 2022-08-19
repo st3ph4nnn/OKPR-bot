@@ -6,7 +6,6 @@ module.exports = {
     category: "Moderation",
     cooldown: 1,
     staff: true,
-    role: [ '843950648437112843' ],
     description: "Șterge ultimele X mesaje din canal.",
     async execute(message, args, client) {
         const off_embed = new embed(message, 'Clear');
