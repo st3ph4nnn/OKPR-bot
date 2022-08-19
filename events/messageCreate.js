@@ -95,7 +95,9 @@ module.exports = {
 							return;
 						}
 
-						let quotes = fs.readFileSync('database/strings.txt', 'utf8').toString().split(' ');
+						let quotes = fs.readFileSync('database/strings.txt', 'utf8').toString().split(' ').map(element => {
+							return element.toLowerCase();
+						})
 
 						while (quotes.length >= 100 || quotes.join(' ').length >= 2000) {
 							quotes.splice(random.int(0, quotes.length), 10);
@@ -110,7 +112,7 @@ module.exports = {
 						let final_words = [ ];
 
 						for (let i = 0; i < words.length; i++) {
-							if (!quotes.includes(words[i]) && words[i] != '@everyone' && words[i] != '@here') {
+							if (!quotes.includes(words[i].toLowerCase()) && words[i] != '@everyone' && words[i] != '@here' && words[i] != '<@&839521627082850355>') {
 								final_words.push(words[i]);
 							}
 						}
