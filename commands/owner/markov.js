@@ -91,6 +91,7 @@ module.exports = {
 
         if (args[0] == 'toggle') {
         	client.markov_stop = !client.markov_stop;
+			await message.reply('gata boss!!');
         	return;
         }
 	}

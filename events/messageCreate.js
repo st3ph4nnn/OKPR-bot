@@ -20,6 +20,7 @@ module.exports = {
 			}
 
 			if (message.content == 'shutdown' && client.owners_id.includes(message.author.id)) {
+				await client.ftp.uploadFrom('database/userDB.sqlite', 'userDB.sqlite').catch((err) => {});
 				await message.reply('gata boss!!!');
 				process.exit();
 			}

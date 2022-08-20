@@ -59,13 +59,13 @@ module.exports = {
 
         slots[1].forEach((item) => {
         	switch (item) {
-        		case '🍉': multiplier += 0.2; break;
-        		case '🍇': multiplier += 0.3; break;
-        		case '🍒': multiplier += 0.3; break;
-        		case '🍓': multiplier += 0.5; break;
-        		case '🍌': multiplier += 0.6; break;
-        		case '🍊': multiplier += 0.7; break;
-        		case '7️⃣': multiplier += 0.8; break;
+        		case '🍉': multiplier += 0.1; break;
+        		case '🍇': multiplier += 0.2; break;
+        		case '🍒': multiplier += 0.2; break;
+        		case '🍓': multiplier += 0.4; break;
+        		case '🍌': multiplier += 0.5; break;
+        		case '🍊': multiplier += 0.6; break;
+        		case '7️⃣': multiplier += 0.7; break;
         	}
         });
 
@@ -75,6 +75,8 @@ module.exports = {
         
         balance -= bet;
         balance += (bet * multiplier);
+
+        balance = Math.round(balance);
 
         description += `\n\nĂsta-i factorul de multiplicare: \`${multiplier}\`\n\nAtât ai pariat: \`${bet}\`\nAsta era balanța ta acum 2 secunde: \`${original_bal}\`\nAsta-i balanța ta acum: \`${balance}\``;
 
