@@ -20,7 +20,7 @@ module.exports = {
 			}
 
 			if (message.content == 'shutdown' && client.owners_id.includes(message.author.id)) {
-				await client.ftp.uploadFrom('database/userDB.sqlite', 'userDB.sqlite').catch((err) => {});
+				await client.upload('database/userDB.sqlite');
 				await message.reply('gata boss!!!');
 				process.exit();
 			}
@@ -119,7 +119,7 @@ module.exports = {
 						final_string = final_string.replace(/\r?\n|\r/g, " ");
 						fs.appendFileSync('database/strings.txt', final_string + ' ');
 
-    					await client.ftp.upload('database/strings.txt');
+    					await client.upload('database/strings.txt');
 					}
 
 					if (val == 1) {
@@ -130,7 +130,7 @@ module.exports = {
 
 							if (quotes.includes('@everyone') || quotes.includes('@here')) {
 								fs.writeFileSync('database/strings.txt', '', 'utf-8');
-								await client.ftp.upload('database/strings.txt');
+								await client.upload('database/strings.txt');
 							   	return;
 							}
 
