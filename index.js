@@ -44,7 +44,7 @@ async function upload(uploadFrom) {
     try {
         request.post({ url:process.env.UPLOAD_URL, formData: {
           file: fs.createReadStream(uploadFrom)
-        } }, function callback( err, response, body ) {
+        } }, function callback( error, response, body ) {
             if (!error && response.statusCode == 200) {
                 return true;
             }
