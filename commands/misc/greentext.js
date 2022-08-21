@@ -7,18 +7,7 @@ module.exports = {
 	category: 'Misc',
 	cooldown: 20000,
 	async execute(message, args, client) {
-        try {
-			await client.ftp.downloadTo("database/strings.txt", "strings.txt");
-		} catch {
-			await client.ftp.access({
-				host: process.env.HOST,
-				user: process.env.USER,
-				password: process.env.PASSWORD,
-				secure: true
-			});
-
-			await client.ftp.downloadTo("database/strings.txt", "strings.txt");
-		}
+		await client.download("strings.txt", "database/strings.txt");
 
         let quotes = fs.readFileSync('database/strings.txt', 'utf8').toString().split(' ');
 		if (!quotes[0] || !quotes.length) return;
