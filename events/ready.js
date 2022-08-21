@@ -19,7 +19,7 @@ module.exports = {
 
 				if (client.timer == 60000) {
 					client.upload('database/userDB.sqlite');
-					client.timer = 1;
+					client.timer = 1000;
 				}
 			}, 1000);
     	} catch(err) {
