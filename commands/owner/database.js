@@ -18,7 +18,7 @@ module.exports = {
 		}
 
 		if (args[0] == 'upload') {
-			await client.ftp.uploadFrom('database/userDB.sqlite', 'userDB.sqlite').catch((err) => {});
+			await client.upload('database/userDB.sqlite');
 			await message.reply('gata boss!!');
 		}
 		

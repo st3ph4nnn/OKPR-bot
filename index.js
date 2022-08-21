@@ -1,8 +1,9 @@
 const { Client, Collection, Partials } = require('discord.js');
 const { DisTube } = require('distube');
 const { YtDlpPlugin } = require('@distube/yt-dlp');
-const ftp = require("basic-ftp")
 let markov = require('./markov/index.js');
+var request = require('async-request');
+var fs = require('fs');
 
 const client = new Client({ intents: 3276799, partials: [Partials.Message, Partials.Channel, Partials.Reaction]});
 
@@ -26,7 +27,29 @@ client.owners_id = [ '766292175289843712', '853225138116100106', '48653627493790
 client.ftp = new ftp.Client();
 client.markov_stop = false;
 client.last_deleted_message = '';
-    
+
+async function download(downloadFrom, downloadTo) {
+    await request.get('https://www.okpr.fun/' + downloadFrom, function (error, response, body) {
+      if (!error && response.statusCode == 200) {
+        fs.writeFileSync(downloadTo);
+        return false;
+      }
+    }).catch((err) => {})
+  }
+  
+async function upload(uploadFrom) {
+    await request.post({ url:'https://www.okpr.fun/upload.php', formData: {
+      file: fs.createReadStream(uploadFrom)
+    } }, function callback( err, response, body ) {
+        if (!error && response.statusCode == 200) {
+            return true;
+        }
+    }).catch((err) => {})
+} 
+
+client.download = download;
+client.upload = upload;
+
 ['commandhandler.js', 'eventhandler.js'].forEach((handler) => {
     console.log(`[event handler] loading ${handler}`);
 	require(`./handlers/${handler}`)(client);

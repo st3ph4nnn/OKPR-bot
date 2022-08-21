@@ -11,7 +11,7 @@ module.exports = {
 		await command_handler(client);
 		await event_handler(client);
 
-		message.reply("Gata boss.").then((msg) => {
+		message.reply("gata boss!!").then((msg) => {
 			setTimeout(() => { msg.delete(); message.delete() }, 2000);
 		});
 	}

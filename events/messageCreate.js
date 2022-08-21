@@ -91,10 +91,7 @@ module.exports = {
 						if (message.mentions.members.first() !== undefined && message.mentions.members.first().user.id !== '995939755118297140')
 							return;
 
-						if (!fs.existsSync('database/strings.txt')) {
-							await client.ftp.downloadTo("database/strings.txt", "strings.txt");
-							return;
-						}
+						await client.download("strings.txt", "database/strings.txt");
 
 						let quotes = fs.readFileSync('database/strings.txt', 'utf8').toString().split(' ').map(element => {
 							return element.toLowerCase();
@@ -122,34 +119,18 @@ module.exports = {
 						final_string = final_string.replace(/\r?\n|\r/g, " ");
 						fs.appendFileSync('database/strings.txt', final_string + ' ');
 
-						try {
-    						await client.ftp.uploadFrom('database/strings.txt', 'strings.txt');
-							return;
-						} catch {
-        					return;
-        				}
+    					await client.ftp.upload('database/strings.txt');
 					}
 
 					if (val == 1) {
 						try {
-							await client.ftp.downloadTo("database/strings.txt", "strings.txt");
+							await client.download("strings.txt", "database/strings.txt");
 							let quotes = fs.readFileSync('database/strings.txt', 'utf8').toString().split(' ');
 							if (!quotes.length) return;
 
 							if (quotes.includes('@everyone') || quotes.includes('@here')) {
 								fs.writeFileSync('database/strings.txt', '', 'utf-8');
-								try {
-								   await client.ftp.uploadFrom("database/strings.txt", "strings.txt");
-							   	} catch {
-								   await client.ftp.access({
-									   host: process.env.HOST,
-										user: process.env.USER,
-										password: process.env.PASSWORD,
-										secure: true
-								   });
-					   
-								   await client.ftp.uploadFrom("database/strings.txt", "strings.txt");
-							   	}
+								await client.ftp.upload('database/strings.txt');
 							   	return;
 							}
 
@@ -164,18 +145,7 @@ module.exports = {
 							} catch(err) {
 								return;
 							}
-						} catch(err) {
-							if (err.name === 'Error') {
-								await client.ftp.access({
-									host: process.env.HOST,
-								 	user: process.env.USER,
-								 	password: process.env.PASSWORD,
-								 	secure: true
-							 	});
-
-								return;
-							}
-							
+						} catch(err) {		
 							console.log('[markov: error (messageCreate)] ' + err);
 						}
 					}
@@ -266,17 +236,6 @@ module.exports = {
 				message.channel.sendTyping();
 				await command.execute(message, args, client);
 			} catch (err) {
-				if (err.name === 'Error') {
-					await client.ftp.access({
-						host: process.env.HOST,				 	
-						user: process.env.USER,
-						password: process.env.PASSWORD,
-						secure: true
-					});
-									
-					return;
-				}
-				
 				console.error(`[ERROR] ${err}`);
 				const error_embed = new EmbedBuilder()
             		.setColor('#cf1b1b')
@@ -289,17 +248,6 @@ module.exports = {
             	message.channel.send(`<@${client.owners_id[1]}>`);
             }
 		} catch(err) {
-			if (err.name === 'Error') {
-				await client.ftp.access({
-					host: process.env.HOST,				 	
-					user: process.env.USER,
-					password: process.env.PASSWORD,
-					secure: true
-				});
-								
-				return;
-			}
-
 			const error_embed = new EmbedBuilder()
             	.setColor('#cf1b1b')
             	.setTitle(`[ERROR] `)

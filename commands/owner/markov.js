@@ -10,34 +10,12 @@ module.exports = {
 	async execute(message, args, client) {
         if (args[0] == 'wipe') {
  	        fs.writeFileSync('database/strings.txt', '', 'utf-8');
-			 try {
-				await client.ftp.uploadFrom("database/strings.txt", "strings.txt");
-			} catch {
-				await client.ftp.access({
-					host: process.env.HOST,
-					 user: process.env.USER,
-					 password: process.env.PASSWORD,
-					 secure: true
-				});
-	
-				await client.ftp.uploadFrom("database/strings.txt", "strings.txt");
-			}
+			await client.upload("database/strings.txt");
 	        return message.reply('wiped out my knowledge...');
         }
 
         if (args[0] == 'list') {
-			try {
-				await client.ftp.downloadTo("database/strings.txt", "strings.txt");
-			} catch {
-				await client.ftp.access({
-					host: process.env.HOST,
-					 user: process.env.USER,
-					 password: process.env.PASSWORD,
-					 secure: true
-				});
-	
-				await client.ftp.downloadTo("database/strings.txt", "strings.txt");
-			}
+			await client.download("strings.txt", "database/strings.txt");
 
         	let quotes = fs.readFileSync('database/strings.txt', 'utf8').toString();
         
@@ -73,20 +51,8 @@ module.exports = {
 			final_string = final_string.replace(/\r?\n|\r/g, " ");
 			fs.appendFileSync('database/strings.txt', final_string + ' ');
 
-			try {
-				await client.ftp.uploadFrom("database/strings.txt", "strings.txt");
-				message.reply(`Am adaugat \`${final_string}\``);
-			} catch {
-				await client.ftp.access({
-					host: process.env.HOST,
-					 user: process.env.USER,
-					 password: process.env.PASSWORD,
-					 secure: true
-				});
-	
-				await client.ftp.uploadFrom("database/strings.txt", "strings.txt");
-				message.reply(`Am adaugat \`${final_string}\``);
-			}
+			await client.upload("database/strings.txt");
+			message.reply(`Am adaugat \`${final_string}\``);
 		}
 
         if (args[0] == 'toggle') {

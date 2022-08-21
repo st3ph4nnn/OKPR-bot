@@ -13,24 +13,14 @@ module.exports = {
 		});
 
 		try {
-        	await client.ftp.access({
-           		host: process.env.HOST,
-            	user: process.env.USER,
-            	password: process.env.PASSWORD,
-            	secure: true
-        	});
+			await client.download('strings.txt', 'database/strings.txt')
+			await client.download('userDB.sqlite', 'database/userDB.sqlite')
 
-			await client.ftp.downloadTo('database/strings.txt', 'strings.txt').catch((err) => {});
-			await client.ftp.downloadTo('database/userDB.sqlite', 'userDB.sqlite').catch((err) => {});
-
-			const d = new Date();
-			d.setHours(3, 0, 0);
-			
 			setInterval(() => {
-				client.ftp.uploadFrom('database/userDB.sqlite', 'userDB.sqlite').catch((err) => {});
-			}, Date.now() - d)
+				client.upload('database/userDB.sqlite');
+			}, 120000);
     	} catch(err) {
-        	console.log(`[ftp] ${err}`);
+        	console.log(`[server] ${err}`);
     	}
 
 
