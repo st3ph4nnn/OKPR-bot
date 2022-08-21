@@ -135,6 +135,9 @@ module.exports = {
 							await client.ftp.downloadTo("database/strings.txt", "strings.txt");
 							let quotes = fs.readFileSync('database/strings.txt', 'utf8').toString().split(' ');
 							if (!quotes.length) return;
+							console.log(quotes);
+							return;
+
 							let s = fs.createReadStream('database/strings.txt');
 				
 							try {
