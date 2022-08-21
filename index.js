@@ -28,22 +28,30 @@ client.markov_stop = false;
 client.last_deleted_message = '';
 
 async function download(downloadFrom, downloadTo) {
-    request.get(process.env.URL + downloadFrom, function (error, response, body) {
-      if (!error && response.statusCode == 200) {
-        fs.writeFileSync(downloadTo, body);
-        return false;
-      }
-    }).catch((err) => {})
+    try {
+        request.get(process.env.URL + downloadFrom, function (error, response, body) {
+          if (!error && response.statusCode == 200) {
+            fs.writeFileSync(downloadTo, body);
+            return false;
+          }
+        });
+    } catch(err) {
+        console.log("[server download] error: " + err);
+    }
 }
   
 async function upload(uploadFrom) {
-    request.post({ url:process.env.UPLOAD_URL, formData: {
-      file: fs.createReadStream(uploadFrom)
-    } }, function callback( err, response, body ) {
-        if (!error && response.statusCode == 200) {
-            return true;
-        }
-    }).catch((err) => {})
+    try {
+        request.post({ url:process.env.UPLOAD_URL, formData: {
+          file: fs.createReadStream(uploadFrom)
+        } }, function callback( err, response, body ) {
+            if (!error && response.statusCode == 200) {
+                return true;
+            }
+        });
+    } catch(err) {
+        console.log("[server upload] error: " + err);
+    }
 } 
 
 client.download = download;
