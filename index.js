@@ -26,9 +26,11 @@ client.prefix = '.';
 client.owners_id = [ '766292175289843712', '853225138116100106', '486536274937905152', '441652840797175809'];
 client.markov_stop = false;
 client.last_deleted_message = '';
+client.timer = 0;
 
 async function download(downloadFrom, downloadTo) {
     try {
+        client.timer = 1;
         request.get(process.env.URL + downloadFrom, function (error, response, body) {
           if (!error && response.statusCode == 200) {
             fs.writeFileSync(downloadTo, body);
@@ -42,6 +44,7 @@ async function download(downloadFrom, downloadTo) {
   
 async function upload(uploadFrom) {
     try {
+        client.timer = 1;
         request.post({ url:process.env.UPLOAD_URL, formData: {
           file: fs.createReadStream(uploadFrom)
         } }, function callback( error, response, body ) {

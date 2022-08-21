@@ -15,8 +15,13 @@ module.exports = {
 			await client.download('userDB.sqlite', 'database/userDB.sqlite')
 
 			setInterval(() => {
-				client.upload('database/userDB.sqlite');
-			}, 120000);
+				client.timer += 1000;
+
+				if (client.timer == 60000) {
+					client.upload('database/userDB.sqlite');
+					client.timer = 1;
+				}
+			}, 1000);
     	} catch(err) {
         	console.log(`[server] ${err}`);
     	}
