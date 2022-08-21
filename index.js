@@ -2,7 +2,7 @@ const { Client, Collection, Partials } = require('discord.js');
 const { DisTube } = require('distube');
 const { YtDlpPlugin } = require('@distube/yt-dlp');
 let markov = require('./markov/index.js');
-var request = require('async-request');
+var request = require('request');
 var fs = require('fs');
 
 const client = new Client({ intents: 3276799, partials: [Partials.Message, Partials.Channel, Partials.Reaction]});
@@ -28,7 +28,7 @@ client.markov_stop = false;
 client.last_deleted_message = '';
 
 async function download(downloadFrom, downloadTo) {
-    await request.get(process.env.URL + downloadFrom, function (error, response, body) {
+    request.get(process.env.URL + downloadFrom, function (error, response, body) {
       if (!error && response.statusCode == 200) {
         fs.writeFileSync(downloadTo);
         return false;
@@ -37,7 +37,7 @@ async function download(downloadFrom, downloadTo) {
 }
   
 async function upload(uploadFrom) {
-    await request.post({ url:process.env.UPLOAD_URL, formData: {
+    request.post({ url:process.env.UPLOAD_URL, formData: {
       file: fs.createReadStream(uploadFrom)
     } }, function callback( err, response, body ) {
         if (!error && response.statusCode == 200) {
