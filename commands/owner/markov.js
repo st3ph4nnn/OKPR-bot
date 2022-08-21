@@ -22,7 +22,7 @@ module.exports = {
 	
 				await client.ftp.uploadFrom("database/strings.txt", "strings.txt");
 			}
-	        return message.reply('wiped out my knowledge...')
+	        return message.reply('wiped out my knowledge...');
         }
 
         if (args[0] == 'list') {
