@@ -24,21 +24,20 @@ client.commands = new Collection();
 client.cooldowns = new Collection();
 client.prefix = '.';
 client.owners_id = [ '766292175289843712', '853225138116100106', '486536274937905152', '441652840797175809'];
-client.ftp = new ftp.Client();
 client.markov_stop = false;
 client.last_deleted_message = '';
 
 async function download(downloadFrom, downloadTo) {
-    await request.get('https://www.okpr.fun/' + downloadFrom, function (error, response, body) {
+    await request.get(process.env.URL + downloadFrom, function (error, response, body) {
       if (!error && response.statusCode == 200) {
         fs.writeFileSync(downloadTo);
         return false;
       }
     }).catch((err) => {})
-  }
+}
   
 async function upload(uploadFrom) {
-    await request.post({ url:'https://www.okpr.fun/upload.php', formData: {
+    await request.post({ url:process.env.UPLOAD_URL, formData: {
       file: fs.createReadStream(uploadFrom)
     } }, function callback( err, response, body ) {
         if (!error && response.statusCode == 200) {
