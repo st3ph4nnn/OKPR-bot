@@ -29,6 +29,7 @@
     "quick.db": "^9.0.5",
     "random": "^3.0.6",
     "random-hex-color": "^1.0.1",
+    "request": "^2.88.2",
     "textract": "^2.5.0",
     "youtube-search-without-api-key": "^1.0.7"
   }
