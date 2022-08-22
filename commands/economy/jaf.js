@@ -27,7 +27,7 @@ module.exports = {
 		}
 
 		let value = random.int(1, 100);
-		while (value < member_balance) value--;
+		while (value > member_balance) value--;
 
 		if (Math.floor(Math.random() * 3 + 1) == 1) {
 			user = new DatabaseUser(message.author.username, message.author.id);
@@ -37,6 +37,8 @@ module.exports = {
         		return jaf_embed.send();
 			}
 		}
+
+		await user.sub(value);
 
 		user = new DatabaseUser(message.author.username, message.author.id);
 
