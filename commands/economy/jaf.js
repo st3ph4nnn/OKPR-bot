@@ -38,7 +38,7 @@ module.exports = {
 			}
 		}
 
-		await user.sub(value);
+		await user.sub('balance', value);
 
 		user = new DatabaseUser(message.author.username, message.author.id);
 
