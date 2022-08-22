@@ -13,19 +13,9 @@ module.exports = {
 		try {
 			await client.download('strings.txt', 'database/strings.txt')
 			await client.download('userDB.sqlite', 'database/userDB.sqlite')
-
-			setInterval(() => {
-				client.timer += 1000;
-
-				if (client.timer == 60000) {
-					client.upload('database/userDB.sqlite');
-					client.timer = 1000;
-				}
-			}, 1000);
     	} catch(err) {
         	console.log(`[server] ${err}`);
     	}
-
 
 		client.distube
     	.on('playSong', (queue, song) => {
