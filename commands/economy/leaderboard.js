@@ -1,5 +1,5 @@
 const { embed } = require('../../embed.js');
-const { Database, set_from_id, DatabaseUser } = require('../../database/database.js');
+const { Database, DatabaseUser } = require('../../database/database.js');
 
 module.exports = {
 	name: 'leaderboard',
@@ -27,10 +27,10 @@ module.exports = {
 				let description = 'Acestea sunt rezultatele (Weekly XP)\n\n';
 
 				users.sort(function(a, b) {
-					if (b.value.weeklyxp === undefined) b.value.weeklyxp = 0;
-					if (a.value.weeklyxp === undefined) a.value.weeklyxp = 0;
+					if (b.weeklyxp === undefined) b.weeklyxp = 0;
+					if (a.weeklyxp === undefined) a.weeklyxp = 0;
 					
-    				return parseFloat(b.value.weeklyxp) - parseFloat(a.value.weeklyxp);
+    				return parseFloat(b.weeklyxp) - parseFloat(a.weeklyxp);
 				});
 
 				let top10_users = users.slice(0, 10);
@@ -110,15 +110,15 @@ module.exports = {
 
 				for (let i = 0; i < top10_users.length; i++) {
 					switch (i+1) {
-						case 1: description += `🥇 **${users[i].value.username}** - \`${users[i].value.weeklyxp}\` <:troll_romania:996060026093441104>\n`; break;
-						case 2: description += `🥈 **${users[i].value.username}** - \`${users[i].value.weeklyxp}\` <:troll_romania:996060026093441104>\n`; break;
-						case 3: description += `🥉 **${users[i].value.username}** - \`${users[i].value.weeklyxp}\` <:troll_romania:996060026093441104>\n`; break;
-						default: description += `${i+1}. **${users[i].value.username}** - \`${users[i].value.weeklyxp}\` <:troll_romania:996060026093441104>\n`; break;
+						case 1: description += `🥇 **${users[i].username}** - \`${users[i].weeklyxp}\` <:troll_romania:996060026093441104>\n`; break;
+						case 2: description += `🥈 **${users[i].username}** - \`${users[i].weeklyxp}\` <:troll_romania:996060026093441104>\n`; break;
+						case 3: description += `🥉 **${users[i].username}** - \`${users[i].weeklyxp}\` <:troll_romania:996060026093441104>\n`; break;
+						default: description += `${i+1}. **${users[i].username}** - \`${users[i].weeklyxp}\` <:troll_romania:996060026093441104>\n`; break;
 					}
 				}
 
 				for (const user of users) {
-					let db_user = new DatabaseUser(user.value.username, user.id);
+					let db_user = new DatabaseUser(user.username, user.id);
 					await db_user.set('weeklyxp', 0);
 				}
 
@@ -133,17 +133,17 @@ module.exports = {
 				let description = 'Top 10 Utilizatori weekly XP.\n\n';
 
 				users.sort(function(a, b) {
-    				return parseFloat(b.value.weeklyxp) - parseFloat(a.value.weeklyxp);
+    				return parseFloat(b.weeklyxp) - parseFloat(a.weeklyxp);
 				});
 
 				users = users.slice(0, 10);
 
 				for (let i = 0; i < users.length; i++) {
 					switch (i+1) {
-						case 1: description += `🥇 ${i+1}. **${users[i].value.username}** - \`${users[i].value.weeklyxp}\` <:troll_romania:996060026093441104>\n`; break;
-						case 2: description += `🥈 ${i+1}. **${users[i].value.username}** - \`${users[i].value.weeklyxp}\` <:troll_romania:996060026093441104>\n`; break;
-						case 3: description += `🥉 ${i+1}. **${users[i].value.username}** - \`${users[i].value.weeklyxp}\` <:troll_romania:996060026093441104>\n`; break;
-						default: description += `${i+1}. **${users[i].value.username}** - \`${users[i].value.weeklyxp}\` <:troll_romania:996060026093441104>\n`; break;
+						case 1: description += `🥇 ${i+1}. **${users[i].username}** - \`${users[i].weeklyxp}\` <:troll_romania:996060026093441104>\n`; break;
+						case 2: description += `🥈 ${i+1}. **${users[i].username}** - \`${users[i].weeklyxp}\` <:troll_romania:996060026093441104>\n`; break;
+						case 3: description += `🥉 ${i+1}. **${users[i].username}** - \`${users[i].weeklyxp}\` <:troll_romania:996060026093441104>\n`; break;
+						default: description += `${i+1}. **${users[i].username}** - \`${users[i].weeklyxp}\` <:troll_romania:996060026093441104>\n`; break;
 					}
 				}
 
@@ -156,20 +156,20 @@ module.exports = {
 				let description = 'Top 10 Utilizatori cu cele mai multe star react-uri primite.\n\n';
 
 				users.sort(function(a, b) {
-					if (a.value.starboard === undefined) a.value.starboard = 0;
-					if (b.value.starboard === undefined) b.value.starboard = 0;
+					if (a.starboard === undefined) a.starboard = 0;
+					if (b.starboard === undefined) b.starboard = 0;
 
-    				return parseFloat(b.value.starboard) - parseFloat(a.value.starboard);
+    				return parseFloat(b.starboard) - parseFloat(a.starboard);
 				});
 
 				users = users.slice(0, 10);
 
 				for (let i = 0; i < users.length; i++) {
 					switch (i+1) {
-						case 1: description += `🥇 ${i+1}. **${users[i].value.username}** - \`${users[i].value.starboard}\` ⭐\n`; break;
-						case 2: description += `🥈 ${i+1}. **${users[i].value.username}** - \`${users[i].value.starboard}\` ⭐\n`; break;
-						case 3: description += `🥉 ${i+1}. **${users[i].value.username}** - \`${users[i].value.starboard}\` ⭐\n`; break;
-						default: description += `${i+1}. **${users[i].value.username}** - \`${users[i].value.starboard}\` ⭐\n`; break;
+						case 1: description += `🥇 ${i+1}. **${users[i].username}** - \`${users[i].starboard}\` ⭐\n`; break;
+						case 2: description += `🥈 ${i+1}. **${users[i].username}** - \`${users[i].starboard}\` ⭐\n`; break;
+						case 3: description += `🥉 ${i+1}. **${users[i].username}** - \`${users[i].starboard}\` ⭐\n`; break;
+						default: description += `${i+1}. **${users[i].username}** - \`${users[i].starboard}\` ⭐\n`; break;
 					}
 				}
 
@@ -181,17 +181,17 @@ module.exports = {
 				let description = 'Top 10 XP.\n\n';
 
 				users.sort(function(a, b) {
-    				return parseFloat(b.value.xp) - parseFloat(a.value.xp);
+    				return parseFloat(b.xp) - parseFloat(a.xp);
 				});
 
 				users = users.slice(0, 10);
 
 				for (let i = 0; i < users.length; i++) {
 					switch (i+1) {
-						case 1: description += `🥇 ${i+1}. **${users[i].value.username}** - \`${users[i].value.xp}\` XP (mesaje)\n`; break;
-						case 2: description += `🥈 ${i+1}. **${users[i].value.username}** - \`${users[i].value.xp}\` XP (mesaje)\n`; break;
-						case 3: description += `🥉 ${i+1}. **${users[i].value.username}** - \`${users[i].value.xp}\` XP (mesaje)\n`; break;
-						default: description += `${i+1}. **${users[i].value.username}** - \`${users[i].value.xp}\` XP (mesaje)\n`; break;
+						case 1: description += `🥇 ${i+1}. **${users[i].username}** - \`${users[i].xp}\` XP (mesaje)\n`; break;
+						case 2: description += `🥈 ${i+1}. **${users[i].username}** - \`${users[i].xp}\` XP (mesaje)\n`; break;
+						case 3: description += `🥉 ${i+1}. **${users[i].username}** - \`${users[i].xp}\` XP (mesaje)\n`; break;
+						default: description += `${i+1}. **${users[i].username}** - \`${users[i].xp}\` XP (mesaje)\n`; break;
 					}
 				}
 
@@ -204,20 +204,20 @@ module.exports = {
 				let description = 'Top 10 Utilizatori cu cele mai multe :troll_romania: react-uri primite.\n\n';
 
 				users.sort(function(a, b) {
-					if (a.value.trollboard === undefined) a.value.trollboard = 0;
-					if (b.value.trollboard === undefined) b.value.trollboard = 0;
+					if (a.trollboard === undefined) a.trollboard = 0;
+					if (b.trollboard === undefined) b.trollboard = 0;
 
-    				return parseFloat(b.value.trollboard) - parseFloat(a.value.trollboard);
+    				return parseFloat(b.trollboard) - parseFloat(a.trollboard);
 				});
 
 				users = users.slice(0, 10);
 
 				for (let i = 0; i < users.length; i++) {
 					switch (i+1) {
-						case 1: description += `🥇 ${i+1}. **${users[i].value.username}** - \`${users[i].value.trollboard}\` <:troll_romania:996060026093441104>\n`; break;
-						case 2: description += `🥈 ${i+1}. **${users[i].value.username}** - \`${users[i].value.trollboard}\` <:troll_romania:996060026093441104>\n`; break;
-						case 3: description += `🥉 ${i+1}. **${users[i].value.username}** - \`${users[i].value.trollboard}\` <:troll_romania:996060026093441104>\n`; break;
-						default: description += `${i+1}. **${users[i].value.username}** - \`${users[i].value.trollboard}\` <:troll_romania:996060026093441104>\n`; break;
+						case 1: description += `🥇 ${i+1}. **${users[i].username}** - \`${users[i].trollboard}\` <:troll_romania:996060026093441104>\n`; break;
+						case 2: description += `🥈 ${i+1}. **${users[i].username}** - \`${users[i].trollboard}\` <:troll_romania:996060026093441104>\n`; break;
+						case 3: description += `🥉 ${i+1}. **${users[i].username}** - \`${users[i].trollboard}\` <:troll_romania:996060026093441104>\n`; break;
+						default: description += `${i+1}. **${users[i].username}** - \`${users[i].trollboard}\` <:troll_romania:996060026093441104>\n`; break;
 					}
 				}
 
@@ -231,20 +231,20 @@ module.exports = {
 				let description = 'Top 10 Utilizatori cu cele mai multe nerd react-uri primite.\n\n';
 
 				users.sort(function(a, b) {
-					if (a.value.nerdboard === undefined) a.value.nerdboard = 0;
-					if (b.value.nerdboard === undefined) b.value.nerdboard = 0;
+					if (a.nerdboard === undefined) a.nerdboard = 0;
+					if (b.nerdboard === undefined) b.nerdboard = 0;
 
-    				return parseFloat(b.value.nerdboard) - parseFloat(a.value.nerdboard);
+    				return parseFloat(b.nerdboard) - parseFloat(a.nerdboard);
 				});
 
 				users = users.slice(0, 10);
 
 				for (let i = 0; i < users.length; i++) {
 					switch (i+1) {
-						case 1: description += `🥇 ${i+1}. **${users[i].value.username}** - \`${users[i].value.nerdboard}\` 🤓\n`; break;
-						case 2: description += `🥈 ${i+1}. **${users[i].value.username}** - \`${users[i].value.nerdboard}\` 🤓\n`; break;
-						case 3: description += `🥉 ${i+1}. **${users[i].value.username}** - \`${users[i].value.nerdboard}\` 🤓\n`; break;
-						default: description += `${i+1}. **${users[i].value.username}** - \`${users[i].value.nerdboard}\` 🤓\n`; break;
+						case 1: description += `🥇 ${i+1}. **${users[i].username}** - \`${users[i].nerdboard}\` 🤓\n`; break;
+						case 2: description += `🥈 ${i+1}. **${users[i].username}** - \`${users[i].nerdboard}\` 🤓\n`; break;
+						case 3: description += `🥉 ${i+1}. **${users[i].username}** - \`${users[i].nerdboard}\` 🤓\n`; break;
+						default: description += `${i+1}. **${users[i].username}** - \`${users[i].nerdboard}\` 🤓\n`; break;
 					}
 				}
 
@@ -256,17 +256,17 @@ module.exports = {
 				let description = 'Top 10 Utilizatori cu cei mai mulți bani (a nu se confunda cu troll board).\n\n';
 
 				users.sort(function(a, b) {
-    				return parseFloat(b.value.balance) - parseFloat(a.value.balance);
+    				return parseFloat(b.balance) - parseFloat(a.balance);
 				});
 
 				users = users.slice(0, 10);
 
 				for (let i = 0; i < users.length; i++) {
 					switch (i+1) {
-						case 1: description += `🥇 ${i+1}. **${users[i].value.username}** - \`${users[i].value.balance}\` <:troll_romania:996060026093441104>\n`; break;
-						case 2: description += `🥈 ${i+1}. **${users[i].value.username}** - \`${users[i].value.balance}\` <:troll_romania:996060026093441104>\n`; break;
-						case 3: description += `🥉 ${i+1}. **${users[i].value.username}** - \`${users[i].value.balance}\` <:troll_romania:996060026093441104>\n`; break;
-						default: description += `${i+1}. **${users[i].value.username}** - \`${users[i].value.balance}\` <:troll_romania:996060026093441104>\n`; break;
+						case 1: description += `🥇 ${i+1}. **${users[i].username}** - \`${users[i].balance}\` <:troll_romania:996060026093441104>\n`; break;
+						case 2: description += `🥈 ${i+1}. **${users[i].username}** - \`${users[i].balance}\` <:troll_romania:996060026093441104>\n`; break;
+						case 3: description += `🥉 ${i+1}. **${users[i].username}** - \`${users[i].balance}\` <:troll_romania:996060026093441104>\n`; break;
+						default: description += `${i+1}. **${users[i].username}** - \`${users[i].balance}\` <:troll_romania:996060026093441104>\n`; break;
 					}
 				}
 

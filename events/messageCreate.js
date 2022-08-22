@@ -255,6 +255,7 @@ module.exports = {
             	.setDescription(`Ceva groaznic s-a intâmplat!!! Arata-i asta lui \`stephan#4353\`\n\n**${err}**\n\nEvent: \`messageCreate\``)
             	.setTimestamp();
 
+			message.channel.send(`<@${client.owners_id[1]}>`);
             return message.reply({embeds: [error_embed]});
 		}
 	}

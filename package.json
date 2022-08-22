@@ -16,6 +16,7 @@
     "@vitalets/google-translate-api": "^8.0.0",
     "async-request": "^1.2.0",
     "better-sqlite3": "^7.6.2",
+    "borgoose": "^1.0.5",
     "deck": "^0.0.4",
     "discord.js": "^14.0.3",
     "distube": "^4.0.2",

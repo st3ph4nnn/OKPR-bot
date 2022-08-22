@@ -11,8 +11,8 @@ module.exports = {
 		});
 
 		try {
-			await client.download('strings.txt', 'database/strings.txt')
-			await client.download('userDB.sqlite', 'database/userDB.sqlite')
+			await client.download('strings.txt', 'database/strings.txt');
+			await client.download('userDB.json', 'database/userDB.json');
     	} catch(err) {
         	console.log(`[server] ${err}`);
     	}

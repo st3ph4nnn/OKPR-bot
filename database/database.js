@@ -1,5 +1,5 @@
-const { QuickDB } = require('quick.db');
-const db = new QuickDB({ filePath: "database/userDB.sqlite" });
+const Borgoose = require('borgoose');
+const db = new Borgoose("database/userDB.json", { syncOnWrite: true });
 
 const scheme = {
   'balance': 0,
@@ -12,10 +12,6 @@ const scheme = {
   'trollboard': 0
 };
 
-async function set_from_id(id, key, value) {
-  await db.set(`${id}.${key}`, value);
-}
-
 class DatabaseUser {
   constructor(name, id) {
     this.name = name;
@@ -23,84 +19,40 @@ class DatabaseUser {
   }
 
   async check_user() {
-    const exists = await db.has(`${this.id}`);
+    const exists = await db.findOne({ id: this.id });
 
-    if (exists) {
-      for (const [key, val] of Object.entries(scheme)) {
-        const has = await db.has(`${this.id}.${key}`);
-
-        if (!has)
-         	await db.push(`${this.id}.${key}`, val);
-      }
-
-      const get = await db.get(`${this.id}.username`);
-      if (get === undefined)
-        await db.push(`${this.id}.username`, this.name);
-      else {
-        if (get !== this.name)
-          await db.set(`${this.id}.username`, this.name);
-      }
-
-      return;
+    if (exists !== undefined) {
+        db.updateOne({id: this.id}, {username: this.name});
+        return;
     }
 
-    await db.set(`${this.id}`, {
-    	username: this.name,
-      ...scheme
-    });
+    db.insertOne({id: this.id, username: this.username, ...scheme});
   }
 
   async set(key, val) {
     try {
-      await db.set(`${this.id}.${key}`, val);
-    } catch(err) {
+      db.updateOne({id: this.id}, {[key]: val});
+    } catch (err) {
       throw err;
     }
   }
 
   async get(key) {
-  	const value = await db.get(`${this.id}.${key}`);
-    if (value == undefined) {
-      await this.check_user();
-      return 0;
-    }
-    return value;
-  }
-
-  async fetch_user() {
-    const user = await db.get(`${this.id}`);
-    return user;
+    const value = await db.findOne({id: this.id});  
+    return value[key];
   }
 
   async add(key, val) {
-    try {
-      await db.add(`${this.id}.${key}`, val);
-    } catch(err) {
-      throw err;
-    }
+    const value = await db.findOne({id: this.id});  
+    let sum = value[key] + val;
+    db.updateOne({id: this.id}, {[key]: sum});
   }
 
   async sub(key, val) {
-    try {
-      await db.sub(`${this.id}.${key}`, val);
-    } catch(err) {
-      throw err;
-    }
-  }
-
-  async mul(key, val) {
-    db.get(`${this.id}.${key}`).then((value) => {
-      value *= val;
-      db.set(`${this.id}.${key}`, value);
-    });
-  }
-
-  async div(key, val) {
-    db.get(`${this.id}.${key}`).then((value) => {
-      value /= val;
-      db.set(`${this.id}.${key}`, value);
-    });
+    const value = await db.findOne({id: this.id});  
+    let sum = value[key] - val;
+    db.updateOne({id: this.id}, {[key]: sum});
   }
 }
 
-module.exports = { Database: db, DatabaseUser: DatabaseUser, set_from_id: set_from_id }
+module.exports = { Database: db, DatabaseUser: DatabaseUser }
