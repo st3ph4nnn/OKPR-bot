@@ -12,8 +12,6 @@ const fs = require('fs');
   } catch(err) {
     console.log("[server download] error: " + err);
   }
-
-  if (fs.existsSync('./userDB.json'))
 })();
 
 const db = new Borgoose("./userDB.json", { syncOnWrite: true });
