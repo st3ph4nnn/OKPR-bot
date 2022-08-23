@@ -1,8 +1,4 @@
-const sleepSync = require('sleep-synchronously');
-
-sleepSync(5000);
-
-
+Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, milliseconds);
 
 console.log(fs.existsSync('database/userDB.json'));
 
