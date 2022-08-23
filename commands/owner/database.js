@@ -10,7 +10,7 @@ module.exports = {
 	cooldown: 1000,
 	async execute(message, args, client) {
 		if (args[0] == 'list') {
-			let users = await Database.all();
+			let users = await Database.findMany();
 			fs.writeFileSync('database/list.txt', JSON.stringify(users, null, '\t'));
 
 			await message.reply({ files: ['database/list.txt'] });

@@ -43,13 +43,23 @@ class DatabaseUser {
   }
 
   async add(key, val) {
-    const value = await db.findOne({id: this.id});  
+    const value = await db.findOne({id: this.id});
+    if (value === undefined) { this.check_user(); return; }
+
+    if (value[key] === undefined)
+      value[key] = 0;
+
     let sum = value[key] + val;
     db.updateOne({id: this.id}, {[key]: sum});
   }
 
   async sub(key, val) {
     const value = await db.findOne({id: this.id});  
+    if (value === undefined) { this.check_user(); return; }
+
+    if (value[key] === undefined)
+      value[key] = 0;
+
     let sum = value[key] - val;
     db.updateOne({id: this.id}, {[key]: sum});
   }
