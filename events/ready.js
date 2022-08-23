@@ -1,7 +1,6 @@
 const { ActivityType, EmbedBuilder } = require('discord.js');
 const random_col = require('random-hex-color');
-const { Database } = require('../database/database');
-const fs = require('fs');
+const Borgoose = require('borgoose');
 
 module.exports = {
 	name: "ready",
@@ -15,8 +14,7 @@ module.exports = {
 		try {
 			await client.download('strings.txt', 'database/strings.txt');
 			await client.download('userDB.json', 'database/userDB.json');
-			console.log(fs.readFileSync('database/userDB.json').toString());
-			Database.storage = JSON.parse(fs.readFileSync('database/userDB.json'));
+			client.db = new Borgoose("database/userDB.json", { syncOnWrite: true });
     	} catch(err) { 
         	console.log(`[server] ${err}`);
     	}
