@@ -1,4 +1,9 @@
 const Borgoose = require('borgoose');
+
+(async () => {
+  await client.download('userDB.json', 'database/userDB.json');
+})();
+
 const db = new Borgoose("database/userDB.json", { syncOnWrite: true });
 
 const scheme = {
