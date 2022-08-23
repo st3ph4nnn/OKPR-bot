@@ -2,8 +2,10 @@ const delay = ms => new Promise(resolve => setTimeout(resolve, ms))
 
 (async () => {
   await delay(10000);
-})()
+})();
 
+const fs = require('fs');
+console.log(fs.existsSync('database/userDB.json'));
 
 const Borgoose = require('borgoose');
 const db = new Borgoose("database/userDB.json", { syncOnWrite: true });
