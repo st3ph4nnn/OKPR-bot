@@ -14,7 +14,6 @@ module.exports = {
 		try {
 			await client.download('strings.txt', 'database/strings.txt');
 			await client.download('userDB.json', 'database/userDB.json');
-			client.db = new Borgoose("database/userDB.json", { syncOnWrite: true });
     	} catch(err) { 
         	console.log(`[server] ${err}`);
     	}

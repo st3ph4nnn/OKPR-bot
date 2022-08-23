@@ -1,11 +1,12 @@
 const delay = ms => new Promise(resolve => setTimeout(resolve, ms))
 
 (async () => {
-  await delay(5000);
-})();
+  await delay(10000);
+})()
 
-const { client } = require('../index');
-const db = client.db;
+
+const Borgoose = require('borgoose');
+const db = new Borgoose("database/userDB.json", { syncOnWrite: true });
 
 const scheme = {
   'balance': 0,
