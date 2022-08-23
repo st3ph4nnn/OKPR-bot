@@ -5,13 +5,16 @@ const fs = require('fs');
   try {
     request.get(process.env.URL + 'userDB.json', function (error, response, body) {
       if (!error && response.statusCode == 200) {
-        fs.writeFileSync('userDB.json', body);
+        fs.writeFileSync('./userDB.json', body);
         return false;
       }
     });
   } catch(err) {
     console.log("[server download] error: " + err);
   }
+
+  if (fs.existsSync('./userDB.json'))
+    console.log('EXISTS');
 })();
 
 const db = new Borgoose("./userDB.json", { syncOnWrite: true });
