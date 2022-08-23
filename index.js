@@ -31,8 +31,8 @@ async function download(downloadFrom, downloadTo) {
     try {
         request.get(process.env.URL + downloadFrom, function (error, response, body) {
           if (!error && response.statusCode == 200) {
+            console.log("DOwnloaded to: " + downloadTo);
             fs.writeFileSync(downloadTo, body);
-            if (fs.existsSync(downloadTo)) console.log("EXISTS"); else console.log("DOESNT EXIST");
             return false;
           }
         });
