@@ -39,6 +39,7 @@ async function download(downloadFrom, downloadTo) {
     } catch(err) {
         console.log("[server download] error: " + err);
     }
+    console.log('DOWNLOAD DONE');
 }
   
 async function upload(uploadFrom) {
