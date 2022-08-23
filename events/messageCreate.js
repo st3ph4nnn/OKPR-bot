@@ -75,7 +75,7 @@ module.exports = {
 
 			if (!message.content.startsWith(client.prefix) && !has_bot_mention) {
 				if (message.channelId === '839520481475952654' && !client.markov_stop) {
-					let val = random.int(0, 10);
+					let val = random.int(0, 15);
 
 					try {
 						const msg = await message.fetchReference();
@@ -129,7 +129,7 @@ module.exports = {
 							if (!quotes.length) return;
 
 							if (quotes.includes('@everyone') || quotes.includes('@here')) {
-								fs.writeFileSync('database/strings.txt', '', 'utf-8');
+								fs.truncate('database/strings.txt', 0);
 								await client.upload('database/strings.txt');
 							   	return;
 							}
