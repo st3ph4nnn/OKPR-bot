@@ -13,13 +13,16 @@ const request = require('request');
   } catch(err) {
     console.log("[server download] error: " + err);
   }
+
+  if (fs.existsSync('./database/userDB.json'))
+    console.log('EXISTS');
 })();
 
-let db;
+fs.readdirSync('./database/').forEach(file => {
+  console.log(file); 
+});
 
-setTimeout(() => {
-  db = new Borgoose("./database/userDB.json", { syncOnWrite: true });
-}, 2000);
+const db = new Borgoose("./database/userDB.json", { syncOnWrite: true });
 
 const scheme = {
   'balance': 0,
