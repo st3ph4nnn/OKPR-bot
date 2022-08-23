@@ -2,6 +2,8 @@ const sleepSync = require('sleep-synchronously');
 
 sleepSync(5000);
 
+
+
 console.log(fs.existsSync('database/userDB.json'));
 
 const Borgoose = require('borgoose');
