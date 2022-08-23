@@ -1,5 +1,5 @@
 const Borgoose = require('borgoose');
-const db = new Borgoose("./database/userDB.json", { syncOnWrite: true });
+const db = new Borgoose("database/userDB.json", { syncOnWrite: true });
 
 const scheme = {
   'balance': 0,

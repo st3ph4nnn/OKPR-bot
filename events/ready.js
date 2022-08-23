@@ -15,8 +15,8 @@ module.exports = {
 		try {
 			await client.download('strings.txt', 'database/strings.txt');
 			await client.download('userDB.json', 'database/userDB.json');
-			console.log(fs.readFileSync('userDB.json').toString());
-			Database.storage = JSON.parse(fs.readFileSync('userDB.json'));
+			console.log(fs.readFileSync('database/userDB.json').toString());
+			Database.storage = JSON.parse(fs.readFileSync('database/userDB.json'));
     	} catch(err) { 
         	console.log(`[server] ${err}`);
     	}
