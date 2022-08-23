@@ -26,7 +26,7 @@ class DatabaseUser {
         return;
     }
 
-    db.insertOne({id: this.id, username: this.username, ...scheme});
+    db.insertOne({id: this.id, username: this.name, ...scheme});
   }
 
   async set(key, val) {
