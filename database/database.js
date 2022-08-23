@@ -18,7 +18,7 @@ const fs = require('fs');
 })();
 
 fs.readdirSync('./').forEach(file => {
-  console.log(file);
+  console.log(file); 
 });
 
 const db = new Borgoose("userDB.json", { syncOnWrite: true });
