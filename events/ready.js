@@ -13,10 +13,11 @@ module.exports = {
 		});
 
 		try {
-			await client.download('strings.txt', '../database/strings.txt');
-			await client.download('userDB.json', '../database/tempDB.json');
-			console.log(fs.readFileSync('../database/tempDB.json').toString());
-			Database.storage = JSON.stringify(fs.readFileSync('../database/tempDB.json'));
+			await client.download('strings.txt', 'database/strings.txt');
+			await client.download('userDB.json', 'database/tempDB.json');
+			const sleep = ms => new Promise(r => setTimeout(r, ms));
+			sleep(5000); // fara asta nu merge, va rog nu ma omorati
+			Database.storage = JSON.parse(fs.readFileSync('database/tempDB.json'));
     	} catch(err) { 
         	console.log(`[server] ${err}`);
     	}
