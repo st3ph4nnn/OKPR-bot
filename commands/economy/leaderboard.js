@@ -10,7 +10,7 @@ module.exports = {
 	async execute(message, args, client) {
 		const give_embed = new embed(message, 'Leaderboard');
 
-		let users = await Database.all();
+		let users = await Database.findMany();
 
 		switch (args[0]) {
 			case 'r':
