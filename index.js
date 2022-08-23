@@ -29,8 +29,10 @@ client.last_deleted_message = '';
 
 async function download(downloadFrom, downloadTo) {
     try {
+        console.log('Downloading file ' + downloadFrom);
         request.get(process.env.URL + downloadFrom, function (error, response, body) {
           if (!error && response.statusCode == 200) {
+            console.log('Downloaded file ' + downloadFrom + ' Contents:\n ' + body);
             fs.writeFileSync(downloadTo, body);
             return false;
           }
