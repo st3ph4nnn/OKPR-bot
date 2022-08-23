@@ -1,6 +1,8 @@
 const delay = ms => new Promise(resolve => setTimeout(resolve, ms))
 
-await delay(5000);
+(async () => {
+  await delay(5000);
+})();
 
 const { client } = require('../index');
 const db = client.db;
