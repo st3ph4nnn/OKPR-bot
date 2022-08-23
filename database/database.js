@@ -1,20 +1,19 @@
 const Borgoose = require('borgoose');
 const fs = require('fs');
+
 (async () => {
   try {
     request.get(process.env.URL + 'userDB.json', function (error, response, body) {
       if (!error && response.statusCode == 200) {
-        fs.writeFileSync('database/userDB.json', body);
+        fs.writeFileSync('userDB.json', body);
         return false;
       }
     });
   } catch(err) {
     console.log("[server download] error: " + err);
   }
-
-  if (fs.existsSync('database/userDB.json'))
-    console.log("EXISTS");
 })();
+
 const db = new Borgoose("database/userDB.json", { syncOnWrite: true });
 
 const scheme = {
