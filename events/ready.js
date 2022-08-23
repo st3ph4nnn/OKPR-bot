@@ -1,6 +1,7 @@
 const { ActivityType, EmbedBuilder } = require('discord.js');
 const random_col = require('random-hex-color');
-const { Database } = require('../database/database')
+const { Database } = require('../database/database');
+const fs = require('fs');
 
 module.exports = {
 	name: "ready",
