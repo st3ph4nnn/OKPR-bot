@@ -1,10 +1,7 @@
-const delay = ms => new Promise(resolve => setTimeout(resolve, ms))
+const sleepSync = require('sleep-synchronously');
 
-(async () => {
-  await delay(10000);
-})();
+sleepSync(5000);
 
-const fs = require('fs');
 console.log(fs.existsSync('database/userDB.json'));
 
 const Borgoose = require('borgoose');
