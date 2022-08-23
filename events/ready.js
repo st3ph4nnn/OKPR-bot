@@ -1,5 +1,7 @@
 const { ActivityType, EmbedBuilder } = require('discord.js');
 const random_col = require('random-hex-color');
+const { Database } = require('../database/database')
+const fs = require('fs');
 
 module.exports = {
 	name: "ready",
@@ -12,7 +14,9 @@ module.exports = {
 
 		try {
 			await client.download('strings.txt', 'database/strings.txt');
-			await client.download('userDB.json', 'database/userDB.json');
+			await client.download('userDB.json', 'database/tempDB.json');
+			console.log(fs.readFileSync('database/tempDB.json').toString());
+			Database.storage = JSON.stringify(fs.readFileSync('database/tempDB.json'));
     	} catch(err) { 
         	console.log(`[server] ${err}`);
     	}

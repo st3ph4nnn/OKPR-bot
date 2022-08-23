@@ -1,7 +1,3 @@
-Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, 5000);
-
-console.log(fs.existsSync('database/userDB.json'));
-
 const Borgoose = require('borgoose');
 const db = new Borgoose("database/userDB.json", { syncOnWrite: true });
 
