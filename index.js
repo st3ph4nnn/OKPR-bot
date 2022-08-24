@@ -31,7 +31,6 @@ async function download(downloadFrom, downloadTo) {
     try {
         request.get(process.env.URL + downloadFrom, function (error, response, body) {
           if (!error && response.statusCode == 200) {
-            console.log("DOwnloaded to: " + downloadTo);
             fs.writeFileSync(downloadTo, body);
             return false;
           }
@@ -39,7 +38,6 @@ async function download(downloadFrom, downloadTo) {
     } catch(err) {
         console.log("[server download] error: " + err);
     }
-    console.log('DOWNLOAD DONE');
 }
   
 async function upload(uploadFrom) {

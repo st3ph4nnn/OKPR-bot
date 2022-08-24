@@ -9,7 +9,7 @@ module.exports = {
 	cooldown: 0,
 	async execute(message, args, client) {
         if (args[0] == 'wipe') {
-			fs.truncate('database/strings.txt', 0);
+			fs.writeFileSync("database/strings.txt", "");
 			await client.upload("database/strings.txt");
 	        return message.reply('wiped out my knowledge...');
         }

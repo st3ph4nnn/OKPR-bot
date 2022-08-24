@@ -68,13 +68,13 @@ module.exports = {
 				return;
 			}
 
-			if (!message.content || message.content.includes('http'))
-				return;
-
 			const has_bot_mention = (message.mentions.has(client.user) && message.type != 19);
 
 			if (!message.content.startsWith(client.prefix) && !has_bot_mention) {
 				if (message.channelId === '839520481475952654' && !client.markov_stop) {
+					if (message.content.includes('http'))
+						return;
+
 					let val = random.int(0, 15);
 
 					try {
@@ -88,7 +88,7 @@ module.exports = {
 						if (message.mentions.everyone)
 							return;
 
-						if (message.mentions.members.first() !== undefined && message.mentions.members.first().user.id !== '995939755118297140')
+						if (message.mentions !== undefined && !message.mentions.members.first().user.bot)
 							return;
 
 						await client.download("strings.txt", "database/strings.txt");
@@ -110,7 +110,7 @@ module.exports = {
 						let final_words = [ ];
 
 						for (let i = 0; i < words.length; i++) {
-							if (!quotes.includes(words[i].toLowerCase()) && words[i] != '@everyone' && words[i] != '@here' && words[i] != '<@&839521627082850355>') {
+							if (!quotes.includes(words[i].toLowerCase()) && words[i] != '@everyone' && words[i] != '@here' && !words[i].startsWith('<@&')) {
 								final_words.push(words[i]);
 							}
 						}
@@ -129,7 +129,7 @@ module.exports = {
 							if (!quotes.length) return;
 
 							if (quotes.includes('@everyone') || quotes.includes('@here')) {
-								fs.truncate('database/strings.txt', 0);
+								fs.writeFileSync('database/strings.txt', '');
 								await client.upload('database/strings.txt');
 							   	return;
 							}
