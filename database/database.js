@@ -1,4 +1,6 @@
 const Borgoose = require('borgoose');
+const request = require('request');
+const fs = require('fs');
 const db = new Borgoose("database/userDB.json", { syncOnWrite: true });
 
 const scheme = {
@@ -12,6 +14,28 @@ const scheme = {
   'trollboard': 0
 };
 
+let timer = 1;
+
+setInterval(() => {
+  timer++;
+
+  if (timer == 60) {
+    try {
+          request.post({ url:process.env.UPLOAD_URL, formData: {
+            file: fs.createReadStream('database/userDB.json')
+          } }, function callback( error, response, body ) {
+              if (!error && response.statusCode == 200) {
+                  return true;
+              }
+          });
+      } catch(err) {
+        console.log("[server upload] error: " + err);
+    }
+
+    timer = 0;
+  } 
+}, 1000);
+
 class DatabaseUser {
   constructor(name, id) {
     this.name = name;
@@ -19,6 +43,7 @@ class DatabaseUser {
   }
 
   async check_user() {
+    timer = 1;
     const exists = await db.findOne({ id: this.id });
 
     if (exists !== undefined) {
@@ -30,6 +55,7 @@ class DatabaseUser {
   }
 
   async set(key, val) {
+    timer = 1;
     try {
       db.updateOne({id: this.id}, {[key]: val});
     } catch (err) {
@@ -38,11 +64,13 @@ class DatabaseUser {
   }
 
   async get(key) {
+    timer = 1;
     const value = await db.findOne({id: this.id});  
     return value[key];
   }
 
   async add(key, val) {
+    timer = 1;
     const value = await db.findOne({id: this.id});
     if (value === undefined) { this.check_user(); return; }
 
@@ -54,6 +82,7 @@ class DatabaseUser {
   }
 
   async sub(key, val) {
+    timer = 1;
     const value = await db.findOne({id: this.id});  
     if (value === undefined) { this.check_user(); return; }
 

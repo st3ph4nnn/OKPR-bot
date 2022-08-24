@@ -23,7 +23,7 @@ module.exports = {
 			case '🤓': {
 				await db_user.add('nerdboard', 1);
 				if (reaction.count == 4  && reaction.message.content != '') {
-					let embed = new EmbedBuilder().setTitle('Mesaj nărduit!!!').setColor(random_col()).setDescription(`**${reaction.message.content}**\n\n${reaction.message.url}`).setTimestamp().setAuthor({ name: reaction.message.author.username, iconURL: reaction.message.author.avatarURL() }).setFooter({ text: '@okpr.fun (c)', iconURL: 'https://cdn.discordapp.com/icons/839520481475952650/e87fffe069a4160e464fd88f5ccc17e2.png'});
+					let embed = new EmbedBuilder().setColor(random_col()).setDescription(`**${reaction.message.content}**\n\n${reaction.message.url}`).setTimestamp().setAuthor({ name: reaction.message.author.username, iconURL: reaction.message.author.avatarURL() });
 					reaction.message.channelId = '905219942394241044';
 					await reaction.message.channel.send({embeds: [embed]});
 				}
@@ -32,7 +32,7 @@ module.exports = {
 			case 'troll_romania': {
 				await db_user.add('trollboard', 1);
 				if (reaction.count == 4 && reaction.message.content != '') {
-					let embed = new EmbedBuilder().setTitle('Mesaj trolluit!!!').setColor(random_col()).setDescription(`**${reaction.message.content}**\n\n${reaction.message.url}`).setTimestamp().setAuthor({ name: reaction.message.author.username, iconURL: reaction.message.author.avatarURL() }).setFooter({ text: '@okpr.fun (c)', iconURL: 'https://cdn.discordapp.com/icons/839520481475952650/e87fffe069a4160e464fd88f5ccc17e2.png'});
+					let embed = new EmbedBuilder().setColor(random_col()).setDescription(`**${reaction.message.content}**\n\n${reaction.message.url}`).setTimestamp().setAuthor({ name: reaction.message.author.username, iconURL: reaction.message.author.avatarURL() });
 					reaction.message.channelId = '842131828726693909';
 					await reaction.message.channel.send({embeds: [embed]});
 				}
@@ -41,7 +41,7 @@ module.exports = {
 			case '⭐': {
 				await db_user.add('starboard', 1); 
 				if (reaction.count == 4 && reaction.message.content != '') {
-					let embed = new EmbedBuilder().setTitle('Mesaj stăruit!!!').setColor(random_col()).setDescription(`**${reaction.message.content}**\n\n${reaction.message.url}`).setTimestamp().setAuthor({ name: reaction.message.author.username, iconURL: reaction.message.author.avatarURL() }).setFooter({ text: '@okpr.fun (c)', iconURL: 'https://cdn.discordapp.com/icons/839520481475952650/e87fffe069a4160e464fd88f5ccc17e2.png'});
+					let embed = new EmbedBuilder().setColor(random_col()).setDescription(`**${reaction.message.content}**\n\n${reaction.message.url}`).setTimestamp().setAuthor({ name: reaction.message.author.username, iconURL: reaction.message.author.avatarURL() });
 					reaction.message.channelId = '839559315820118026';
 					await reaction.message.channel.send({embeds: [embed]});
 				}

@@ -1,6 +1,6 @@
 const { ActivityType, EmbedBuilder } = require('discord.js');
 const random_col = require('random-hex-color');
-const { Database } = require('../database/database')
+const { Database, timer } = require('../database/database')
 const fs = require('fs');
 
 module.exports = {
@@ -15,8 +15,7 @@ module.exports = {
 		try {
 			await client.download('strings.txt', 'database/strings.txt');
 			await client.download('userDB.json', 'database/tempDB.json');
-			const sleep = ms => new Promise(r => setTimeout(r, ms));
-			sleep(5000); // fara asta nu merge, va rog nu ma omorati
+			await new Promise(r => setTimeout(r, 5000));
 			Database.storage = JSON.parse(fs.readFileSync('database/tempDB.json'));
     	} catch(err) { 
         	console.log(`[server] ${err}`);

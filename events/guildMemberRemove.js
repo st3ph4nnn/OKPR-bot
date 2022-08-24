@@ -9,7 +9,7 @@ module.exports = {
 
 		const user = new DatabaseUser(member.user.username, member.user.id);
 
-		if ((await user.fetch_user()))
+		if ((await user.get('username') !== undefined))
 			await Database.delete(member.user.id);
 	}
 }

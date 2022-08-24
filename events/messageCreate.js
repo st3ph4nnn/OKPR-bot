@@ -19,6 +19,9 @@ module.exports = {
 				return;
 			}
 
+			if (client.debug && message.channelId != '997570224419254362')
+				return;
+
 			if (message.content == 'shutdown' && client.owners_id.includes(message.author.id)) {
 				await client.upload('database/userDB.sqlite');
 				await message.reply('gata boss!!!');
@@ -30,8 +33,7 @@ module.exports = {
 				await db_user.check_user();
 				let xp = (parseInt(await db_user.get('xp'))) + 1;
 
-				if (xp.toString()[0] == '0' && xp.toString()[1] >= 0)
-					xp = 1;
+				if (xp.toString()[0] == '0' && xp.toString()[1] >= 0) xp = 1;
 
 				await db_user.set('xp', xp);
 				await db_user.add('weeklyxp', 1);
@@ -72,23 +74,16 @@ module.exports = {
 
 			if (!message.content.startsWith(client.prefix) && !has_bot_mention) {
 				if (message.channelId === '839520481475952654' && !client.markov_stop) {
-					if (message.content.includes('http'))
-						return;
-
 					let val = random.int(0, 15);
-
-					try {
-						const msg = await message.fetchReference();
-
-						if (msg.author.id === '995939755118297140')
-							val = Math.ceil(val /= 2);
-					} catch {}
 
 					if (val == 0) {
 						if (message.mentions.everyone)
 							return;
 
-						if (message.mentions !== undefined && !message.mentions.members.first().user.bot)
+						if (message.mentions !== undefined)
+							return;
+
+						if (message.content.includes('http'))
 							return;
 
 						await client.download("strings.txt", "database/strings.txt");

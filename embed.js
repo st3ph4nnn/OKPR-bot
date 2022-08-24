@@ -3,7 +3,7 @@ const random_col = require('random-hex-color');
 
 class embed {
 	constructor(message, title, description = null, time = null, color = null) {
-		const embed = new EmbedBuilder().setTitle(title).setColor((color == null ? random_col() : color)).setDescription(description).setTimestamp().setAuthor({ name: message.author.username, iconURL: message.author.avatarURL() }).setFooter({ text: '@okpr.fun (c)', iconURL: 'https://cdn.discordapp.com/icons/839520481475952650/e87fffe069a4160e464fd88f5ccc17e2.png'});
+		const embed = new EmbedBuilder().setTitle(title).setColor((color == null ? random_col() : color)).setDescription(description).setTimestamp().setAuthor({ name: message.author.username, iconURL: message.author.avatarURL() });
 		this.embed = embed;
 		this.time = time;
 		this.message = message;

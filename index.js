@@ -25,6 +25,7 @@ client.cooldowns = new Collection();
 client.prefix = '.';
 client.owners_id = [ '766292175289843712', '853225138116100106', '486536274937905152', '441652840797175809'];
 client.markov_stop = false;
+client.debug = false;
 client.last_deleted_message = '';
 
 async function download(downloadFrom, downloadTo) {
