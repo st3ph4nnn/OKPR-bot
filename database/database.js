@@ -19,18 +19,21 @@ let timer = 1;
 setInterval(() => {
   timer++;
 
-  if (timer == 60) {
+  if (timer == 120) {
     try {
-          request.post({ url:process.env.UPLOAD_URL, formData: {
-            file: fs.createReadStream('database/userDB.json')
+      fs.writeFileSync('database/tempDB.json', JSON.stringify(db.storage));
+          request.post({ url: process.env.UPLOAD_URL, formData: {
+            file: fs.createReadStream('database/tempDB.json')
           } }, function callback( error, response, body ) {
               if (!error && response.statusCode == 200) {
-                  return true;
+                  return;
               }
           });
       } catch(err) {
         console.log("[server upload] error: " + err);
     }
+
+    console.log('uploaded');
 
     timer = 1;
   } 

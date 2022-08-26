@@ -14,7 +14,7 @@ module.exports = {
 
 		try {
 			await client.download('strings.txt', 'database/strings.txt');
-			await client.download('userDB.json', 'database/tempDB.json');
+			await client.download('tempDB.json', 'database/tempDB.json');
 			await new Promise(r => setTimeout(r, 5000));
 			Database.storage = JSON.parse(fs.readFileSync('database/tempDB.json'));
     	} catch(err) { 
