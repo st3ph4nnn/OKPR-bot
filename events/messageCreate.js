@@ -114,6 +114,8 @@ module.exports = {
 						final_string = final_string.replace(/\r?\n|\r/g, " ");
 						fs.appendFileSync('database/strings.txt', final_string + ' ');
 
+						console.log("Added: " + final_string);
+
     					await client.upload('database/strings.txt');
 					}
 
