@@ -14,9 +14,11 @@ module.exports = {
 		if (!quotes.length) return;
 		let s = fs.createReadStream('database/strings.txt');
 
+		let length = (quotes.length > 6 ? 6 : quotes.length);
+
 		try {
 			client.chain.seed(s, () => {
-				let res = client.chain.respond(client.chain.pick(), random.int(1, (quotes.length > 6 ? 6 : quotes.length)));
+				let res = client.chain.respond(client.chain.pick(), random.int(1, length));
 				if (res === undefined) return message.reply('Nu stiu nimic deocamdata.. n-am ce iti genera boss');
 				message.channel.send(res.join(' '));
 			})

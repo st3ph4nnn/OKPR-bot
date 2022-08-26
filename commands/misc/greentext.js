@@ -15,6 +15,8 @@ module.exports = {
 
         let key = undefined;
 
+		let length = (quotes.length > 4 ? 4 : quotes.length);
+
         try {
             client.chain.seed(s, () => {
                 let range = random.int(5, 10);
@@ -29,7 +31,7 @@ module.exports = {
                 for (let i = 0; i < range; i++) {
                     if (key === undefined) key = client.chain.pick();
             
-                    let res = client.chain.respond(key, random.int(1, (quotes.length > 5 ? 5 : quotes.length)));
+                    let res = client.chain.respond(key, random.int(1, length));
                     if (res === undefined)
                         return message.reply('Nu stiu nimic deocamdata.. n-am ce iti spune boss');
 
