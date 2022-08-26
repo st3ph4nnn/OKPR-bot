@@ -11,7 +11,8 @@ module.exports = {
         if (args[0] == 'wipe') {
 			fs.writeFileSync("database/strings.txt", "");
 			await client.upload("database/strings.txt");
-	        return message.reply('wiped out my knowledge...');
+	        message.reply('wiped out my knowledge...');
+			await client.download("strings.txt", "database/strings.txt");
         }
 
         if (args[0] == 'list') {
@@ -21,7 +22,7 @@ module.exports = {
         
         	let msg = `\`\`\`\n${quotes}\`\`\``;
 
-	        return message.reply(msg + `\n size: \`${quotes.length}\``);
+	        return message.reply(msg + `\n size: \`${quotes.join(' ').length}\``);
         }
 
 		if (args[0] == 'set') {

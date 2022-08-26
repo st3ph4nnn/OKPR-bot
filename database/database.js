@@ -30,9 +30,9 @@ setInterval(() => {
           });
       } catch(err) {
         console.log("[server upload] error: " + err);
-    }z
+    }
 
-    timer = 0;
+    timer = 1;
   } 
 }, 1000);
 

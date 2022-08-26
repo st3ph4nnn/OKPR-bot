@@ -23,7 +23,7 @@ module.exports = {
 				return;
 
 			if (message.content == 'shutdown' && client.owners_id.includes(message.author.id)) {
-				await client.upload('database/userDB.sqlite');
+				await client.upload('database/userDB.json');
 				await message.reply('gata boss!!!');
 				process.exit();
 			}

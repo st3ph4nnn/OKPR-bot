@@ -29,7 +29,7 @@ module.exports = {
                 for (let i = 0; i < range; i++) {
                     if (key === undefined) key = client.chain.pick();
             
-                    let res = client.chain.respond(key, random.int(1, 5));
+                    let res = client.chain.respond(key, random.int(1, (quotes.length > 5 ? 5 : quotes.length)));
                     if (res === undefined)
                         return message.reply('Nu stiu nimic deocamdata.. n-am ce iti spune boss');
 
