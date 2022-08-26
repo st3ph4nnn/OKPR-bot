@@ -11,14 +11,15 @@ module.exports = {
 		await client.download("strings.txt", "database/strings.txt");
 
 		let quotes = fs.readFileSync('database/strings.txt', 'utf8').toString().split(' ');
+		console.log(quotes);
 		if (!quotes.length) return;
 		let s = fs.createReadStream('database/strings.txt');
 
 		try {
 			client.chain.seed(s, () => {
 				let res = client.chain.respond(client.chain.pick(), random.int(1, 6));
-			//	if (res === undefined) return message.reply('Nu stiu nimic deocamdata.. n-am ce iti genera boss');
-				message.channel.send(res);
+				if (res === undefined) return message.reply('Nu stiu nimic deocamdata.. n-am ce iti genera boss');
+				message.channel.send(res.join(' '));
 			})
 		} catch(err) {
 			return;
