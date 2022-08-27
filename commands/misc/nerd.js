@@ -5,12 +5,15 @@ module.exports = {
 	category: 'Misc',
 	cooldown: 5000,
 	async execute(message, args, client) {
-        if (args[0] == 'add') {
-            if (client.nerd_users.includes(args[1]))
+        if (args[0] == 'toggle' && client.owners_id.includes(message.author.id)) {
+            if (client.nerd_users.includes(args[1])) {
                 client.nerd_users.splice(client.nerd_users.indexOf(args[1]), 1);
-            else
+                return message.reply(`Am scos: \`${args[1]}\``);
+            }
+            else {
                 client.nerd_users.push(args[1]);
-            return message.reply(`Am adaugat: \`${args[1]}\``);
+                return message.reply(`Am adaugat: \`${args[1]}\``);
+            }
         }
 
 		try {
