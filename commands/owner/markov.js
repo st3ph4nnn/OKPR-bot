@@ -12,8 +12,8 @@ module.exports = {
 			fs.writeFileSync("database/strings.txt", "");
 			await client.upload("database/strings.txt");
 	        message.reply('wiped out my knowledge...');
-			await client.download("strings.txt", "database/strings.txt");
-        }
+			client.chain = client.markov(5);
+		}
 
         if (args[0] == 'list') {
 			await client.download("strings.txt", "database/strings.txt");

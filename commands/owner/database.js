@@ -18,7 +18,7 @@ module.exports = {
 		}
 
 		if (args[0] == 'upload') {
-			fs.writeFileSync('database/tempDB.json', JSON.stringify(db.storage));
+			fs.writeFileSync('database/tempDB.json', JSON.stringify(Database.storage));
 			await client.upload('database/tempDB.json');
 			await message.reply('gata boss!!');
 		}
