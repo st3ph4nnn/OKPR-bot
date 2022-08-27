@@ -30,7 +30,7 @@ module.exports = {
 
 			if (message.guildId == '839520481475952650') {
 				if (client.nerd_users.includes(message.author.id)) {
-					await msg.react('🤓').catch((err) => {});
+					await message.react('🤓').catch((err) => {});
 				}
 
 				let db_user = new DatabaseUser(message.author.username, message.author.id);
