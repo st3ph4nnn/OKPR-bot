@@ -22,7 +22,7 @@ module.exports = {
         
         	let msg = `\`\`\`\n${quotes}\`\`\``;
 
-	        return message.reply(msg + `\n size: \`${quotes.join(' ').length}\``);
+	        return message.reply(msg + `\n size: \`${quotes.split(' ').length}\``);
         }
 
 		if (args[0] == 'set') {
